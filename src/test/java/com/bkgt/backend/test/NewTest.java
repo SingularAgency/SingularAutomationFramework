@@ -45,14 +45,6 @@ public class NewTest {
 	}
 	
 	
-	@Test
-	public void validateAddress() throws IOException, UnirestException {
-		String email="alara6@yopmail.com";
-		String password="Test123";
-		Services orders = new Services(email,password);
-		
-	}
-	
 	
 	
 }

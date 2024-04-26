@@ -16,10 +16,10 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
-import com.appium.utill.CommonUtil;
-import com.appium.utill.TestNgListeners;
-import com.appium.utill.actiondriver.BaseActionDriver;
-import com.appium.utill.actiondriver.MobileActionDriver;
+import com.appium.util.CommonUtil;
+import com.appium.util.TestNgListeners;
+import com.appium.util.actiondriver.BaseActionDriver;
+import com.appium.util.actiondriver.MobileActionDriver;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 
