@@ -81,15 +81,17 @@ public class CommonUtil {
 			if(device.equals("Android")){
 				
 				UiAutomator2Options options=new UiAutomator2Options();
-				options.setDeviceName("Pixel 4 API 33");
+				options.setDeviceName("Android Test");
 				options.setPlatformName("Android");
-				options.setCapability("platformVersion","13.0");
+				options.setCapability("platformVersion","11.0");
 				options.setAutomationName("UiAutomator2");
 				options.setCapability("unicodeKeyboard", true);
 				options.setCapability("resetKeyboard", true);
-				
+				options.setCapability(UiAutomator2Options.AUTO_GRANT_PERMISSIONS_OPTION, true);
+				options.setCapability(UiAutomator2Options.NO_RESET_OPTION, true);
+				options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION,"com.mycompany.heyhorse.MainActivity");
 				//options.setApp(System.getProperty("user.dir")+"\\src\\test\\java\\resources\\ApiDemos-debug.apk");
-				options.setApp("./src/test/java/resources/app-debug.apk");
+				options.setApp("./src/test/java/resources/HeyHorse.apk");
 
 				
 				//create object for AndroidDriver/ IOSDriver 
