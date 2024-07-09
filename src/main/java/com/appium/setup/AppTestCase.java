@@ -125,7 +125,7 @@ public abstract class AppTestCase {
 	@AfterMethod(alwaysRun = true)
 	public synchronized void tearDown() {
 		reports.flush();
-		//closeDriver();
+		closeDriver();
 
 	}
 
