@@ -103,7 +103,7 @@ public class CommonUtil {
 				
 				options.setDeviceName("iPhone");
 				options.setPlatformVersion("17.0");
-				options.setApp("./src/test/java/resources/App.app");
+				options.setApp("./src/test/java/resources/HeyHorse.app");
 				options.setCapability("automationName", "XCUITest");
 				//options.setCapability(XCUITestOptions.USE_JSON_SOURCE_OPTION, true);
 				options.setCapability(XCUITestOptions.SIMPLE_IS_VISIBLE_CHECK_OPTION, true);
