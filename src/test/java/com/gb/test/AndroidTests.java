@@ -40,7 +40,7 @@ public class AndroidTests extends AppTestCase {
         homePage.getBtnHome().click();
         Assert.assertTrue(homePage.getLblHome().isDisplayed(), "Home Label is not displayed");
         homePage.getBtnCarousel().click();
-        Assert.assertTrue(carouselSteps.searchText("king"));
+        Assert.assertTrue(carouselSteps.getFirstResult());
     }
 
 
