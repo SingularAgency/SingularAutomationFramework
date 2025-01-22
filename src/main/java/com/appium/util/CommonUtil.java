@@ -72,7 +72,7 @@ public class CommonUtil {
 		initializeAppiumDriver(device.toString());
 	}
 	public void initializeAppiumDriver(String device) throws Exception {
-		log("Iniciando Driver de Appium");
+		log("Initializing Appium Driver");
 
 		try {
 			deviceName=device;
@@ -167,10 +167,10 @@ public class CommonUtil {
 			}
 			actionDriver.takeScreenShot(MAIN_DIR + screenShotName);
 			try {
-				test.log(LogStatus.INFO, "Evidencia adjuntada abajo: " + test.addScreenCapture(screenShotName));
+				test.log(LogStatus.INFO, "Screenshot attached below: " + test.addScreenCapture(screenShotName));
 			} catch (Throwable e) {
 				e.printStackTrace();
-				test.log(LogStatus.FAIL, "Se obtuvo el siguiente error al adjuntar la evidencia " + e.getMessage());
+				test.log(LogStatus.FAIL, "Error while attaching screenshot " + e.getMessage());
 			}
 		}
 	}
