@@ -19,7 +19,9 @@ public class HomePage extends BasePage {
     @AndroidFindBy(accessibility = "Home")
     private WebElement lblHome;
 
-    @AndroidFindBy(xpath="//*[contains(@content-desc,'Carousel')]")
+    @AndroidFindBy(accessibility="Reader\n" +
+            "Carousel\n" +
+            "Tab 1 of 4")
     private WebElement btnCarousel;
 
 }
