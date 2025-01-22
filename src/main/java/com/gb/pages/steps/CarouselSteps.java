@@ -11,13 +11,12 @@ public class CarouselSteps extends CarouselPage {
         super(driver);
     }
 
-    public void getFirstResult() throws InterruptedException {
+    public void getFirstResult() {
         wait.until(ExpectedConditions.visibilityOf(getBtnSearch()));
         getBtnSearch().click();
         wait.until(ExpectedConditions.visibilityOf(getTxtSearchBox()));
         wait.until(ExpectedConditions.visibilityOfAllElements(getImageResults()));
         getImageResults().get(1).click();
-        wait(5000);
 
 
     }

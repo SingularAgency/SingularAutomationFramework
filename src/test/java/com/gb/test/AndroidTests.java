@@ -34,7 +34,7 @@ public class AndroidTests extends AppTestCase {
 
 
     @Test
-    public void VCTC001_PerformLogin() throws InterruptedException {
+    public void VCTC001_PerformLogin() {
         common.logScreen("HomePage");
         Assert.assertTrue(homePage.getBtnHome().isDisplayed(), "Home button not displayed.");
         homePage.getBtnHome().click();
