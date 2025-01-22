@@ -19,6 +19,7 @@ public class CarouselSteps extends CarouselPage {
         getImageResults().get(1).click();
         wait(3000);
         WebElement result = driver.findElement(By.xpath("//android.view.View[contains(@content-desc,':')]"));
+        wait.until(ExpectedConditions.visibilityOf(result));
         return result.isDisplayed();
 
     }
