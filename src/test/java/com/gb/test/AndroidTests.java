@@ -34,7 +34,7 @@ public class AndroidTests extends AppTestCase {
 
 
     @Test
-    public void VCTC001_PerformLogin() {
+    public void VCTC001_ClickAnImage() {
         common.logScreen("HomePage");
         Assert.assertTrue(homePage.getBtnHome().isDisplayed(), "Home button not displayed.");
         homePage.getBtnHome().click();
