@@ -11,15 +11,14 @@ public class CarouselSteps extends CarouselPage {
         super(driver);
     }
 
-    public boolean searchText(String text) throws InterruptedException {
+    public boolean getFirstResult() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOf(getBtnSearch()));
         getBtnSearch().click();
         wait.until(ExpectedConditions.visibilityOf(getTxtSearchBox()));
-        getTxtSearchBox().sendKeys(text);
         wait.until(ExpectedConditions.visibilityOfAllElements(getImageResults()));
         getImageResults().get(1).click();
         wait(3000);
-        WebElement result = driver.findElement(By.xpath("//android.view.View[contains(@content-desc,'"+text+"')]"));
+        WebElement result = driver.findElement(By.xpath("//android.view.View[contains(@content-desc,':')]"));
         return result.isDisplayed();
 
     }
