@@ -34,8 +34,8 @@ public class AndroidTests extends AppTestCase {
 
 
     @Test
-    public void VCTC001_ClickAnImage() {
-        common.logScreen("HomePage");
+    public void VCTC001_ClickAnImage() throws InterruptedException {
+        common.logScreen("HomePage is displayed");
         Assert.assertTrue(homePage.getBtnHome().isDisplayed(), "Home button not displayed.");
         homePage.getBtnHome().click();
         Assert.assertTrue(homePage.getLblHome().isDisplayed(), "Home Label is not displayed");
