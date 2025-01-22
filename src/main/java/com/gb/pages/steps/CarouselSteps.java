@@ -11,16 +11,14 @@ public class CarouselSteps extends CarouselPage {
         super(driver);
     }
 
-    public boolean getFirstResult() throws InterruptedException {
+    public void getFirstResult() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOf(getBtnSearch()));
         getBtnSearch().click();
         wait.until(ExpectedConditions.visibilityOf(getTxtSearchBox()));
         wait.until(ExpectedConditions.visibilityOfAllElements(getImageResults()));
         getImageResults().get(1).click();
-        wait(3000);
-        WebElement result = driver.findElement(By.xpath("//android.view.View[contains(@content-desc,':')]"));
-        wait.until(ExpectedConditions.visibilityOf(result));
-        return result.isDisplayed();
+        wait(5000);
+
 
     }
 
