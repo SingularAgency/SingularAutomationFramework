@@ -64,6 +64,8 @@ public abstract class AppTestCase {
 		
 		Map<String , String> env = new HashMap<String , String>(System.getenv());
 		env.put("ANDROID_HOME", "/Users/cruyfj/Library/Android/sdk");
+		env.put("PATH", "/Users/cruyfj/Library/Android/sdk/platform-tools");
+
 		env.put("JAVA_HOME", "/Applications/Android Studio.app/Contents/jbr/Contents/Home");
 		env.put("PATH", "/usr/local/bin");
 		env.put("SDKROOT", "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk");

@@ -86,13 +86,15 @@ public class CommonUtil {
 				options.setCapability("platformVersion","11.0");
 				options.setAutomationName("UiAutomator2");
 				options.setCapability("unicodeKeyboard", true);
-				options.setCapability("resetKeyboard", true);
 				options.setCapability(UiAutomator2Options.AUTO_GRANT_PERMISSIONS_OPTION, true);
-				options.setCapability(UiAutomator2Options.NO_RESET_OPTION, true);
-				options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION,"com.mycompany.heyhorse.MainActivity");
-				//options.setApp(System.getProperty("user.dir")+"\\src\\test\\java\\resources\\ApiDemos-debug.apk");
-				options.setApp("./src/test/java/resources/HeyHorse.apk");
+				options.setCapability(UiAutomator2Options.NO_RESET_OPTION, false);
+				options.setCapability(UiAutomator2Options.FULL_RESET_OPTION, false);
 
+				//options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION,"com.constr.client.MainActivity");
+				//options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION,"com.osmo.smt.MainActivity");
+				options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION,"com.plusgb.app.MainActivity");
+				//options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION,"com.cempro.vuzo.MainActivity");
+				//options.setApp(System.getProperty("user.dir")+"\\src\\test\\java\\resources\\ApiDemos-debug.apk");
 				
 				//create object for AndroidDriver/ IOSDriver 
 				actionDriver.setAppiumDriver(new AndroidDriver(new URI("http://127.0.0.1:4723").toURL(), options));
