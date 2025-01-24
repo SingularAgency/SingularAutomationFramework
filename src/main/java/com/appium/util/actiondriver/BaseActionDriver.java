@@ -9,26 +9,20 @@ package com.appium.util.actiondriver;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public abstract class BaseActionDriver {
 	
-	protected AppiumDriver appiumDriver;
+    protected AppiumDriver appiumDriver;
 	protected IOSDriver iosDriver;
 	private String testCaseName;
 	private String deviceName;
-	public String getTestCaseName() {
-		return testCaseName;
-	}
-	
-	public void setTestCaseName(String testCaseName) {
-		this.testCaseName= testCaseName;
-	}
-	
-	public AppiumDriver getAppiumDriver() {
-		return appiumDriver;
-	}
-	
-	public IOSDriver getIOSDriver() {
+
+
+    public IOSDriver getIOSDriver() {
 		return iosDriver;
 	}
 	public void setIOSDriver(IOSDriver appiumDriver) {
@@ -42,14 +36,6 @@ public abstract class BaseActionDriver {
 		this.appiumDriver = appiumDriver;
 	}
 
-
-	public String getDeviceName() {
-		return deviceName;
-	}
-
-	public void setDeviceName(String deviceName) {
-		this.deviceName = deviceName;
-	}
 
 	public abstract void initializeLogging();
 

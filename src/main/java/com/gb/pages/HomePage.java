@@ -1,6 +1,6 @@
 package com.gb.pages;
 
-import com.bkgt.pages.BasePage;
+import com.appium.setup.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import lombok.Getter;

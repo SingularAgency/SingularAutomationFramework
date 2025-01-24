@@ -1,7 +1,9 @@
 package com.appium.util;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.net.URI;
+import java.util.Properties;
 
 import org.testng.Reporter;
 
@@ -24,7 +26,9 @@ public class CommonUtil {
 	public static boolean isInitialConfigurationDone = false;
 	public static boolean isReportInitialized = false;
 	public static String MAIN_DIR;
+	public static Properties CONFIG;
 	private String sessionId;
+	public static FileInputStream fn;
 	public String screenShotName = null;
 	public String deviceName;
 
@@ -41,12 +45,13 @@ public class CommonUtil {
 			isInitialConfigurationDone = true;
 			System.out.println("Initializing Selenium files path");
 			try {
+				CONFIG = new Properties();
+				String baseFilePath = System.getProperty("user.dir") + "/src/main/resources/config/";
+				String filePath = null;
+				filePath = baseFilePath + "config.properties";
+				fn = new FileInputStream(filePath);
+				CONFIG.load(fn);
 
-				/*
-				 * XLS_READER = new Xls_Reader( System.getProperty("user.dir") +
-				 * "//src//com//selenium//testdata//Suite.xlsx");
-				 */
-				// set the max wait time
 				AppTestCase.WAIT_TIMEOUT = Integer.parseInt("10");
 			} catch (Exception e) {
 				throw new Exception("Environment configuration is not set " + e.getMessage());
@@ -66,11 +71,12 @@ public class CommonUtil {
 			
 		}
 	}
-	
-	
-	public void initializeAppiumDriver(Device device) throws Exception {
-		initializeAppiumDriver(device.toString());
+
+	public static String getKeyValue(String key) {
+			return CONFIG.getProperty(key);
+
 	}
+
 	public void initializeAppiumDriver(String device) throws Exception {
 		log("Initializing Appium Driver");
 
@@ -81,9 +87,9 @@ public class CommonUtil {
 			if(device.equals("Android")){
 				
 				UiAutomator2Options options=new UiAutomator2Options();
-				options.setDeviceName("Android Test");
+				options.setDeviceName(CommonUtil.CONFIG.getProperty(ConfigKey.DEVICE_NAME));
 				options.setPlatformName("Android");
-				options.setCapability("platformVersion","11.0");
+				options.setCapability("platformVersion",CommonUtil.CONFIG.getProperty(ConfigKey.OS_VERSION));
 				options.setAutomationName("UiAutomator2");
 				options.setCapability("unicodeKeyboard", true);
 				options.setCapability(UiAutomator2Options.AUTO_GRANT_PERMISSIONS_OPTION, true);
@@ -92,7 +98,7 @@ public class CommonUtil {
 
 				//options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION,"com.constr.client.MainActivity");
 				//options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION,"com.osmo.smt.MainActivity");
-				options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION,"com.plusgb.app.MainActivity");
+				options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION,CommonUtil.CONFIG.getProperty(ConfigKey.MAIN_ACTIVITY));
 				//options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION,"com.cempro.vuzo.MainActivity");
 				//options.setApp(System.getProperty("user.dir")+"\\src\\test\\java\\resources\\ApiDemos-debug.apk");
 				
