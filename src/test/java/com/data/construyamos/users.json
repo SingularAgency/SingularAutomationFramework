@@ -1,0 +1,28 @@
+[{
+  "tag": "Admin",
+  "data": [
+    {
+      "email": "admin@admin.com",
+      "password": "admin"
+    }
+  ]
+},
+  {
+    "tag": "Asesor",
+    "data": [
+      {
+        "email": "alara+casesor@singularagency.co",
+        "password": "Test123!"
+      }
+    ]
+  },
+  {
+    "tag": "Ventas",
+    "data": [
+      {
+        "email": "alara+cv@singularagency.co",
+        "password": "Test123!"
+      }
+    ]
+  }
+]

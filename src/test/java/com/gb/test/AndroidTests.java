@@ -1,22 +1,14 @@
 package com.gb.test;
 
 import com.appium.setup.AppTestCase;
-
-
-import com.gb.pages.CarouselPage;
 import com.gb.pages.HomePage;
 import com.gb.pages.steps.CarouselSteps;
-import com.gb.pages.steps.LoginPageSteps;
 
 import io.appium.java_client.android.AndroidDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.io.IOException;
-import java.util.Map;
 
 public class AndroidTests extends AppTestCase {
     private HomePage homePage;

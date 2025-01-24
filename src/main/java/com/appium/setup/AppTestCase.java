@@ -1,12 +1,15 @@
 package com.appium.setup;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
+import com.appium.util.ConfigKey;
 import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -50,7 +53,8 @@ public abstract class AppTestCase {
 	public static ExtentTest getTest() {
 		return testThread.get();
 	}
-
+	public static Properties CONFIG;
+	public static FileInputStream fn;
 	public static CommonUtil getCommon() {
 		return commonThread.get();
 	}
@@ -61,17 +65,19 @@ public abstract class AppTestCase {
 	
 	@BeforeClass
 	public void configureAppium() throws IOException {
-		
+		CONFIG = new Properties();
+		String baseFilePath = System.getProperty("user.dir") + "/src/main/resources/config/";
+		String filePath = null;
+		filePath = baseFilePath + "config.properties";
+		fn = new FileInputStream(filePath);
+		CONFIG.load(fn);
 		Map<String , String> env = new HashMap<String , String>(System.getenv());
-		env.put("ANDROID_HOME", "/Users/cruyfj/Library/Android/sdk");
-		env.put("PATH", "/Users/cruyfj/Library/Android/sdk/platform-tools");
-
-		env.put("JAVA_HOME", "/Applications/Android Studio.app/Contents/jbr/Contents/Home");
-		env.put("PATH", "/usr/local/bin");
-		env.put("SDKROOT", "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk");
+		env.put("ANDROID_HOME", CONFIG.getProperty(ConfigKey.ANDROID_HOME));
+		env.put("PATH", CONFIG.getProperty(ConfigKey.PATH));
+		env.put("JAVA_HOME", CONFIG.getProperty(ConfigKey.JAVA_HOME));
+		env.put("SDKROOT", CONFIG.getProperty(ConfigKey.SDKROOT));
 		env.put("PATH", "/Applications/Xcode.app");
-		env.put("PATH", "/usr/local/bin:" + System.getenv("PATH"));
-		this.service = new AppiumServiceBuilder().withAppiumJS(new File("/usr/local/lib/node_modules/appium/build/lib/main.js"))
+		this.service = new AppiumServiceBuilder().withAppiumJS(new File(CONFIG.getProperty(ConfigKey.APPIUM_FILE_PATH)))
 				.withIPAddress("127.0.0.1").usingPort(4723).withEnvironment(env).withTimeout(Duration.ofSeconds(300)).build();
 		service.start();
 
