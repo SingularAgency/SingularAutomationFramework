@@ -252,7 +252,7 @@ public class CommonUtil {
 	@SuppressWarnings("unused")
 	public void passSeleniumTest(Throwable t, BaseActionDriver actionDriver, int counter, String deviceName) {
 
-		test.log(LogStatus.PASS, "Ejecucion finalizada con exito");
+		test.log(LogStatus.PASS, "Test Case has been passed");
 		addScreenShot(deviceName);
 	}
 
