@@ -97,7 +97,7 @@ public class CommonUtil {
 				options.setCapability(UiAutomator2Options.FULL_RESET_OPTION, false);
 
 
-				options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION,CommonUtil.CONFIG.getProperty(ConfigKey.MAIN_ACTIVITY));
+				//options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION,CommonUtil.CONFIG.getProperty(ConfigKey.MAIN_ACTIVITY));
 				
 				//create object for AndroidDriver/ IOSDriver 
 				actionDriver.setAppiumDriver(new AndroidDriver(new URI("http://127.0.0.1:4723").toURL(), options));

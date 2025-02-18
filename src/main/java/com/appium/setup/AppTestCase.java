@@ -62,7 +62,9 @@ public abstract class AppTestCase {
 	public static BaseActionDriver getActionDriver() {
 		return actionDriverThread.get();
 	}
-	
+
+
+
 	@BeforeClass
 	public void configureAppium() throws IOException {
 		CONFIG = new Properties();
