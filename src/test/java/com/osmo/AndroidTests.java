@@ -40,12 +40,10 @@ public class AndroidTests extends AppTestCase {
 
     @Test
     public void VCTC003_AttemptBuyWithKYC() throws InterruptedException {
-
         AndroidDriver driver = (AndroidDriver) AppTestCase.getActionDriver().getAppiumDriver();
         InviertePageSteps inviertePageSteps = new InviertePageSteps(driver);
         Assert.assertFalse(inviertePageSteps.attemptToBuyWithoutKYC());
         common.log(inviertePageSteps.getModalVerificacion().getAttribute("content-desc"));
-
 
     }
 
