@@ -11,6 +11,12 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"2\"]")
+    private WebElement btn2;
+
+    @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"0\"]")
+    private WebElement btn0;
+
     @AndroidFindBy(xpath = "//android.widget.ImageView[@content-desc=\"Convertir\"]")
     private WebElement btnSWAP;
 

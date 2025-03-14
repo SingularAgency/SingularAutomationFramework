@@ -12,15 +12,18 @@ import java.util.regex.Pattern;
 @Getter
 public class SwapPage extends BasePage {
 
-
+    @AndroidFindBy(accessibility = "CONVERSIÓN ÚNICA")
+    private WebElement lblHeader;
     @AndroidFindBy(xpath = "//android.widget.ImageView")
     private WebElement btnReference;
     @AndroidFindBy(xpath = "//android.widget.Button[@content-desc=\"Convertir\"]")
     private WebElement btnConvert;
-    @AndroidFindBy(xpath = "//android.view.View[contains(@content-desc,\"Minimal conversion\")]")
+    @AndroidFindBy(xpath = "//android.view.View[contains(@content-desc,\"Conversión mínima\")]")
     private WebElement lblMinimumAmmount;
-    @AndroidFindBy(className = "android.widget.EditText")
+    @AndroidFindBy(xpath = "//android.widget.EditText")
     private List<WebElement> textFields;
+    @AndroidFindBy(xpath = "//android.widget.ImageView")
+    private List<WebElement> swapButtons;
 
     public SwapPage(AppiumDriver driver) {
         super(driver);

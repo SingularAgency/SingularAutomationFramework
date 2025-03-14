@@ -93,10 +93,9 @@ public class CommonUtil {
 				options.setAutomationName("UiAutomator2");
 				options.setCapability("unicodeKeyboard", true);
 				options.setCapability(UiAutomator2Options.AUTO_GRANT_PERMISSIONS_OPTION, true);
-				options.setCapability(UiAutomator2Options.NO_RESET_OPTION, false);
+				options.setCapability(UiAutomator2Options.NO_RESET_OPTION, true);
 				options.setCapability(UiAutomator2Options.FULL_RESET_OPTION, false);
-
-
+				options.setCapability(UiAutomator2Options.APP_PACKAGE_OPTION,CommonUtil.CONFIG.getProperty(ConfigKey.APP_PACKAGE));
 				options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION,CommonUtil.CONFIG.getProperty(ConfigKey.MAIN_ACTIVITY));
 				
 				//create object for AndroidDriver/ IOSDriver 

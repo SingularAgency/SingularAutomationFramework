@@ -131,15 +131,15 @@ public abstract class AppTestCase {
 	
 
 	@AfterMethod(alwaysRun = true)
-	public synchronized void tearDown() {
+	public synchronized void tearDown() throws IOException {
 		reports.flush();
 		closeDriver();
+
 
 	}
 
 	public void closeDriver() {
 		this.actionDriver.getAppiumDriver().quit();
-
 	}
 	
 	@AfterClass(alwaysRun=true)
