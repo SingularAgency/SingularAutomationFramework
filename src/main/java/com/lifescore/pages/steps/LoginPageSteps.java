@@ -86,4 +86,8 @@ public class LoginPageSteps extends LoginPage {
         getTxtPassword().clear();
     }
 
+    public void register(){
+        getBtnRegister().click();
+    }
+
 }
