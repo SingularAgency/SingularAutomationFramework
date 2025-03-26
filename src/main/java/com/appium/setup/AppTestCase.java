@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.appium.util.ConfigKey;
+import org.openqa.selenium.WebDriver;
 import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -80,17 +81,12 @@ public abstract class AppTestCase {
 		this.service = new AppiumServiceBuilder().withAppiumJS(new File(CONFIG.getProperty(ConfigKey.APPIUM_FILE_PATH)))
 				.withIPAddress("127.0.0.1").usingPort(4723).withEnvironment(env).withTimeout(Duration.ofSeconds(300)).build();
 		service.start();
-
-
-
-
 	}
 	
 	@BeforeMethod(groups = { "smoke", "prod" }, alwaysRun = true)
 	@Parameters({ "device" })
 	public synchronized void setUp(@Optional String device, Method method) throws Exception {
 		try {
-
 			testCaseName = method.getName();
 			actionDriver.setDeviceName(deviceName);
 			actionDriver.setTestCaseName(testCaseName);
@@ -103,16 +99,13 @@ public abstract class AppTestCase {
 			}else if(actionDriver.getDeviceName().equalsIgnoreCase("iOS")) {
 				common.initializeAppiumDriver(deviceName);
 			}
-
 		} catch (Throwable t) {
 			t.printStackTrace();
 			if (actionDriver.getAppiumDriver() != null) {
 				actionDriver.quit();
 			}
-
 			throw new SkipException("Skipping test case due to following error : " + t.getMessage());
 		}
-
 	}
 
 	public void initializeAppTest(String testId, String device) throws Exception {
@@ -126,21 +119,17 @@ public abstract class AppTestCase {
 		this.common = getCommon();
 		this.actionDriver = getActionDriver();
 	}
-	
-
-	
 
 	@AfterMethod(alwaysRun = true)
 	public synchronized void tearDown() {
 		reports.flush();
 		closeDriver();
-
 	}
 
 	public void closeDriver() {
 		this.actionDriver.getAppiumDriver().quit();
-
 	}
+
 	
 	@AfterClass(alwaysRun=true)
 	public synchronized void stopService() {

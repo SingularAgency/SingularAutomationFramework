@@ -3,10 +3,11 @@ package com.raptor.pages;
 import com.appium.setup.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import lombok.Getter;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
-
+@Getter
 public class Reports extends BasePage {
 
     @AndroidFindBy(xpath = "//android.widget.Button[@content-desc=\"Create\"]")
@@ -21,4 +22,7 @@ public class Reports extends BasePage {
     public Reports(AppiumDriver driver) {
         super(driver);
     }
+
+
+
 }

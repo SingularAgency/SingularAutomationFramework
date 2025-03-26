@@ -3,13 +3,17 @@ package com.appium.setup;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
+@Getter
 public class BasePage {
 
     public WebDriverWait wait;
@@ -36,7 +40,4 @@ public class BasePage {
         this.driver= driver;
     }
 
-    public void waitForElementToBePresent(WebElement element){
-        wait.until(ExpectedConditions.visibilityOf(element));
-    }
 }

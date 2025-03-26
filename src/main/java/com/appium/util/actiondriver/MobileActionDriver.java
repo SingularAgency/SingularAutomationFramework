@@ -35,8 +35,7 @@ public class MobileActionDriver extends BaseActionDriver {
 
 	public void takeScreenShot(String filePath) {
 		try {
-			Augmenter augmenter = new Augmenter();
-			TakesScreenshot ts = (TakesScreenshot) augmenter.augment(getAppiumDriver());
+			TakesScreenshot ts = ((TakesScreenshot)getAppiumDriver());
 			File scrFile = ts.getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(scrFile, new File(filePath));
 		} catch (Throwable e) {
