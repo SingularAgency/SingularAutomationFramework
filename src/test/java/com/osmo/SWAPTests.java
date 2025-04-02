@@ -28,13 +28,13 @@ public class SWAPTests extends AppTestCase {
         driver = (AndroidDriver) AppTestCase.getActionDriver().getAppiumDriver();
         homePage= new HomePage(driver);
         swapSteps = new SWAPSteps(driver);
-        homePage.fluentWait.until(ExpectedConditions.visibilityOf(homePage.getBtn2()));
-        homePage.getBtn2().click();
-        homePage.getBtn0().click();
-        homePage.getBtn2().click();
-        homePage.getBtn0().click();
-        homePage.getBtn2().click();
-        homePage.getBtn0().click();
+        //homePage.fluentWait.until(ExpectedConditions.visibilityOf(homePage.getBtn2()));
+        //homePage.getBtn2().click();
+        //homePage.getBtn0().click();
+        //homePage.getBtn2().click();
+        //homePage.getBtn0().click();
+        //homePage.getBtn2().click();
+        //homePage.getBtn0().click();
         //Runtime.getRuntime().exec("/Users/cruyfj/Library/Android/sdk/platform-tools/adb pm clear "+ ConfigKey.MAIN_ACTIVITY);
         //Runtime.getRuntime().exec("/Users/cruyfj/Library/Android/sdk/platform-tools/adb shell am start -n "+ ConfigKey.MAIN_ACTIVITY);
 
@@ -42,7 +42,7 @@ public class SWAPTests extends AppTestCase {
 
     @Test
     public void performBTCtoQTZ(){
-        homePage.wait.until(ExpectedConditions.visibilityOf(homePage.getBtnSWAP()));
+        //homePage.wait.until(ExpectedConditions.visibilityOf(homePage.getBtnSWAP()));
         homePage.getBtnSWAP().click();
         swapSteps.performSWAP("Bitcoin","Quetzales");
 
