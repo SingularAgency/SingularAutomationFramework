@@ -76,7 +76,7 @@ public abstract class AppTestCase {
 		String githubActions = System.getenv("GITHUB_ACTIONS");
 		if ((githubActions == null || !githubActions.equalsIgnoreCase("true")) && avdName != null && !avdName.isEmpty()) {
 			// Only start emulator manually if NOT running in GitHub Actions
-			startEmulator(avdName);
+			//startEmulator(avdName);
 		} else {
 			System.out.println("Skipping emulator start in CI environment.");
 		}
