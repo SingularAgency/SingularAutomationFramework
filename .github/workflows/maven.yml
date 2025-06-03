@@ -37,17 +37,17 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
-      - name: Start Android Emulator and Run Tests
+      - name: Run Android emulator and tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 34
-          target: default
-          arch: x86_64
-          profile: Pixel 5
+            api-level: 34
+            arch: x86_64
+            profile: "Pixel 5"
+            disable-animations: true
+            script: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
 
       - name: Install dependencies and run tests
         run: |
-          mvn test -DsuiteXmlFile=src/test/java/suites/testng.xml
           mkdir -p out
           cp -r AndroidAutomationReport/* out/
 
