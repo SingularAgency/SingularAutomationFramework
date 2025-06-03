@@ -26,7 +26,7 @@ jobs:
 
     - name: Install dependencies and run tests
       run: |
-        ./mvnw clean test   # Ajusta si usas otro comando para correr tus pruebas
+        mvn clean test   # Ajusta si usas otro comando para correr tus pruebas
         mkdir -p out
         cp -r AndroidAutomationReport/* out/
 
