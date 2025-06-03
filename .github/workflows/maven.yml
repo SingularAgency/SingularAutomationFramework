@@ -14,6 +14,18 @@ jobs:
   test-and-publish:
     runs-on: ubuntu-latest
 
+    env:
+      MOBILE_OS: Android
+      ANDROID_HOME: /home/runner/Android/Sdk
+      PATH: /home/runner/Android/Sdk/platform-tools:${{ env.PATH }}
+      JAVA_HOME: /usr/lib/jvm/java-17-openjdk
+      SDKROOT: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk
+      APPIUM_FILE_PATH: /usr/local/lib/node_modules/appium/build/lib/main.js
+      DEVICE_NAME: Pixel 5
+      OS_VERSION: 14
+      MAIN_ACTIVITY: com.osmo.smt.MainActivity
+      APP_PACKAGE: com.osmo.smt
+
     steps:
     - name: Checkout repo
       uses: actions/checkout@v3
@@ -24,6 +36,20 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
+    - name: Enable KVM
+      run: |
+        echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+        sudo udevadm control --reload-rules
+        sudo udevadm trigger --name-match=kvm
+
+    - name: Run Android emulator and tests
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+              api-level: 34               # Android API level you want
+              target: default             # or google_apis if you need Google Play services
+              arch: x86_64               # architecture
+              profile: Pixel 5
+        # hardware profile
     - name: Install dependencies and run tests
       run: |
         mvn test -DsuiteXmlFile=src/test/java/suites/testng.xml
