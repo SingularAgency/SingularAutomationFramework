@@ -13,7 +13,7 @@ jobs:
       JAVA_HOME: /usr/lib/jvm/java-17-openjdk
       SDKROOT: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk
       APPIUM_FILE_PATH: /usr/local/lib/node_modules/appium/build/lib/main.js
-      DEVICE_NAME: Pixel 5
+      DEVICE_NAME: pixel_4_xl
       OS_VERSION: 14
       MAIN_ACTIVITY: com.osmo.smt.MainActivity
       APP_PACKAGE: com.osmo.smt
@@ -42,7 +42,7 @@ jobs:
         with:
             api-level: 34
             arch: x86_64
-            profile: "Pixel 5"
+            profile: pixel_4_xl
             disable-animations: true
             script: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
 
