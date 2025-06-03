@@ -19,7 +19,8 @@ jobs:
 
       - name: Install dependencies and run tests
         run: |
-          mvn clean test   # o tu comando personalizado
+          mvn test -DsuiteXmlFile=src/test/java/suites/testng.xml
+          # o tu comando personalizado
           mkdir -p out
           cp -r AndroidAutomationReport/* out/  # Ajusta según la ruta del reporte generado
 
