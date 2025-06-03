@@ -45,16 +45,25 @@ jobs:
             profile: pixel_4_xl
             disable-animations: true
             script: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
-
-      - name: Install dependencies and run tests
+      - name: Copy reports
         if: always()
         run: |
           mkdir -p out
           cp -r AndroidAutomationReport/* out/
 
-      - name: Deploy Report to GitHub Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+      - name: Fetch full git history
+        run: git fetch --prune --unshallow
+
+      - name: Commit and push reports
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add out/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Add test reports from workflow run $GITHUB_RUN_ID"
+            git push origin HEAD:refs/heads/gh-pages
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
