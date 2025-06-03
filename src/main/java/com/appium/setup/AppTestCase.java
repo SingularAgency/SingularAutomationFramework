@@ -72,9 +72,15 @@ public abstract class AppTestCase {
 		fn = new FileInputStream(filePath);
 		CONFIG.load(fn);
 		String avdName = CONFIG.getProperty("DEVICE_NAME"); // Add this property to your config.properties
-		if (avdName != null && !avdName.isEmpty()) {
+		// Detect if running in GitHub Actions CI environment
+		String githubActions = System.getenv("GITHUB_ACTIONS");
+		if ((githubActions == null || !githubActions.equalsIgnoreCase("true")) && avdName != null && !avdName.isEmpty()) {
+			// Only start emulator manually if NOT running in GitHub Actions
 			startEmulator(avdName);
+		} else {
+			System.out.println("Skipping emulator start in CI environment.");
 		}
+
 		Map<String , String> env = new HashMap<String , String>(System.getenv());
 		env.put("ANDROID_HOME", CONFIG.getProperty(ConfigKey.ANDROID_HOME));
 		env.put("PATH", CONFIG.getProperty(ConfigKey.PATH));
@@ -85,10 +91,6 @@ public abstract class AppTestCase {
 		this.service = new AppiumServiceBuilder().withAppiumJS(new File(CONFIG.getProperty(ConfigKey.APPIUM_FILE_PATH)))
 				.withIPAddress("127.0.0.1").usingPort(4723).withEnvironment(env).withTimeout(Duration.ofSeconds(300)).build();
 		service.start();
-
-
-
-
 	}
 	
 	@BeforeMethod(groups = { "smoke", "prod" }, alwaysRun = true)
