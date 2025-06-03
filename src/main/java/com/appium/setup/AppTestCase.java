@@ -76,7 +76,7 @@ public abstract class AppTestCase {
 		env.put("PATH", CONFIG.getProperty(ConfigKey.PATH));
 		env.put("JAVA_HOME", CONFIG.getProperty(ConfigKey.JAVA_HOME));
 		env.put("SDKROOT", CONFIG.getProperty(ConfigKey.SDKROOT));
-		env.put("PATH", "/Applications/Xcode.app");
+		//env.put("PATH", "/Applications/Xcode.app");
 		this.service = new AppiumServiceBuilder().withAppiumJS(new File(CONFIG.getProperty(ConfigKey.APPIUM_FILE_PATH)))
 				.withIPAddress("127.0.0.1").usingPort(4723).withEnvironment(env).withTimeout(Duration.ofSeconds(300)).build();
 		service.start();
