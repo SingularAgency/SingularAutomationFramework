@@ -19,12 +19,9 @@ public class AndroidTests extends AppTestCase {
 
     @Test
     public void VCTC001_CheckBitcoinPrice() throws InterruptedException {
-
         AndroidDriver driver = (AndroidDriver) AppTestCase.getActionDriver().getAppiumDriver();
         InviertePageSteps inviertePageSteps = new InviertePageSteps(driver);
         common.log("Precio actual del Bitcoin:" + inviertePageSteps.getBictoinPrice());
-
-
     }
 
     @Test

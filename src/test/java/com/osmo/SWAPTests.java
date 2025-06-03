@@ -1,8 +1,6 @@
 package com.osmo;
 
 import com.appium.setup.AppTestCase;
-import com.appium.util.ConfigKey;
-import com.google.common.collect.ImmutableMap;
 import com.osmo.pages.HomePage;
 import com.osmo.pages.steps.SWAPSteps;
 import io.appium.java_client.android.AndroidDriver;
@@ -28,30 +26,44 @@ public class SWAPTests extends AppTestCase {
         driver = (AndroidDriver) AppTestCase.getActionDriver().getAppiumDriver();
         homePage= new HomePage(driver);
         swapSteps = new SWAPSteps(driver);
-        //homePage.fluentWait.until(ExpectedConditions.visibilityOf(homePage.getBtn2()));
-        //homePage.getBtn2().click();
-        //homePage.getBtn0().click();
-        //homePage.getBtn2().click();
-        //homePage.getBtn0().click();
-        //homePage.getBtn2().click();
-        //homePage.getBtn0().click();
-        //Runtime.getRuntime().exec("/Users/cruyfj/Library/Android/sdk/platform-tools/adb pm clear "+ ConfigKey.MAIN_ACTIVITY);
-        //Runtime.getRuntime().exec("/Users/cruyfj/Library/Android/sdk/platform-tools/adb shell am start -n "+ ConfigKey.MAIN_ACTIVITY);
+        driver.activateApp(appBundleId);
+        homePage.fluentWait.until(ExpectedConditions.visibilityOf(homePage.getBtn2()));
+        homePage.getBtn2().click();
+        homePage.getBtn0().click();
+        homePage.getBtn2().click();
+        homePage.getBtn0().click();
+        homePage.getBtn2().click();
+        homePage.getBtn0().click();
 
     }
 
     @Test
     public void performBTCtoQTZ(){
-        //homePage.wait.until(ExpectedConditions.visibilityOf(homePage.getBtnSWAP()));
+        homePage.wait.until(ExpectedConditions.visibilityOf(homePage.getBtnSWAP()));
         homePage.getBtnSWAP().click();
         swapSteps.performSWAP("Bitcoin","Quetzales");
-
     }
+
+    @Test
+    public void performBTCtoCRC(){
+        homePage.wait.until(ExpectedConditions.visibilityOf(homePage.getBtnSWAP()));
+        homePage.getBtnSWAP().click();
+        swapSteps.performSWAP("Bitcoin","Colones");
+    }
+
+    @Test
+    public void performBTCtoDollars(){
+        homePage.wait.until(ExpectedConditions.visibilityOf(homePage.getBtnSWAP()));
+        homePage.getBtnSWAP().click();
+        swapSteps.performSWAP("Bitcoin","Dólares");
+    }
+
 
     @AfterMethod
-    public void tearDown() throws IOException {
-        Runtime.getRuntime().exec("/Users/cruyfj/Library/Android/sdk/platform-tools/adb am force-stop " + ConfigKey.MAIN_ACTIVITY);
+    public void closeApp()  {
+        driver.terminateApp(appBundleId);
     }
+
 
     @Override
     protected void cleanPageObjects() {

@@ -237,7 +237,7 @@ public class CommonUtil {
 	}
 
 	public void failSeleniumTest(Throwable t, BaseActionDriver actionDriver, int counter, String deviceName) {
-		t.printStackTrace();
+		//t.printStackTrace();
 
 		addScreenShot(deviceName);
 	}
