@@ -47,11 +47,13 @@ jobs:
             script: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
 
       - name: Install dependencies and run tests
+        if: always()
         run: |
           mkdir -p out
           cp -r AndroidAutomationReport/* out/
 
       - name: Deploy Report to GitHub Pages
+        if: always()
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
