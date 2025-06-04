@@ -72,8 +72,8 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Appium globally
-        run: npm install -g appium
+      - name: Install Appium v1.22.3
+        run: npm install -g appium@1.22.3
 
       - name: Detect Node executable path
         id: detect_node_path
