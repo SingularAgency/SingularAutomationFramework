@@ -64,37 +64,70 @@ public abstract class AppTestCase {
 	public static BaseActionDriver getActionDriver() {
 		return actionDriverThread.get();
 	}
-	
+
 	@BeforeClass
 	public void configureAppium() throws Exception {
 		CONFIG = new Properties();
 		String baseFilePath = System.getProperty("user.dir") + "/src/main/resources/config/";
-		String filePath = null;
-		filePath = baseFilePath + "config.properties";
-		fn = new FileInputStream(filePath);
-		CONFIG.load(fn);
-		String avdName = CONFIG.getProperty("DEVICE_NAME"); // Add this property to your config.properties
-		// Detect if running in GitHub Actions CI environment
+		String filePath = baseFilePath + "config.properties";
+
+		// Load config file
+		try (FileInputStream fn = new FileInputStream(filePath)) {
+			CONFIG.load(fn);
+		} catch (FileNotFoundException e) {
+			System.out.println("Config file not found, will rely on environment variables");
+		}
+		// For each config key, check env var first, else fallback to config file
+		String avdName = System.getenv("DEVICE_NAME");
+		if (avdName == null) avdName = CONFIG.getProperty("DEVICE_NAME");
+
+		String androidHome = System.getenv("ANDROID_HOME");
+		if (androidHome == null) androidHome = CONFIG.getProperty(ConfigKey.ANDROID_HOME);
+
+		String javaHome = System.getenv("JAVA_HOME");
+		if (javaHome == null) javaHome = CONFIG.getProperty(ConfigKey.JAVA_HOME);
+
+		String sdkroot = System.getenv("SDKROOT");
+		if (sdkroot == null) sdkroot = CONFIG.getProperty(ConfigKey.SDKROOT);
+
+		String appiumFilePath = System.getenv("APPIUM_FILE_PATH");
+		if (appiumFilePath == null) appiumFilePath = CONFIG.getProperty(ConfigKey.APPIUM_FILE_PATH);
+
+		String path = System.getenv("PATH");
+		if (path == null) path = CONFIG.getProperty(ConfigKey.PATH);
+
+		// Decide if running in GitHub Actions
 		String githubActions = System.getenv("GITHUB_ACTIONS");
 		if ((githubActions == null || !githubActions.equalsIgnoreCase("true")) && avdName != null && !avdName.isEmpty()) {
-			// Only start emulator manually if NOT running in GitHub Actions
 			startEmulator(avdName);
 		} else {
 			System.out.println("Skipping emulator start in CI environment.");
 		}
 
-		Map<String , String> env = new HashMap<String , String>(System.getenv());
-		env.put("ANDROID_HOME", CONFIG.getProperty(ConfigKey.ANDROID_HOME));
-		env.put("PATH", CONFIG.getProperty(ConfigKey.PATH));
-		env.put("JAVA_HOME", CONFIG.getProperty(ConfigKey.JAVA_HOME));
-		env.put("SDKROOT", CONFIG.getProperty(ConfigKey.SDKROOT));
-		appBundleId= CONFIG.getProperty(ConfigKey.APP_PACKAGE);
-		//env.put("PATH", "/Applications/Xcode.app");
-		this.service = new AppiumServiceBuilder().withAppiumJS(new File(CONFIG.getProperty(ConfigKey.APPIUM_FILE_PATH)))
-				.withIPAddress("127.0.0.1").usingPort(4723).withEnvironment(env).withTimeout(Duration.ofSeconds(300)).build();
+		// Build environment for Appium
+		Map<String, String> env = new HashMap<>(System.getenv());
+		env.put("ANDROID_HOME", androidHome);
+		env.put("JAVA_HOME", javaHome);
+		env.put("SDKROOT", sdkroot);
+		env.put("PATH", path);
+
+		// Store app package for later use
+		appBundleId = CONFIG.getProperty(ConfigKey.APP_PACKAGE);
+
+		// Build Appium service with dynamic path to main.js
+		this.service = new AppiumServiceBuilder()
+				.withAppiumJS(new File(appiumFilePath))
+				.withIPAddress("127.0.0.1")
+				.usingPort(4723)
+				.withEnvironment(env)
+				.withTimeout(Duration.ofSeconds(300))
+				.build();
+
 		service.start();
 	}
-	
+
+
+
 	@BeforeMethod(groups = { "smoke", "prod" }, alwaysRun = true)
 	@Parameters({ "device" })
 	public synchronized void setUp(@Optional String device, Method method) throws Exception {
