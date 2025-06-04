@@ -5,7 +5,7 @@ on:
 
 jobs:
   test-and-publish:
-    runs-on: ubuntu-22.04  # Use newer runner for better package support
+    runs-on: ubuntu-22.04  # Use newer runner for better support
 
     env:
       MOBILE_OS: Android
@@ -21,7 +21,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # full history for git operations
+          fetch-depth: 0
 
       - name: Install unzip
         run: |
@@ -36,15 +36,15 @@ jobs:
           mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
 
       - name: Set up Java 17
+        id: setup-java
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
 
-
       - name: Install Android SDK Platform-Tools
         env:
-          JAVA_HOME: ${{ env.JAVA_HOME }}
+          JAVA_HOME: ${{ steps.setup-java.outputs.java-home }}
         run: |
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platform-tools"
 
@@ -56,8 +56,16 @@ jobs:
           adb version
           which adb
 
-      - name: Add Android platform-tools to PATH (for subsequent steps)
-        run: echo "${ANDROID_HOME}/platform-tools" >> $GITHUB_PATH
+      - name: Verify shell and PATH
+        run: |
+          which sh
+          sh --version || echo "sh not found"
+          echo $PATH
+
+      - name: Restart adb server
+        run: |
+          adb kill-server
+          adb start-server
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -107,7 +115,7 @@ jobs:
           arch: x86_64
           profile: pixel_4_xl
           disable-animations: true
-          timeout: 1800  # increase timeout (default is 900 seconds)
+          timeout: 1800  # 30 minutes timeout to allow full boot
           script: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
         env:
           NODE_PATH: ${{ env.NODE_PATH }}
