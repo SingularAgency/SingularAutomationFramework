@@ -57,6 +57,15 @@ jobs:
           disable-animations: true
           script: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
 
+      # Copy reports to a temporary directory before checkout
+      - name: Copy reports to temporary directory
+        if: always()
+        run: |
+          mkdir -p /tmp/reports
+          cp -r AndroidAutomationReport/* /tmp/reports/
+          echo "Contents of /tmp/reports:"
+          ls -lR /tmp/reports/
+
       # Fetch full git history and clean untracked files before switching branches
       - name: Fetch full git history
         if: always()
@@ -73,12 +82,12 @@ jobs:
           git checkout gh-pages
           git pull origin gh-pages
 
-      # Copy reports from previous branch directory to gh-pages branch
+      # Copy reports from temporary directory to gh-pages branch
       - name: Copy reports to gh-pages branch
         if: always()
         run: |
           mkdir -p out
-          cp -r AndroidAutomationReport/* out/
+          cp -r /tmp/reports/* out/
           echo "Contents of 'out' directory after copying reports:"
           ls -lR out/
 
