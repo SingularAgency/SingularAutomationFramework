@@ -23,6 +23,12 @@ jobs:
         with:
           fetch-depth: 0  # full history for git operations
 
+      - name: Install unzip
+        run: sudo apt-get update && sudo apt-get install -y unzip
+
+      - name: Verify unzip installation
+        run: unzip -v
+
       - name: Add Android platform-tools to PATH
         run: echo "${ANDROID_HOME}/platform-tools" >> $GITHUB_PATH
 
@@ -66,9 +72,6 @@ jobs:
 
       - name: Verify Appium installation
         run: appium -v
-
-      - name: Install unzip
-        run: sudo apt-get update && sudo apt-get install -y unzip
 
       - name: Enable KVM for hardware acceleration
         run: |
