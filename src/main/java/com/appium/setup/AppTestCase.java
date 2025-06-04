@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.appium.util.ConfigKey;
+import lombok.Setter;
 import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -39,7 +40,8 @@ public abstract class AppTestCase {
 	public String testCaseName;
 	public Throwable Error = null;
 	public int counter;
-	private String testId;
+	@Setter
+    private String testId;
 
 	public static ExtentReports reports;
 
@@ -73,13 +75,13 @@ public abstract class AppTestCase {
 		CONFIG.load(fn);
 		String avdName = CONFIG.getProperty("DEVICE_NAME"); // Add this property to your config.properties
 		// Detect if running in GitHub Actions CI environment
-		//String githubActions = System.getenv("GITHUB_ACTIONS");
-	//	if ((githubActions == null || !githubActions.equalsIgnoreCase("true")) && avdName != null && !avdName.isEmpty()) {
+		String githubActions = System.getenv("GITHUB_ACTIONS");
+		if ((githubActions == null || !githubActions.equalsIgnoreCase("true")) && avdName != null && !avdName.isEmpty()) {
 			// Only start emulator manually if NOT running in GitHub Actions
-			//startEmulator(avdName);
-	//	} else {
-	//		System.out.println("Skipping emulator start in CI environment.");
-	//	}
+			startEmulator(avdName);
+		} else {
+			System.out.println("Skipping emulator start in CI environment.");
+		}
 
 		Map<String , String> env = new HashMap<String , String>(System.getenv());
 		env.put("ANDROID_HOME", CONFIG.getProperty(ConfigKey.ANDROID_HOME));
@@ -151,19 +153,10 @@ public abstract class AppTestCase {
 		if (service != null && service.isRunning()) {
 			service.stop();
 		}
-		//stopEmulator();  // Stop emulator after Appium service
+		stopEmulator();  // Stop emulator after Appium service
 	}
 
-	public String getTestId() {
-		return testId;
-	}
-
-	public void setTestId(String testId) {
-		this.testId = testId;
-	}
-
-/*
-	public void startEmulator(String avdName) throws Exception {
+    public void startEmulator(String avdName) throws Exception {
 		String emulatorPath = CONFIG.getProperty(ConfigKey.ANDROID_HOME) + "/emulator/emulator";
 		ProcessBuilder pb = new ProcessBuilder(
 				emulatorPath,
@@ -215,7 +208,6 @@ public abstract class AppTestCase {
 			System.err.println("Error stopping emulator: " + e.getMessage());
 		}
 	}
-*/
 
 
 }
