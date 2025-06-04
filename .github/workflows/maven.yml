@@ -39,6 +39,18 @@ jobs:
       - name: Install Appium globally
         run: npm install -g appium
 
+      - name: Detect Appium main.js path
+        id: detect_appium_path
+        run: |
+          APP_PATH=$(npm root -g)/appium/build/lib/main.js
+          if [ -f "$APP_PATH" ]; then
+            echo "Appium main.js found at $APP_PATH"
+            echo "APPIUM_FILE_PATH=$APP_PATH" >> $GITHUB_ENV
+          else
+            echo "Appium main.js not found!"
+            exit 1
+          fi
+
       - name: Verify Appium installation
         run: appium -v
 
