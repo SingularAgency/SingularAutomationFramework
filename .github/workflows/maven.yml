@@ -175,3 +175,4 @@ jobs:
           else
             git commit -m "Add test reports from workflow run $GITHUB_RUN_ID"
             git push origin gh-pages
+          fi
