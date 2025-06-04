@@ -5,7 +5,7 @@ on:
 
 jobs:
   test-and-publish:
-    runs-on: ubuntu-22.04  # Use newer runner for better support
+    runs-on: ubuntu-22.04
 
     env:
       MOBILE_OS: Android
@@ -115,8 +115,8 @@ jobs:
           arch: x86_64
           profile: pixel_4_xl
           disable-animations: true
-          emulator-boot-timeout: 1800  # Correct input name
-          force-avd-creation: true     # Optional: recreate emulator to avoid stale state
+          emulator-boot-timeout: 1800
+          force-avd-creation: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           script: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
         env:
@@ -127,8 +127,14 @@ jobs:
           SDKROOT: ${{ env.SDKROOT }}
           PATH: ${{ env.ANDROID_HOME }}/platform-tools:${{ env.PATH }}
 
+      - name: Terminate Emulator (Optional)
+        if: always()
+        run: |
+          $ANDROID_HOME/platform-tools/adb -s emulator-5554 emu kill || echo "Emulator already shut down"
+
       - name: Copy reports to temporary directory
         if: always()
+        shell: bash
         run: |
           mkdir -p /tmp/reports
           shopt -s nullglob
@@ -148,6 +154,7 @@ jobs:
 
       - name: Copy reports to gh-pages branch root
         if: always()
+        shell: bash
         run: |
           shopt -s nullglob
           cp -r /tmp/reports/* . || echo "No reports to copy."
@@ -167,5 +174,4 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Add test reports from workflow run $GITHUB_RUN_ID"
-            git push origin gh-pages
+            git commit -m "Ad
