@@ -124,6 +124,7 @@ public abstract class AppTestCase {
 				.build();
 
 		service.start();
+		waitForAppiumServer();
 	}
 
 
@@ -239,6 +240,35 @@ public abstract class AppTestCase {
 			}
 		} catch (Exception e) {
 			System.err.println("Error stopping emulator: " + e.getMessage());
+		}
+	}
+
+	private void waitForAppiumServer() throws InterruptedException {
+		int retries = 0;
+		boolean serverReady = false;
+		while (retries < 15 && !serverReady) {
+			try {
+				java.net.URL url = new java.net.URL("http://127.0.0.1:4723/status");
+				java.net.HttpURLConnection connection = (java.net.HttpURLConnection) url.openConnection();
+				connection.setRequestMethod("GET");
+				connection.setConnectTimeout(3000);
+				connection.connect();
+
+				int responseCode = connection.getResponseCode();
+				if (responseCode == 200) {
+					serverReady = true;
+					System.out.println("Appium server is up and running!");
+				}
+			} catch (java.io.IOException e) {
+				System.out.println("Waiting for Appium server to be ready...");
+			}
+			if (!serverReady) {
+				Thread.sleep(2000); // wait 2 seconds before retry
+				retries++;
+			}
+		}
+		if (!serverReady) {
+			throw new RuntimeException("Appium server not responding at http://127.0.0.1:4723/status after waiting.");
 		}
 	}
 
