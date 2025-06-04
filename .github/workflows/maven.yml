@@ -78,7 +78,7 @@ jobs:
         if: always()
         run: |
           mkdir -p out
-          cp -r ../AndroidAutomationReport/* out/
+          cp -r AndroidAutomationReport/* out/
           echo "Contents of 'out' directory after copying reports:"
           ls -lR out/
 
