@@ -55,6 +55,12 @@ jobs:
         if: always()
         run: git fetch --prune --unshallow
 
+      - name: Checkout gh-pages branch
+        if: always()
+        run: |
+          git checkout gh-pages
+          git pull origin gh-pages
+
       - name: Commit and push reports
         if: always()
         run: |
@@ -65,7 +71,7 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "Add test reports from workflow run $GITHUB_RUN_ID"
-            git push origin HEAD:refs/heads/gh-pages
+            git push origin gh-pages
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
