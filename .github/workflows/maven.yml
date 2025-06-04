@@ -25,6 +25,8 @@ jobs:
 
       - name: Set up debugging session
         uses: mxschmitt/action-tmate@v3
+        with:
+          limit-access-to-actor: false  # allows anyone with link
 
       - name: Install unzip
         run: |
