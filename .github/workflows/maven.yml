@@ -107,6 +107,7 @@ jobs:
           arch: x86_64
           profile: pixel_4_xl
           disable-animations: true
+          timeout: 1800  # increase timeout (default is 900 seconds)
           script: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
         env:
           NODE_PATH: ${{ env.NODE_PATH }}
