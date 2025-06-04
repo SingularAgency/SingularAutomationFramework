@@ -1,4 +1,4 @@
-name: Run Appium Tests and Publish Report
+name: Execute Osmo Tests and Publish Report
 
 on:
   workflow_dispatch:
@@ -40,11 +40,12 @@ jobs:
       - name: Run Android emulator and tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-            api-level: 34
-            arch: x86_64
-            profile: pixel_4_xl
-            disable-animations: true
-            script: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
+          api-level: 34
+          arch: x86_64
+          profile: pixel_4_xl
+          disable-animations: true
+          script: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
+
       - name: Copy reports
         if: always()
         run: |
@@ -55,6 +56,10 @@ jobs:
         if: always()
         run: git fetch --prune --unshallow
 
+      - name: Clean untracked files before checkout
+        if: always()
+        run: git clean -fdx
+
       - name: Checkout gh-pages branch
         if: always()
         run: |
@@ -63,6 +68,8 @@ jobs:
 
       - name: Commit and push reports
         if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -73,5 +80,3 @@ jobs:
             git commit -m "Add test reports from workflow run $GITHUB_RUN_ID"
             git push origin gh-pages
           fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
