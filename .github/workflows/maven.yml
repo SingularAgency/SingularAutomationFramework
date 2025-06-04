@@ -115,7 +115,9 @@ jobs:
           arch: x86_64
           profile: pixel_4_xl
           disable-animations: true
-          timeout: 1800  # 30 minutes timeout to allow full boot
+          emulator-boot-timeout: 1800  # Correct input name
+          force-avd-creation: true     # Optional: recreate emulator to avoid stale state
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           script: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
         env:
           NODE_PATH: ${{ env.NODE_PATH }}
