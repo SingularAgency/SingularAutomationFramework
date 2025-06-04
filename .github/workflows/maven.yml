@@ -5,7 +5,7 @@ on:
 
 jobs:
   test-and-publish:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # Use newer runner for better package support
 
     env:
       MOBILE_OS: Android
@@ -23,20 +23,31 @@ jobs:
         with:
           fetch-depth: 0  # full history for git operations
 
-      - name: Clean apt cache
-        run: sudo rm -rf /var/lib/apt/lists/*
-
       - name: Install unzip
         run: |
           sudo apt-get update
           sudo apt-get install -y unzip
 
-      - name: Verify unzip installation
+      - name: Download Android Command Line Tools
         run: |
-          which unzip
-          unzip -v
+          mkdir -p $ANDROID_HOME/cmdline-tools
+          curl -o commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
+          unzip commandlinetools.zip -d $ANDROID_HOME/cmdline-tools
+          mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+
+      - name: Install Android SDK Platform-Tools
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platform-tools"
 
       - name: Add Android platform-tools to PATH
+        run: echo "$ANDROID_HOME/platform-tools" >> $GITHUB_PATH
+
+      - name: Verify adb installation
+        run: |
+          adb version
+          which adb
+
+      - name: Add Android platform-tools to PATH (for subsequent steps)
         run: echo "${ANDROID_HOME}/platform-tools" >> $GITHUB_PATH
 
       - name: Set up Java 17
@@ -86,11 +97,6 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
-      - name: Verify adb is available
-        run: |
-          adb version
-          which adb      
-
       - name: Run Android emulator and tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -107,16 +113,14 @@ jobs:
           SDKROOT: ${{ env.SDKROOT }}
           PATH: ${{ env.ANDROID_HOME }}/platform-tools:${{ env.PATH }}
 
-      # Copy reports to a temporary directory before checkout
       - name: Copy reports to temporary directory
         if: always()
         run: |
           mkdir -p /tmp/reports
-          cp -r AndroidAutomationReport/* /tmp/reports/
+          shopt -s nullglob
+          cp -r AndroidAutomationReport/* /tmp/reports/ || echo "No reports to copy."
           echo "Contents of /tmp/reports:"
           ls -lR /tmp/reports/
-
-      # Removed git fetch --prune --unshallow step as repo is already full depth
 
       - name: Clean untracked files before checkout
         if: always()
@@ -128,15 +132,9 @@ jobs:
           git checkout gh-pages
           git pull origin gh-pages
 
-      # Optional: Clean old report files in gh-pages root (use with caution)
-      # - name: Clean old report files in gh-pages root
-      #   if: always()
-      #   run: rm -rf *
-
       - name: Copy reports to gh-pages branch root
         if: always()
         run: |
-          mkdir -p /tmp/reports
           shopt -s nullglob
           cp -r /tmp/reports/* . || echo "No reports to copy."
           echo "Contents of gh-pages branch root after copying reports:"
@@ -157,4 +155,3 @@ jobs:
           else
             git commit -m "Add test reports from workflow run $GITHUB_RUN_ID"
             git push origin gh-pages
-          fi
