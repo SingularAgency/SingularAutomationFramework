@@ -57,14 +57,7 @@ jobs:
           disable-animations: true
           script: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
 
-      - name: Copy reports
-        if: always()
-        run: |
-          mkdir -p out
-          cp -r AndroidAutomationReport/* out/
-          echo "Contents of 'out' directory after copying reports:"
-          ls -lR out/
-
+      # Fetch full git history and clean untracked files before switching branches
       - name: Fetch full git history
         if: always()
         run: git fetch --prune --unshallow
@@ -73,12 +66,23 @@ jobs:
         if: always()
         run: git clean -fdx
 
+      # Checkout gh-pages branch and pull latest changes
       - name: Checkout gh-pages branch
         if: always()
         run: |
           git checkout gh-pages
           git pull origin gh-pages
 
+      # Copy reports from previous branch directory to gh-pages branch
+      - name: Copy reports to gh-pages branch
+        if: always()
+        run: |
+          mkdir -p out
+          cp -r ../AndroidAutomationReport/* out/
+          echo "Contents of 'out' directory after copying reports:"
+          ls -lR out/
+
+      # Commit and push changes if any
       - name: Commit and push reports
         if: always()
         env:
