@@ -82,14 +82,18 @@ jobs:
           git checkout gh-pages
           git pull origin gh-pages
 
-      # Copy reports from temporary directory to gh-pages branch
-      - name: Copy reports to gh-pages branch
+      # Optional: Clean old report files in gh-pages root (use with caution)
+      # - name: Clean old report files in gh-pages root
+      #   if: always()
+      #   run: rm -rf *
+
+      # Copy reports from temporary directory to gh-pages branch root
+      - name: Copy reports to gh-pages branch root
         if: always()
         run: |
-          mkdir -p out
-          cp -r /tmp/reports/* out/
-          echo "Contents of 'out' directory after copying reports:"
-          ls -lR out/
+          cp -r /tmp/reports/* .
+          echo "Contents of gh-pages branch root after copying reports:"
+          ls -lR
 
       # Commit and push changes if any
       - name: Commit and push reports
@@ -99,7 +103,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A out/
+          git add -A
           echo "Git status before commit:"
           git status
           if git diff --cached --quiet; then
