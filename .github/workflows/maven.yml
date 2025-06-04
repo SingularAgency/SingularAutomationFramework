@@ -12,7 +12,6 @@ jobs:
       ANDROID_HOME: /home/runner/Android/Sdk
       JAVA_HOME: /usr/lib/jvm/java-17-openjdk
       SDKROOT: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk
-      APPIUM_FILE_PATH: /usr/local/lib/node_modules/appium/build/lib/main.js
       DEVICE_NAME: pixel_4_xl
       OS_VERSION: 14
       MAIN_ACTIVITY: com.osmo.smt.MainActivity
@@ -21,6 +20,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # full history for git operations
 
       - name: Add Android platform-tools to PATH
         run: echo "${ANDROID_HOME}/platform-tools" >> $GITHUB_PATH
@@ -38,6 +39,18 @@ jobs:
 
       - name: Install Appium globally
         run: npm install -g appium
+
+      - name: Detect Node executable path
+        id: detect_node_path
+        run: |
+          NODE_PATH=$(which node)
+          if [ -x "$NODE_PATH" ]; then
+            echo "Node executable found at $NODE_PATH"
+            echo "NODE_PATH=$NODE_PATH" >> $GITHUB_ENV
+          else
+            echo "Node executable not found!"
+            exit 1
+          fi
 
       - name: Detect Appium main.js path
         id: detect_appium_path
@@ -68,6 +81,13 @@ jobs:
           profile: pixel_4_xl
           disable-animations: true
           script: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
+        env:
+          NODE_PATH: ${{ env.NODE_PATH }}
+          APPIUM_FILE_PATH: ${{ env.APPIUM_FILE_PATH }}
+          ANDROID_HOME: ${{ env.ANDROID_HOME }}
+          JAVA_HOME: ${{ env.JAVA_HOME }}
+          SDKROOT: ${{ env.SDKROOT }}
+          PATH: ${{ env.PATH }}
 
       # Copy reports to a temporary directory before checkout
       - name: Copy reports to temporary directory
