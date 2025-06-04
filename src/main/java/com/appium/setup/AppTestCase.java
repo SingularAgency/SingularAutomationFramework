@@ -114,17 +114,22 @@ public abstract class AppTestCase {
 		// Store app package for later use
 		appBundleId = CONFIG.getProperty(ConfigKey.APP_PACKAGE);
 
-		// Build Appium service with dynamic path to main.js
-		this.service = new AppiumServiceBuilder()
-				.withAppiumJS(new File(appiumFilePath))
-				.withIPAddress("127.0.0.1")
-				.usingPort(4723)
-				.withEnvironment(env)
-				.withTimeout(Duration.ofSeconds(300))
-				.build();
+		if (githubActions == null || !githubActions.equalsIgnoreCase("true")) {
+			System.out.println("Starting Appium locally...");
+			this.service = new AppiumServiceBuilder()
+					.withAppiumJS(new File(appiumFilePath))
+					.withIPAddress("127.0.0.1")
+					.usingPort(4723)
+					.withEnvironment(env)
+					.withTimeout(Duration.ofSeconds(300))
+					.build();
 
-		service.start();
-		waitForAppiumServer();
+			service.start();
+			waitForAppiumServer();
+		} else {// En GitHub Actions, ya está iniciado por el workflow
+			System.out.println("Running in CI - assuming Appium is already started.");
+		}
+
 	}
 
 
