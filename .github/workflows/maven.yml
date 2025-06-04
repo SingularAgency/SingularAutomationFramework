@@ -67,6 +67,9 @@ jobs:
       - name: Verify Appium installation
         run: appium -v
 
+      - name: Install unzip
+        run: sudo apt-get update && sudo apt-get install -y unzip
+
       - name: Enable KVM for hardware acceleration
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
@@ -98,16 +101,12 @@ jobs:
           echo "Contents of /tmp/reports:"
           ls -lR /tmp/reports/
 
-      # Fetch full git history and clean untracked files before switching branches
-      - name: Fetch full git history
-        if: always()
-        run: git fetch --prune --unshallow
+      # Removed git fetch --prune --unshallow step as repo is already full depth
 
       - name: Clean untracked files before checkout
         if: always()
         run: git clean -fdx
 
-      # Checkout gh-pages branch and pull latest changes
       - name: Checkout gh-pages branch
         if: always()
         run: |
@@ -119,15 +118,15 @@ jobs:
       #   if: always()
       #   run: rm -rf *
 
-      # Copy reports from temporary directory to gh-pages branch root
       - name: Copy reports to gh-pages branch root
         if: always()
         run: |
-          cp -r /tmp/reports/* .
+          mkdir -p /tmp/reports
+          shopt -s nullglob
+          cp -r /tmp/reports/* . || echo "No reports to copy."
           echo "Contents of gh-pages branch root after copying reports:"
           ls -lR
 
-      # Commit and push changes if any
       - name: Commit and push reports
         if: always()
         env:
