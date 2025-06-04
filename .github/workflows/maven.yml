@@ -125,7 +125,6 @@ jobs:
           ANDROID_HOME: ${{ env.ANDROID_HOME }}
           JAVA_HOME: ${{ env.JAVA_HOME }}
           SDKROOT: ${{ env.SDKROOT }}
-          PATH: ${{ env.ANDROID_HOME }}/platform-tools:${{ env.PATH }}
 
       - name: Terminate Emulator (Optional)
         if: always()
@@ -174,4 +173,5 @@ jobs:
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "Ad
+            git commit -m "Add test reports from workflow run $GITHUB_RUN_ID"
+            git push origin gh-pages
