@@ -23,6 +23,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set up debugging session
+        uses: mxschmitt/action-tmate@v3
+
       - name: Install unzip
         run: |
           sudo apt-get update
