@@ -113,6 +113,12 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
+      - name: Start Appium Server in background
+        run: |
+          nohup appium > appium.log 2>&1 &
+          sleep 10
+          curl -f http://127.0.0.1:4723/status || (echo "Appium did not start properly" && cat appium.log && exit 1)
+
       - name: Run Android emulator and tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
