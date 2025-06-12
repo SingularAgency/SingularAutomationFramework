@@ -124,7 +124,16 @@ jobs:
           emulator-boot-timeout: 1800
           force-avd-creation: true
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          script: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
+          script: echo "Emulator is running"
+
+      - name: Install APK on emulator
+        run: |
+          adb wait-for-device
+          adb devices
+          adb install -r apks/Osmo.apk
+
+      - name: Run tests with Maven
+        run: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
         env:
           NODE_PATH: ${{ env.NODE_PATH }}
           APPIUM_FILE_PATH: ${{ env.APPIUM_FILE_PATH }}
