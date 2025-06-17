@@ -27,14 +27,6 @@ public class SWAPTests extends AppTestCase {
         homePage= new HomePage(driver);
         swapSteps = new SWAPSteps(driver);
         driver.activateApp(appBundleId);
-        homePage.fluentWait.until(ExpectedConditions.visibilityOf(homePage.getBtn2()));
-        homePage.getBtn2().click();
-        homePage.getBtn0().click();
-        homePage.getBtn2().click();
-        homePage.getBtn0().click();
-        homePage.getBtn2().click();
-        homePage.getBtn0().click();
-
     }
 
     @Test
