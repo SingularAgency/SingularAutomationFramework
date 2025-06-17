@@ -23,9 +23,6 @@ public class LoginScenariosTests extends AppTestCase {
     public void initializePageObjects() throws IOException {
         AndroidDriver driver = (AndroidDriver) AppTestCase.getActionDriver().getAppiumDriver();
         loginPageSteps = new LoginPageSteps(driver);
-        Runtime.getRuntime().exec("/Users/cruyfj/Library/Android/sdk/platform-tools/adb pm clear "+ ConfigKey.MAIN_ACTIVITY);
-        Runtime.getRuntime().exec("/Users/cruyfj/Library/Android/sdk/platform-tools/adb shell am start -n "+ ConfigKey.MAIN_ACTIVITY);
-
     }
 
 
