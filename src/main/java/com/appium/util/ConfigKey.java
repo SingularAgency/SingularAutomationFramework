@@ -19,4 +19,6 @@ public class ConfigKey {
     public static String OS_VERSION="OS_VERSION";
 
     public static String MAIN_ACTIVITY="MAIN_ACTIVITY";
+
+    public static String APP_PACKAGE ="APP_PACKAGE";
 }
