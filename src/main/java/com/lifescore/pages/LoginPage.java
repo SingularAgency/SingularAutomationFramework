@@ -4,7 +4,6 @@ import com.appium.setup.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import lombok.Getter;
-import org.checkerframework.checker.units.qual.A;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;

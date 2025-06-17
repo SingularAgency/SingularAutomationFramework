@@ -15,6 +15,8 @@ import java.io.IOException;
 
 public class LoginScenariosTests extends AppTestCase {
     private LoginPageSteps loginPageSteps;
+    AndroidDriver driver;
+
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
         initializeAppTest(this.getClass().getSimpleName(), "Android");
@@ -22,10 +24,10 @@ public class LoginScenariosTests extends AppTestCase {
 
     @BeforeMethod
     public void initializePageObjects() throws IOException {
-        AndroidDriver driver = (AndroidDriver) AppTestCase.getActionDriver().getAppiumDriver();
+        driver = (AndroidDriver) AppTestCase.getActionDriver().getAppiumDriver();
         loginPageSteps = new LoginPageSteps(driver);
+        driver.activateApp(appBundleId);
     }
-
 
     @Test
     public void LS_TC01_LoginWithoutEmailAndPassword(){
@@ -62,7 +64,6 @@ public class LoginScenariosTests extends AppTestCase {
     public void closeApp()  {
         driver.terminateApp(appBundleId);
     }
-
 
     @Override
     protected void cleanPageObjects() {
