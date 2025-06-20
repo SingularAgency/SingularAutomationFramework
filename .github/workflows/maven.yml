@@ -126,11 +126,26 @@ jobs:
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           script: echo "Emulator is running"
 
-      - name: Install APK on emulator
+      - name: Wait for emulator to fully boot
         run: |
+          echo "Waiting for emulator to fully boot..."
           adb wait-for-device
-          adb devices
-          adb install -r apks/Osmo.apk
+          boot_completed=""
+          until [[ "$boot_completed" == "1" ]]; do
+            boot_completed=$(adb shell getprop sys.boot_completed | tr -d '\r')
+            echo "boot_completed = $boot_completed"
+            sleep 5
+          done
+          echo "Emulator is fully booted"
+
+      - name: Install APK on emulator (with timeout and retry)
+        run: |
+          echo "Installing APK..."
+          timeout 2m adb install -r apks/Osmo.apk || (
+            echo "Retrying APK install after failure..."
+            sleep 10
+            timeout 2m adb install -r apks/Osmo.apk
+          )
 
       - name: Run tests with Maven
         run: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
