@@ -2,6 +2,8 @@ package com.lifescore.pages.steps;
 
 import com.lifescore.pages.LoginPage;
 import io.appium.java_client.AppiumDriver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 
@@ -36,6 +38,9 @@ public class LoginPageSteps extends LoginPage {
         getTxtPassword().click();
         getTxtPassword().sendKeys(password);
         getBtnLogin().click();
+        wait.until(
+                ExpectedConditions.elementToBeClickable(By.id("com.android.permissioncontroller:id/permission_allow_button")));
+        driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_button")).click();
     }
 
 

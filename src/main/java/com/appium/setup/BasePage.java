@@ -2,11 +2,13 @@ package com.appium.setup;
 
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.PerformsTouchActions;
+import io.appium.java_client.TouchAction;
+import java.util.function.Supplier;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import org.openqa.selenium.StaleElementReferenceException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
 import org.openqa.selenium.support.PageFactory;
@@ -28,24 +30,6 @@ public class BasePage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         this.driver= driver;
         this.fluentWait=new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(5)).pollingEvery(Duration.ofMillis(300)).ignoring(StaleElementReferenceException.class);
-    }
-
-    public WebElement getElemenByContent(String contentDesc){
-        return driver.findElement(
-                AppiumBy.androidUIAutomator(
-                        "new UiScrollable(new UiSelector().scrollable(true))" +
-                                ".scrollIntoView(new UiSelector().description(\"" + contentDesc + "\"))"
-                )
-        );
-    }
-
-    public WebElement getElementByText(String contentText){
-        return driver.findElement(
-                AppiumBy.androidUIAutomator(
-                        "new UiScrollable(new UiSelector().scrollable(true))" +
-                                ".scrollIntoView(new UiSelector().textContains(\"" + contentText + "\"))"
-                )
-        );
     }
 
     public void tapElement(WebElement element) {
@@ -103,6 +87,39 @@ public class BasePage {
     {
         wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
+
+    public void scrollUntilVisible(Supplier<WebElement> elementSupplier, int maxSwipes) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+
+        for (int i = 0; i < maxSwipes; i++) {
+            try {
+                WebElement element = elementSupplier.get();
+                wait.until(ExpectedConditions.visibilityOf(element));
+                // Element is visible, return or break
+                return;
+            } catch (Exception e) {
+                // Element not visible yet, swipe and try again
+                swipeUp();
+            }
+        }
+        throw new NoSuchElementException("Element not found or visible after " + maxSwipes + " swipes.");
+    }
+
+
+    public void swipeUp() {
+        Dimension size = driver.manage().window().getSize();
+        int startX = size.width / 2;
+        int startY = (int) (size.height * 0.6);
+        int endY = (int) (size.height * 0.4);
+
+        new TouchAction<>((PerformsTouchActions) driver)
+                .press(PointOption.point(startX, startY))
+                .waitAction(WaitOptions.waitOptions(Duration.ofMillis(500)))
+                .moveTo(PointOption.point(startX, endY))
+                .release()
+                .perform();
+    }
+
 
 
 

@@ -44,7 +44,7 @@ public class TestNgListeners implements ITestListener{
 		common.set(currentClass.common);
 		test.set(currentClass.test);
 		common.get().log(arg0.getMethod().getMethodName() + " Failed!");
-		test.get().log(LogStatus.FAIL, arg0.getThrowable());
+		test.get().log(LogStatus.FAIL, arg0.getThrowable().getMessage());
 		String deviceName = actionDriver.get().getDeviceName().trim();
 		common.get().failSeleniumTest(arg0.getThrowable(), actionDriver.get(), 0, deviceName);
 		// common.get().analyzeLog();

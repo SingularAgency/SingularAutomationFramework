@@ -195,6 +195,16 @@ public abstract class AppTestCase {
 		stopEmulator();  // Stop emulator after Appium service
 	}
 
+	public void clearCache() throws IOException {
+		String adbPath = CONFIG.getProperty(ConfigKey.ANDROID_HOME) + "/platform-tools/adb";
+		String[] cmd = {adbPath, "shell", "pm", "clear", appBundleId};
+		Runtime.getRuntime().exec(cmd);
+		String[] cmdNotifications = {adbPath, "shell","pm","grant",ConfigKey.APP_PACKAGE,"android.permission.POST_NOTIFICATIONS"};
+		Runtime.getRuntime().exec(cmdNotifications);
+
+
+	}
+
 	public void startEmulator(String avdName) throws Exception {
 		String emulatorPath = CONFIG.getProperty(ConfigKey.ANDROID_HOME) + "/emulator/emulator";
 		ProcessBuilder pb = new ProcessBuilder(

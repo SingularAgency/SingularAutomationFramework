@@ -11,17 +11,19 @@ import java.util.List;
 @Getter
 public class TodayPage extends BasePage {
 
-    private String btnCheckInLocator = "Start daily Check In";
+    @AndroidFindBy(xpath ="//*[@content-desc='Start daily Check In']" )
+    private WebElement btnCheckin;
 
-    private String btnSetupLocator="Complete My Account Setup";
+    @AndroidFindBy(accessibility = "Complete My Account Setup")
+    private WebElement btnSetup;
 
-    private String btnQuizLocator="Start Quiz";
+    @AndroidFindBy(accessibility = "Start Quiz")
+    private WebElement btnQuiz;
 
-    private String btnLearMoreLocator ="Learn more";
+    @AndroidFindBy(accessibility = "Learn more")
+    private WebElement btnLearnMore;
 
-    @AndroidFindBy(accessibility = "Your handy guide to portion sizes\\nYour handy guide to portion sizes")
-    @AndroidFindBy(accessibility = "Mental fitness affects injury recovery\\nMental fitness affects injury recovery")
-    @AndroidFindBy(accessibility = "Plan your workouts with block periodization\\nPlan your workouts with block periodization")
+    @AndroidFindBy(xpath = "//android.view.View[contains(@content-desc,'Your handy guide to portion sizes')]")
     private WebElement resourceCard;
 
     @AndroidFindBy(xpath = "(//android.view.View[contains(@content-desc,'Hi!')]//android.view.View)[position() <= 4]\n")

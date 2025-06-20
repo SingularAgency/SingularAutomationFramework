@@ -3,8 +3,10 @@ package com.lifescore.pages;
 import com.appium.setup.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import lombok.Getter;
 import org.openqa.selenium.WebElement;
 
+@Getter
 public class CommonPage extends BasePage {
 
     @AndroidFindBy(xpath = "//android.widget.Button[contains(@content-desc,'Today')]")

@@ -41,32 +41,5 @@ public class MobileActionDriver extends BaseActionDriver {
 			common.log("Screen shot failure " + e.getMessage());
 		}
 	}
-	
-	/**
-
-
-//	public void waitForElementNotPresent(String text, int waitTime) throws Exception, TimeoutException {
-//		waitForAngularRequestsToFinish();
-//		common.log("Waiting for element not present : " + text);
-//		try {
-//			setImplicitWaitOnDriver(0);
-//			WebDriverWait wait = new WebDriverWait(appiumDriver, waitTime);
-//			wait.until(
-//					ExpectedConditions.invisibilityOfElementLocated(By.xpath("//*[contains(text(),'" + text + "')]")));
-//		} catch (Exception e) {
-//			throw new Exception(e);
-//		} finally {
-//			setImplicitWaitOnDriver(SelTestCase.WAIT_TIMEOUT);
-//		}
-//	}
-
-	/**
-	 * It select the option from a drop down by using text
-	 *
-	 * @param locator
-	 * @param testData
-	 * @throws Exception
-	 */
-	
 
 }
