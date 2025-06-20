@@ -28,6 +28,17 @@ public class LoginPageSteps extends LoginPage {
         Assert.assertTrue(getLblMandatoryField().isDisplayed());
     }
 
+    public void attemptToLogin(String email, String password){
+        waitForVisibilityOfElement(getTxtEmail());
+        cleanTextFields();
+        getTxtEmail().click();
+        getTxtEmail().sendKeys(email);
+        getTxtPassword().click();
+        getTxtPassword().sendKeys(password);
+        getBtnLogin().click();
+    }
+
+
     public void attemptToLoginWithoutEmail(String password){
         waitForVisibilityOfElement(getTxtPassword());
         cleanTextFields();

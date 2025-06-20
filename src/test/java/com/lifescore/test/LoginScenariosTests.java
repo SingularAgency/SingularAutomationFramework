@@ -60,6 +60,11 @@ public class LoginScenariosTests extends AppTestCase {
         Assert.fail("Server is broken");
     }
 
+    @Test
+    public void LS_TC06_LoginSuccessfully(){
+        loginPageSteps.attemptToLogin("caserez199828@gmail.com","Test123!");
+    }
+
     @AfterMethod
     public void closeApp()  {
         driver.terminateApp(appBundleId);

@@ -11,14 +11,13 @@ import java.util.List;
 @Getter
 public class TodayPage extends BasePage {
 
-    @AndroidFindBy(accessibility = "Start daily Check In")
-    private WebElement btnCheckIn;
+    private String btnCheckInLocator = "Start daily Check In";
 
-    @AndroidFindBy(accessibility = "Complete My Account Setup")
-    private WebElement btnSetup;
+    private String btnSetupLocator="Complete My Account Setup";
 
-    @AndroidFindBy(accessibility = "Start Quiz")
-    private WebElement btnQuiz;
+    private String btnQuizLocator="Start Quiz";
+
+    private String btnLearMoreLocator ="Learn more";
 
     @AndroidFindBy(accessibility = "Your handy guide to portion sizes\\nYour handy guide to portion sizes")
     @AndroidFindBy(accessibility = "Mental fitness affects injury recovery\\nMental fitness affects injury recovery")
