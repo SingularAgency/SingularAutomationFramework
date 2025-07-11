@@ -119,6 +119,7 @@ jobs:
         with:
           api-level: 30
           arch: x86
+          target: google_apis       # <== ADD THIS LINE
           profile: pixel_4
           disable-animations: true
           emulator-boot-timeout: 300
