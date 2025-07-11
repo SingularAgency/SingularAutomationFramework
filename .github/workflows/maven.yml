@@ -129,13 +129,21 @@ jobs:
       - name: Wait for emulator to fully boot
         run: |
           echo "Waiting for emulator to fully boot..."
-          adb wait-for-device
+          adb wait-for-device         
           boot_completed=""
-          until [[ "$boot_completed" == "1" ]]; do
+          timeout_seconds=180
+          waited=0        
+          until [[ "$boot_completed" == "1" || "$waited" -ge "$timeout_seconds" ]]; do
             boot_completed=$(adb shell getprop sys.boot_completed | tr -d '\r')
             echo "boot_completed = $boot_completed"
             sleep 5
+            waited=$((waited + 5))
           done
+          if [[ "$boot_completed" != "1" ]]; then
+            echo "Emulator did not boot within $timeout_seconds seconds"
+            exit 1
+          fi
+        
           echo "Emulator is fully booted"
 
       - name: Install APK on emulator (with timeout and retry)
