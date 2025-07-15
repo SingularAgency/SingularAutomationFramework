@@ -108,6 +108,30 @@ jobs:
 
           echo "APK is valid ✅"
 
+      - name: Prepare test script
+        run: |
+          cat > run-tests.sh <<'EOF'
+          #!/bin/bash
+          echo "Waiting for emulator to appear online..."
+          adb wait-for-device
+          adb devices
+          
+          echo "Installing APK (first try)..."
+          timeout 2m adb install -r apks/Osmo.apk
+          INSTALL_RESULT=$?
+          
+          if [ "$INSTALL_RESULT" -ne 0 ]; then
+            echo "First install failed. Retrying..."
+            sleep 10
+            timeout 2m adb install -r apks/Osmo.apk
+          fi
+          
+          echo "Running Maven tests..."
+          mvn test -DsuiteXmlFile=src/test/resources/testng.xml
+          EOF
+          
+          chmod +x run-tests.sh
+
       - name: Start emulator, install APK and run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -119,25 +143,7 @@ jobs:
           emulator-boot-timeout: 300
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          script: |
-            bash -c '
-              echo "Waiting for emulator to appear online..."
-              adb wait-for-device
-              adb devices
-            
-              echo "Installing APK (first try)..."
-              timeout 2m adb install -r apks/Osmo.apk
-              INSTALL_RESULT=$?
-            
-              if [ "$INSTALL_RESULT" -ne 0 ]; then
-                echo "First install failed. Retrying..."
-                sleep 10
-                timeout 2m adb install -r apks/Osmo.apk
-              fi
-            
-              echo "Running Maven tests..."
-              mvn test -DsuiteXmlFile=src/test/resources/testng.xml
-            '
+          script: ./run-tests.sh
 
       - name: Terminate Emulator (Optional)
         if: always()
