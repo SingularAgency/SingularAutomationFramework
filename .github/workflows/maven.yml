@@ -87,7 +87,7 @@ jobs:
       - name: Download APK from GitHub Release
         run: |
           mkdir -p apks
-          curl -L -o apks/Osmo.apk https://github.com/Caserez98/appiumFramework/releases/tag/OsmoApk/Osmo.apk
+          curl -L -o apks/Osmo.apk https://github.com/Caserez98/appiumFramework/releases/download/OsmoApk/Osmo.apk
 
       - name: Validate APK
         run: |
