@@ -11,7 +11,6 @@ jobs:
       MOBILE_OS: Android
       ANDROID_HOME: /home/runner/Android/Sdk
       JAVA_HOME: /usr/lib/jvm/java-17-openjdk
-      SDKROOT: /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk
       DEVICE_NAME: pixel_4_xl
       OS_VERSION: 14
       MAIN_ACTIVITY: com.osmo.smt.MainActivity
@@ -36,7 +35,6 @@ jobs:
           mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
 
       - name: Set up Java 17
-        id: setup-java
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
@@ -62,27 +60,33 @@ jobs:
       - name: Install Appium v1.22.3
         run: npm install -g appium@1.22.3
 
-      - name: Detect Node executable path
-        id: detect_node_path
-        run: |
-          NODE_PATH=$(which node)
-          echo "NODE_PATH=$NODE_PATH" >> $GITHUB_ENV
-
-      - name: Detect Appium main.js path
-        id: detect_appium_path
-        run: |
-          APP_PATH=$(npm root -g)/appium/build/lib/main.js
-          echo "APPIUM_FILE_PATH=$APP_PATH" >> $GITHUB_ENV
-
       - name: Verify Appium installation
         run: appium -v
+
+      - name: Start Appium server in background
+        run: |
+          nohup appium --base-path /wd/hub > appium.log 2>&1 &
+          echo "Appium launched in background"
+          sleep 5
+
+      - name: Wait for Appium to become available
+        run: |
+          for i in {1..10}; do
+            echo "Checking Appium status (attempt $i)..."
+            if curl -s http://127.0.0.1:4723/wd/hub/status | grep -q "status"; then
+              echo "✅ Appium is up!"
+              break
+            else
+              echo "⏳ Appium not ready yet, retrying..."
+              sleep 5
+            fi
+          done
 
       - name: Enable KVM for hardware acceleration
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
-
 
       - name: Download APK from GitHub Release
         run: |
@@ -92,20 +96,16 @@ jobs:
       - name: Validate APK
         run: |
           echo "Checking APK file..."
-
           ls -lh apks/
           file apks/Osmo.apk || { echo "Could not inspect APK"; exit 1; }
-
           if [ ! -f apks/Osmo.apk ]; then
             echo "APK file not found!"
             exit 1
           fi
-
           if ! file apks/Osmo.apk | grep -q "Zip archive data"; then
             echo "Invalid APK!"
             exit 1
           fi
-
           echo "APK is valid ✅"
 
       - name: Prepare test script
@@ -115,21 +115,18 @@ jobs:
           echo "Waiting for emulator to appear online..."
           adb wait-for-device
           adb devices
-          
-          echo "Installing APK (first try)..."
-          timeout 2m adb install -r apks/Osmo.apk
-          INSTALL_RESULT=$?
-          
-          if [ "$INSTALL_RESULT" -ne 0 ]; then
-            echo "First install failed. Retrying..."
+
+          echo "Installing APK..."
+          adb install -r apks/Osmo.apk || {
+            echo "Retrying APK install after failure..."
             sleep 10
-            timeout 2m adb install -r apks/Osmo.apk
-          fi
-          
+            adb install -r apks/Osmo.apk
+          }
+
           echo "Running Maven tests..."
           mvn test -DsuiteXmlFile=src/test/resources/testng.xml
           EOF
-          
+
           chmod +x run-tests.sh
 
       - name: Start emulator, install APK and run tests
