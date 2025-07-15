@@ -1,6 +1,10 @@
 name: Execute LifeScore Tests and Publish Report
 
+
 on:
+  push:
+    branches:
+      - lifescore_main
   workflow_dispatch:
 
 jobs:
