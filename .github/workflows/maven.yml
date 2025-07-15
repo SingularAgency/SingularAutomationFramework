@@ -125,19 +125,20 @@ jobs:
             echo "Waiting for emulator to appear online..."
             adb wait-for-device
             adb devices
-
+          
             echo "Installing APK (first try)..."
             timeout 2m adb install -r apks/Osmo.apk
             INSTALL_RESULT=$?
-
+          
             if [ "$INSTALL_RESULT" -ne 0 ]; then
               echo "First install failed. Retrying..."
               sleep 10
               timeout 2m adb install -r apks/Osmo.apk
             fi
-
+          
             echo "Running Maven tests..."
             mvn test -DsuiteXmlFile=src/test/resources/testng.xml
+
 
       - name: Terminate Emulator (Optional)
         if: always()
