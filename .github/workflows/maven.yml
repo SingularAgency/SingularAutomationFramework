@@ -85,8 +85,18 @@ jobs:
 
       - name: Validate APK before installing
         run: |
-          file apks/Osmo.apk | grep -q "Zip archive data" || (echo "Invalid APK!" && exit 1)
+          if [ ! -f apks/Osmo.apk ]; then
+          echo "APK file not found!"
+          exit 1
+          fi
+          
+          if ! file apks/Osmo.apk | grep -q "Zip archive data"; then
+          echo "Invalid APK!"
+          exit 1
+          fi
+          
           echo "APK is valid"
+
 
       - name: Start emulator, install APK and run tests
         uses: reactivecircus/android-emulator-runner@v2
