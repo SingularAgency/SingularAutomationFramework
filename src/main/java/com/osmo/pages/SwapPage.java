@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import java.util.List;
 import java.util.regex.Pattern;
 
-@Getter
 public class SwapPage extends BasePage {
 
     @AndroidFindBy(accessibility = "CONVERSIÓN ÚNICA")
@@ -56,4 +55,55 @@ public class SwapPage extends BasePage {
 
     }
 
+    public WebElement getBtnComprobante() {
+        return btnComprobante;
+    }
+
+    public WebElement getBtnConvert() {
+        return btnConvert;
+    }
+
+    public WebElement getBtnReference() {
+        return btnReference;
+    }
+
+    public List<WebElement> getCurrencyLists() {
+        return currencyLists;
+    }
+
+    public WebElement getLblComision() {
+        return lblComision;
+    }
+
+    public WebElement getLblHeader() {
+        return lblHeader;
+    }
+
+    public WebElement getLblConfirmSwap() {
+        return lblConfirmSwap;
+    }
+
+    public WebElement getLblMinimumAmmount() {
+        return lblMinimumAmmount;
+    }
+
+    public WebElement getLblTotal() {
+        return lblTotal;
+    }
+
+    public WebElement getLblTotalARecibir() {
+        return lblTotalARecibir;
+    }
+
+    public WebElement getModalConfirmation() {
+        return modalConfirmation;
+    }
+
+    public List<WebElement> getSwapButtons() {
+        return swapButtons;
+    }
+
+    public List<WebElement> getTextFields() {
+        return textFields;
+    }
 }

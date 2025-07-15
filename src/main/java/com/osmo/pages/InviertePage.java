@@ -3,10 +3,9 @@ package com.osmo.pages;
 import com.appium.setup.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import lombok.Getter;
+
 import org.openqa.selenium.WebElement;
 
-@Getter
 public class InviertePage extends BasePage {
     public InviertePage(AppiumDriver driver) {
         super(driver);
@@ -27,5 +26,23 @@ public class InviertePage extends BasePage {
     @AndroidFindBy(accessibility = "Para poder Vender, primero debes verificar tu usuario")
     public WebElement modalVerificacion;
 
+    public WebElement getBtnExpandir() {
+        return btnExpandir;
+    }
 
+    public WebElement getBtnInvierte() {
+        return btnInvierte;
+    }
+
+    public WebElement getBtnVender() {
+        return btnVender;
+    }
+
+    public WebElement getLblPrecioBitcoin() {
+        return lblPrecioBitcoin;
+    }
+
+    public WebElement getModalVerificacion() {
+        return modalVerificacion;
+    }
 }
