@@ -114,36 +114,33 @@ jobs:
           sleep 10
           curl -f http://127.0.0.1:4723/status || (echo "Appium did not start properly" && cat appium.log && exit 1)
 
-      - name: Run Android emulator and tests
+      - name: Start emulator, install APK and run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
           arch: x86
-          target: google_apis       # <== ADD THIS LINE
+          target: google_apis
           profile: pixel_4
           disable-animations: true
           emulator-boot-timeout: 300
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          script: echo "Emulator is running"
+          script: |
+            echo "Emulator is running"
+            
+            echo "Waiting for emulator to appear online..."
+            adb wait-for-device
+            adb devices
+            
+            echo "Installing APK..."
+            timeout 2m adb install -r apks/Osmo.apk || (
+              echo "Retrying APK install after failure..."
+              sleep 10
+              timeout 2m adb install -r apks/Osmo.apk
+            )
 
-      - name: Install APK on emulator (with timeout and retry)
-        run: |
-          echo "Installing APK..."
-          timeout 2m adb install -r apks/Osmo.apk || (
-            echo "Retrying APK install after failure..."
-            sleep 10
-            timeout 2m adb install -r apks/Osmo.apk
-          )
-
-      - name: Run tests with Maven
-        run: mvn test -DsuiteXmlFile=src/test/resources/testng.xml
-        env:
-          NODE_PATH: ${{ env.NODE_PATH }}
-          APPIUM_FILE_PATH: ${{ env.APPIUM_FILE_PATH }}
-          ANDROID_HOME: ${{ env.ANDROID_HOME }}
-          JAVA_HOME: ${{ env.JAVA_HOME }}
-          SDKROOT: ${{ env.SDKROOT }}
+            echo "Running Maven tests..."
+            mvn test -DsuiteXmlFile=src/test/resources/testng.xml
 
       - name: Terminate Emulator (Optional)
         if: always()
