@@ -83,19 +83,25 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
-      - name: Validate APK before installing
+
+      - name: Validate APK
         run: |
+          echo "Checking APK file..."
+          
+          ls -lh apks/
+          file apks/Osmo.apk || { echo "Could not inspect APK"; exit 1; }
+          
           if [ ! -f apks/Osmo.apk ]; then
-          echo "APK file not found!"
-          exit 1
+            echo "APK file not found!"
+            exit 1
           fi
           
           if ! file apks/Osmo.apk | grep -q "Zip archive data"; then
-          echo "Invalid APK!"
-          exit 1
+            echo "Invalid APK!"
+            exit 1
           fi
           
-          echo "APK is valid"
+          echo "APK is valid ✅"
 
 
       - name: Start emulator, install APK and run tests
