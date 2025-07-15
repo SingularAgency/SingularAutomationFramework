@@ -34,6 +34,7 @@ public class LifeScoreScenariosTests extends AppTestCase {
         todayPageSteps = new TodayPageSteps(driver);
         commonPage = new CommonPage(driver);
         myDataPageSteps = new MyDataPageSteps(driver);
+        clearCache();
         driver.activateApp(appBundleId);
     }
 
