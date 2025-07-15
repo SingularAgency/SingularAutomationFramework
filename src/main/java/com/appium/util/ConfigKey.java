@@ -20,5 +20,5 @@ public class ConfigKey {
 
     public static String MAIN_ACTIVITY="MAIN_ACTIVITY";
 
-    public static String APP_PACKAGE ="APP_PACKAGE";
+    public static String APP_PACKAGE="APP_PACKAGE";
 }

@@ -30,7 +30,9 @@ public class MobileActionDriver extends BaseActionDriver {
 
 
 	public void quit() {
-		appiumDriver.quit();
+		if (appiumDriver != null) {
+			appiumDriver.quit(); // Ensures app closes after each test
+		}
 	}
 
 	public void takeScreenShot(String filePath) {

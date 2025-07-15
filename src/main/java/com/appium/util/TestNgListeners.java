@@ -1,5 +1,6 @@
 package com.appium.util;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -44,7 +45,14 @@ public class TestNgListeners implements ITestListener{
 		common.set(currentClass.common);
 		test.set(currentClass.test);
 		common.get().log(arg0.getMethod().getMethodName() + " Failed!");
-		test.get().log(LogStatus.FAIL, arg0.getThrowable().getMessage());
+		Throwable throwable = arg0.getThrowable();
+		if (throwable instanceof NoSuchElementException) {
+			String customMessage = "Element not found: Please verify the locator or app state.";
+			test.get().log(LogStatus.FAIL, customMessage);
+		} else {
+			// Log full exception message and stack trace as usual
+			test.get().log(LogStatus.FAIL, throwable);
+		}
 		String deviceName = actionDriver.get().getDeviceName().trim();
 		common.get().failSeleniumTest(arg0.getThrowable(), actionDriver.get(), 0, deviceName);
 		// common.get().analyzeLog();

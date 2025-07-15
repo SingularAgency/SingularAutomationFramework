@@ -1,0 +1,194 @@
+name: Execute Osmo Tests and Publish Report
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-and-publish:
+    runs-on: ubuntu-22.04
+
+    env:
+      MOBILE_OS: Android
+      ANDROID_HOME: /home/runner/Android/Sdk
+      JAVA_HOME: /usr/lib/jvm/java-17-openjdk
+      DEVICE_NAME: pixel_4_xl
+      OS_VERSION: 14
+      MAIN_ACTIVITY: com.osmo.smt.MainActivity
+      APP_PACKAGE: com.osmo.smt
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Install unzip
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip
+
+      - name: Download Android Command Line Tools
+        run: |
+          mkdir -p $ANDROID_HOME/cmdline-tools
+          curl -o commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
+          unzip commandlinetools.zip -d $ANDROID_HOME/cmdline-tools
+          mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install Android SDK Platform-Tools
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "platform-tools"
+
+      - name: Add Android platform-tools to PATH
+        run: echo "$ANDROID_HOME/platform-tools" >> $GITHUB_PATH
+
+      - name: Restart adb server
+        run: |
+          adb kill-server
+          adb start-server
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Appium v1.22.3
+        run: npm install -g appium@1.22.3
+
+      - name: Verify Appium installation
+        run: appium -v
+
+      - name: Start Appium server in background
+        run: |
+          nohup appium --base-path /wd/hub > appium.log 2>&1 &
+          echo "Appium launched in background"
+          sleep 5
+
+      - name: Wait for Appium to become available
+        run: |
+          for i in {1..10}; do
+            echo "Checking Appium status (attempt $i)..."
+            if curl -s http://127.0.0.1:4723/wd/hub/status | grep -q "status"; then
+              echo "✅ Appium is up!"
+              break
+            else
+              echo "⏳ Appium not ready yet, retrying..."
+              sleep 5
+            fi
+          done
+
+      - name: Enable KVM for hardware acceleration
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Download APK from GitHub Release
+        run: |
+          mkdir -p apks
+          curl -L -o apks/Osmo.apk https://github.com/Caserez98/appiumFramework/releases/download/OsmoApk/Osmo.apk
+
+      - name: Validate APK
+        run: |
+          echo "Checking APK file..."
+          ls -lh apks/
+          file apks/Osmo.apk || { echo "Could not inspect APK"; exit 1; }
+          if [ ! -f apks/Osmo.apk ]; then
+            echo "APK file not found!"
+            exit 1
+          fi
+          if ! file apks/Osmo.apk | grep -q "Zip archive data"; then
+            echo "Invalid APK!"
+            exit 1
+          fi
+          echo "APK is valid ✅"
+
+      - name: Prepare test script
+        run: |
+          cat > run-tests.sh <<'EOF'
+          #!/bin/bash
+          echo "Waiting for emulator to appear online..."
+          adb wait-for-device
+          adb devices
+
+          echo "Installing APK..."
+          adb install -r apks/Osmo.apk || {
+            echo "Retrying APK install after failure..."
+            sleep 10
+            adb install -r apks/Osmo.apk
+          }
+
+          echo "Running Maven tests..."
+          mvn test -DsuiteXmlFile=src/test/resources/testng.xml
+          EOF
+
+          chmod +x run-tests.sh
+
+      - name: Start emulator, install APK and run tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          arch: x86_64
+          target: google_apis
+          profile: pixel_4
+          disable-animations: true
+          emulator-boot-timeout: 300
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          script: ./run-tests.sh
+
+      - name: Terminate Emulator (Optional)
+        if: always()
+        run: |
+          $ANDROID_HOME/platform-tools/adb -s emulator-5554 emu kill || echo "Emulator already shut down"
+
+      - name: Copy reports to temporary directory
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p /tmp/reports
+          shopt -s nullglob
+          cp -r AndroidAutomationReport/* /tmp/reports/ || echo "No reports to copy."
+          echo "Contents of /tmp/reports:"
+          ls -lR /tmp/reports/
+
+      - name: Clean untracked files before checkout
+        if: always()
+        run: git clean -fdx
+
+      - name: Checkout gh-pages branch
+        if: always()
+        run: |
+          git checkout gh-pages
+          git pull origin gh-pages
+
+      - name: Copy reports to gh-pages branch root
+        if: always()
+        shell: bash
+        run: |
+          shopt -s nullglob
+          cp -r /tmp/reports/* . || echo "No reports to copy."
+          echo "Contents of gh-pages branch root after copying reports:"
+          ls -lR
+
+      - name: Commit and push reports
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          echo "Git status before commit:"
+          git status
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Add test reports from workflow run $GITHUB_RUN_ID"
+            git push origin gh-pages
+          fi

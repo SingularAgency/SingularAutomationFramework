@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.appium.util.ConfigKey;
-import lombok.Setter;
 import org.testng.SkipException;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -40,8 +39,7 @@ public abstract class AppTestCase {
 	public String testCaseName;
 	public Throwable Error = null;
 	public int counter;
-	@Setter
-	private String testId;
+    private String testId;
 
 	public static ExtentReports reports;
 
@@ -49,7 +47,7 @@ public abstract class AppTestCase {
 	protected static ThreadLocal<BaseActionDriver> actionDriverThread = new ThreadLocal<BaseActionDriver>();
 	protected static ThreadLocal<CommonUtil> commonThread = new ThreadLocal<CommonUtil>();
 	protected static ThreadLocal<ExtentTest> testThread = new ThreadLocal<ExtentTest>();
-
+	
 	public static ExtentTest getTest() {
 		return testThread.get();
 	}
@@ -63,6 +61,10 @@ public abstract class AppTestCase {
 
 	public static BaseActionDriver getActionDriver() {
 		return actionDriverThread.get();
+	}
+
+	public void setTestId(String testId) {
+		this.testId = testId;
 	}
 
 	@BeforeClass
@@ -195,17 +197,7 @@ public abstract class AppTestCase {
 		stopEmulator();  // Stop emulator after Appium service
 	}
 
-	public void clearCache() throws IOException {
-		String adbPath = CONFIG.getProperty(ConfigKey.ANDROID_HOME) + "/platform-tools/adb";
-		String[] cmd = {adbPath, "shell", "pm", "clear", appBundleId};
-		Runtime.getRuntime().exec(cmd);
-		String[] cmdNotifications = {adbPath, "shell","pm","grant",ConfigKey.APP_PACKAGE,"android.permission.POST_NOTIFICATIONS"};
-		Runtime.getRuntime().exec(cmdNotifications);
-
-
-	}
-
-	public void startEmulator(String avdName) throws Exception {
+    public void startEmulator(String avdName) throws Exception {
 		String emulatorPath = CONFIG.getProperty(ConfigKey.ANDROID_HOME) + "/emulator/emulator";
 		ProcessBuilder pb = new ProcessBuilder(
 				emulatorPath,
