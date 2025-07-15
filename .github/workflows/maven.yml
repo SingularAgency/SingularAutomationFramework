@@ -127,11 +127,11 @@ jobs:
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           script: |
             echo "Emulator is running"
-      
+            
             echo "Waiting for emulator to appear online..."
             adb wait-for-device
             adb devices
-      
+            
             echo "Installing APK..."
             if timeout 2m adb install -r apks/Osmo.apk; then
               echo "APK installed successfully"
@@ -140,8 +140,11 @@ jobs:
               sleep 10
               timeout 2m adb install -r apks/Osmo.apk
             fi
+            
             echo "Running Maven tests..."
             mvn test -DsuiteXmlFile=src/test/resources/testng.xml
+          shell: bash
+
 
       - name: Terminate Emulator (Optional)
         if: always()
