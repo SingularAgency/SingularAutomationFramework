@@ -30,4 +30,28 @@ public class TodayPage extends BasePage {
     public TodayPage(AppiumDriver driver) {
         super(driver);
     }
+
+    public WebElement getBtnCheckin() {
+        return btnCheckin;
+    }
+
+    public WebElement getBtnLearnMore() {
+        return btnLearnMore;
+    }
+
+    public WebElement getBtnQuiz() {
+        return btnQuiz;
+    }
+
+    public WebElement getBtnSetup() {
+        return btnSetup;
+    }
+
+    public WebElement getResourceCard() {
+        return resourceCard;
+    }
+
+    public List<WebElement> getTasksLists() {
+        return tasksLists;
+    }
 }
