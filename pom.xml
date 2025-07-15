@@ -14,13 +14,13 @@
 	<url>http://www.example.com</url>
 
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>8</maven.compiler.source>
-		<maven.compiler.target>8</maven.compiler.target>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 
 	<dependencies>
-		<!-- Your existing dependencies -->
+		<!-- Dependencias existentes -->
+
 		<dependency>
 			<groupId>com.mashape.unirest</groupId>
 			<artifactId>unirest-java</artifactId>
@@ -33,11 +33,13 @@
 			<version>7.20.1</version>
 			<scope>test</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>com.relevantcodes</groupId>
 			<artifactId>extentreports</artifactId>
 			<version>2.41.2</version>
 		</dependency>
+
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
@@ -56,24 +58,24 @@
 			<version>7.8.0</version>
 		</dependency>
 
+		<!-- Appium Java Client excluyendo Selenium transitivo -->
 		<dependency>
 			<groupId>io.appium</groupId>
 			<artifactId>java-client</artifactId>
-			<version>9.4.0</version>
+			<version>9.5.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.seleniumhq.selenium</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
+		<!-- Selenium Java explícito -->
 		<dependency>
-			<groupId>com.aventstack</groupId>
-			<artifactId>extentreports</artifactId>
-			<version>5.1.1</version>
-		</dependency>
-
-		<!-- Removed duplicate ExtentReports 2.41.2 to avoid conflicts -->
-
-		<dependency>
-			<groupId>com.github.javafaker</groupId>
-			<artifactId>javafaker</artifactId>
-			<version>1.0.2</version>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>4.34.0</version>
 		</dependency>
 
 		<!-- Log4j dependencies -->
@@ -89,13 +91,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
-			<version>4.13.0</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.14.0</version>
@@ -105,6 +100,13 @@
 			<groupId>io.appium</groupId>
 			<artifactId>mitmproxy-java</artifactId>
 			<version>1.6.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.38</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -156,18 +158,17 @@
 		</pluginManagement>
 
 		<plugins>
-			<!-- Compiler plugin with Java 8 -->
+			<!-- Compiler plugin -->
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
 				<configuration>
-					<source>8</source>
-					<target>8</target>
+					<source>17</source>
+					<target>17</target>
 				</configuration>
 			</plugin>
 
-			<!-- Surefire plugin to run TestNG tests -->
+			<!-- Surefire plugin para TestNG -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
@@ -176,11 +177,9 @@
 					<includes>
 						<include>**/*Tests.java</include>
 					</includes>
-
-                    <suiteXmlFiles>
-                        <suiteXmlFile>src/test/java/suites/testng.xml</suiteXmlFile>
-                    </suiteXmlFiles>
-
+					<suiteXmlFiles>
+						<suiteXmlFile>src/test/java/suites/testng.xml</suiteXmlFile>
+					</suiteXmlFiles>
 				</configuration>
 			</plugin>
 		</plugins>

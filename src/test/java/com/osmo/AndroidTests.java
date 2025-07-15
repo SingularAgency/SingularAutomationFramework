@@ -2,8 +2,7 @@ package com.osmo;
 
 import com.appium.setup.AppTestCase;
 import com.osmo.pages.steps.InviertePageSteps;
-import com.vuzo.construyamos.pages.SharedPage;
-import com.vuzo.construyamos.pages.steps.LoginPageSteps;
+
 import io.appium.java_client.android.AndroidDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
