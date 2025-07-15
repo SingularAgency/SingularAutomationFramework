@@ -114,6 +114,12 @@ jobs:
           sleep 10
           curl -f http://127.0.0.1:4723/status || (echo "Appium did not start properly" && cat appium.log && exit 1)
 
+      - name: Verify APK file
+        run: |
+          ls -lh apks/Osmo.apk || echo "APK file not found!"
+          file apks/Osmo.apk || echo "Invalid file"
+          unzip -l apks/Osmo.apk || echo "Not a valid ZIP/APK"
+
       - name: Start emulator, install APK and run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
