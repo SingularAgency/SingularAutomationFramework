@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-22.04
 
     env:
+      REPORT_BRANCH: reports-lifescore
       MOBILE_OS: Android
       ANDROID_HOME: /home/runner/Android/Sdk
       JAVA_HOME: /usr/lib/jvm/java-17-openjdk
@@ -25,6 +26,9 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
+      - name: List config folder contents
+        run: ls -lR src/main/resources/config/
 
       - name: Install unzip
         run: |
@@ -156,11 +160,6 @@ jobs:
       #   if: always()
       #   run: git clean -fdx
 
-      - name: Checkout AutomationReports branch
-        if: always()
-        run: |
-          git checkout AutomationReports
-          git pull origin AutomationReports
 
       - name: Publish report to ${{ env.REPORT_BRANCH }} branch
         if: always()
@@ -173,8 +172,18 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/jalc98/SingularAutomationFramework.git
-          git fetch origin $REPORT_BRANCH || echo "Branch $REPORT_BRANCH does not exist yet."
-          git checkout -b $REPORT_BRANCH origin/$REPORT_BRANCH || git checkout -b $REPORT_BRANCH
+          
+          echo "Fetching remote branches..."
+          git fetch origin
+          
+          echo "Checking if branch $REPORT_BRANCH exists..."
+          if git ls-remote --heads origin "$REPORT_BRANCH" | grep "$REPORT_BRANCH" > /dev/null; then
+            echo "✅ Branch $REPORT_BRANCH exists. Checking it out..."
+            git checkout -b $REPORT_BRANCH origin/$REPORT_BRANCH
+          else
+            echo "⚠️ Branch $REPORT_BRANCH does not exist. Creating it..."
+            git checkout -b $REPORT_BRANCH
+          fi
           
           echo "Copying report files..."
           rm -rf ./*
