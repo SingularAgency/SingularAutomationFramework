@@ -95,7 +95,7 @@ jobs:
       - name: Download APK from GitHub Release
         run: |
           mkdir -p apks
-          curl -L -o apks/LifeScore.apk https://github.com/jalc98/SingularAutomationFramework/releases/download/OsmoApk/Osmo.apk
+          curl -L -o apks/Osmo.apk https://github.com/jalc98/SingularAutomationFramework/releases/download/OsmoApk/Osmo.apk
 
       - name: Validate APK
         run: |
@@ -106,7 +106,7 @@ jobs:
             echo "APK file not found!"
             exit 1
           fi
-          if ! file apks/LifeScore.apk | grep -q "Zip archive data"; then
+          if ! file apks/Osmo.apk | grep -q "Zip archive data"; then
             echo "Invalid APK!"
             exit 1
           fi
