@@ -127,7 +127,7 @@ jobs:
           }
 
           echo "Running Maven tests..."
-          mvn test -DsuiteXmlFile=src/test/resources/testng.xml
+          mvn test -DsuiteXmlFile=src/test/resources/osmo_test_suite.xml
           EOF
 
           chmod +x run-tests.sh

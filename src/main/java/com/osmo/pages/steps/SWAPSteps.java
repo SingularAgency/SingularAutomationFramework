@@ -1,12 +1,9 @@
 package com.osmo.pages.steps;
 
-import com.appium.setup.BasePage;
 import com.osmo.pages.SwapPage;
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 

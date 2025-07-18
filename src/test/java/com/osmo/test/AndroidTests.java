@@ -1,4 +1,4 @@
-package com.osmo;
+package com.osmo.test;
 
 import com.appium.setup.AppTestCase;
 import com.osmo.pages.steps.InviertePageSteps;

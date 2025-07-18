@@ -3,11 +3,9 @@ package com.osmo.pages;
 import com.appium.setup.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import lombok.Getter;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class SwapPage extends BasePage {
 
