@@ -17,8 +17,8 @@ jobs:
       JAVA_HOME: /usr/lib/jvm/java-17-openjdk
       DEVICE_NAME: pixel_4_xl
       OS_VERSION: 14
-      MAIN_ACTIVITY: .MainActivity
       APP_PACKAGE: com.mycompany.lifescore
+      MAIN_ACTIVITY: com.mycompany.lifescore.MainActivity
 
     steps:
       - name: Checkout repository
