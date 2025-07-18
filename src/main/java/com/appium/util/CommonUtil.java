@@ -106,7 +106,7 @@ public class CommonUtil {
 
     public void initializeAppiumDriver(String device) throws Exception {
         log("Initializing Appium Driver");
-
+        System.out.println("DEBUG: Using appActivity = '" + AppTestCase.CONFIG.getProperty(ConfigKey.MAIN_ACTIVITY) + "'");
         try {
             deviceName = device;
             actionDriver.setDeviceName(deviceName);
