@@ -53,7 +53,7 @@
 					<i class='mdi-hardware-desktop-windows'></i>
 				</li>
 				<li>
-					<span class='suite-started-time'>2025-07-18 19:54:45</span>
+					<span class='suite-started-time'>2025-07-18 20:05:10</span>
 				</li>
 				<li>
 					<span>v2.41.1</span>
@@ -83,25 +83,25 @@
 					<div class='col l2 m4 s12'>
 						<div class='card suite-total-time-current'> 
 							<span class='panel-name'>Total Time Taken (Current Run)</span> 
-							<span class='suite-total-time-current-value panel-lead'>0h 1m 31s+248ms</span> 
+							<span class='suite-total-time-current-value panel-lead'>0h 1m 22s+368ms</span> 
 						</div> 
 					</div>
 					<div class='col l2 m4 s12'>
 						<div class='card suite-total-time-overall'> 
 							<span class='panel-name'>Total Time Taken (Overall)</span> 
-							<span class='suite-total-time-overall-value panel-lead'>0h 1m 31s+248ms</span> 
+							<span class='suite-total-time-overall-value panel-lead'>0h 1m 22s+368ms</span> 
 						</div> 
 					</div>
 					<div class='col l2 m4 s6 suite-start-time'>
 						<div class='card accent green-accent'> 
 							<span class='panel-name'>Start</span> 
-							<span class='panel-lead suite-started-time'>2025-07-18 19:53:13</span> 
+							<span class='panel-lead suite-started-time'>2025-07-18 20:03:47</span> 
 						</div> 
 					</div>
 					<div class='col l2 m4 s6 suite-end-time'>
 						<div class='card accent pink-accent'> 
 							<span class='panel-name'>End</span> 
-							<span class='panel-lead suite-ended-time'>2025-07-18 19:54:45</span> 
+							<span class='panel-lead suite-ended-time'>2025-07-18 20:05:10</span> 
 						</div> 
 					</div>
 				</div>
@@ -237,15 +237,15 @@
 						<div class='card-panel no-padding-h no-padding-v no-margin-v'>
 							<div class='wrapper'>
 								<ul id='test-collection' class='test-collection'>
-										<li class='collection-item test displayed active skip ' extentid='fa588e2a-ac0f-4cb3-b836-8d0183f7418b'>
+										<li class='collection-item test displayed active fail ' extentid='c1ce5c1c-bc2b-4f48-8e0c-f279f677f353'>
 											<div class='test-head'>
 												<span class='test-name'>Android LifeScoreScenariosTests-LS_TC01_LoginWithoutEmailAndPassword </span>
-												<span class='test-status label right outline capitalize skip'>skip</span>
+												<span class='test-status label right outline capitalize fail'>fail</span>
 												<span class='category-assigned hide '></span>
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 19:53:14</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 20:03:47</span>
 													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
 													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
 												</div>
@@ -264,29 +264,564 @@
 														<tbody>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:53:14</td>
+																	<td class='timestamp'>20:03:47</td>
 																	<td class='step-details'>Initializing Appium Driver</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:53:37</td>
+																	<td class='timestamp'>20:04:10</td>
 																	<td class='step-details'>Executing Test Case LS_TC01_LoginWithoutEmailAndPassword</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:53:37</td>
+																	<td class='timestamp'>20:04:10</td>
 																	<td class='step-details'>LS_TC01_LoginWithoutEmailAndPassword skipped!</td>
 																</tr>
 																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:10</td>
+																	<td class='step-details'>LS_TC01_LoginWithoutEmailAndPassword Failed!</td>
+																</tr>
+																<tr>
+																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
+																	<td class='timestamp'>20:04:10</td>
+																	<td class='step-details'><textarea>java.lang.NullPointerException: Cannot invoke "java.lang.CharSequence.length()" because "this.text" is null
+	at java.base/java.util.regex.Matcher.getTextLength(Matcher.java:1769)
+	at java.base/java.util.regex.Matcher.reset(Matcher.java:415)
+	at java.base/java.util.regex.Matcher.<init>(Matcher.java:252)
+	at java.base/java.util.regex.Pattern.matcher(Pattern.java:1134)
+	at com.relevantcodes.extentreports.utils.ExceptionUtil.getExceptionHeadline(ExceptionUtil.java:25)
+	at com.relevantcodes.extentreports.utils.ExceptionUtil.createExceptionInfo(ExceptionUtil.java:34)
+	at com.relevantcodes.extentreports.ExtentTest.log(ExtentTest.java:131)
+	at com.relevantcodes.extentreports.ExtentTest.log(ExtentTest.java:164)
+	at com.appium.util.TestNgListeners.onTestSkipped(TestNgListeners.java:71)
+	at org.testng.internal.TestListenerHelper.runTestListeners(TestListenerHelper.java:99)
+	at org.testng.internal.invokers.TestInvoker.runTestResultListener(TestInvoker.java:262)
+	at org.testng.internal.invokers.TestInvoker.invokeListenersForSkippedTestResult(TestInvoker.java:500)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:599)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+</textarea></td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:10</td>
+																	<td class='step-details'>Screen shot failure Cannot invoke "io.appium.java_client.AppiumDriver.getScreenshotAs(org.openqa.selenium.OutputType)" because the return value of "com.appium.util.actiondriver.MobileActionDriver.getAppiumDriver()" is null</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:10</td>
+																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_633517392784.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_633517392784.jpeg' /></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active fail ' extentid='7771cea2-b783-4e65-8789-694ce2023d30'>
+											<div class='test-head'>
+												<span class='test-name'>Android LifeScoreScenariosTests-LS_TC02_LoginWithoutEmail </span>
+												<span class='test-status label right outline capitalize fail'>fail</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 20:04:10</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:10</td>
+																	<td class='step-details'>Initializing Appium Driver</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:17</td>
+																	<td class='step-details'>Executing Test Case LS_TC02_LoginWithoutEmail</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:17</td>
+																	<td class='step-details'>LS_TC02_LoginWithoutEmail skipped!</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:17</td>
+																	<td class='step-details'>LS_TC02_LoginWithoutEmail Failed!</td>
+																</tr>
+																<tr>
+																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
+																	<td class='timestamp'>20:04:17</td>
+																	<td class='step-details'><textarea>java.lang.NullPointerException: Cannot invoke "java.lang.CharSequence.length()" because "this.text" is null
+	at java.base/java.util.regex.Matcher.getTextLength(Matcher.java:1769)
+	at java.base/java.util.regex.Matcher.reset(Matcher.java:415)
+	at java.base/java.util.regex.Matcher.<init>(Matcher.java:252)
+	at java.base/java.util.regex.Pattern.matcher(Pattern.java:1134)
+	at com.relevantcodes.extentreports.utils.ExceptionUtil.getExceptionHeadline(ExceptionUtil.java:25)
+	at com.relevantcodes.extentreports.utils.ExceptionUtil.createExceptionInfo(ExceptionUtil.java:34)
+	at com.relevantcodes.extentreports.ExtentTest.log(ExtentTest.java:131)
+	at com.relevantcodes.extentreports.ExtentTest.log(ExtentTest.java:164)
+	at com.appium.util.TestNgListeners.onTestSkipped(TestNgListeners.java:71)
+	at org.testng.internal.TestListenerHelper.runTestListeners(TestListenerHelper.java:99)
+	at org.testng.internal.invokers.TestInvoker.runTestResultListener(TestInvoker.java:262)
+	at org.testng.internal.invokers.TestInvoker.invokeListenersForSkippedTestResult(TestInvoker.java:500)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:599)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+</textarea></td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:17</td>
+																	<td class='step-details'>Screen shot failure Cannot invoke "io.appium.java_client.AppiumDriver.getScreenshotAs(org.openqa.selenium.OutputType)" because the return value of "com.appium.util.actiondriver.MobileActionDriver.getAppiumDriver()" is null</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:17</td>
+																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_613865835421.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_613865835421.jpeg' /></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active fail ' extentid='09a1a4dc-3178-4636-a993-e2a603c35f5d'>
+											<div class='test-head'>
+												<span class='test-name'>Android LifeScoreScenariosTests-LS_TC03_LoginWithInvalidEmail </span>
+												<span class='test-status label right outline capitalize fail'>fail</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 20:04:17</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:17</td>
+																	<td class='step-details'>Initializing Appium Driver</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:24</td>
+																	<td class='step-details'>Executing Test Case LS_TC03_LoginWithInvalidEmail</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:24</td>
+																	<td class='step-details'>LS_TC03_LoginWithInvalidEmail skipped!</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:24</td>
+																	<td class='step-details'>LS_TC03_LoginWithInvalidEmail Failed!</td>
+																</tr>
+																<tr>
+																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
+																	<td class='timestamp'>20:04:24</td>
+																	<td class='step-details'><textarea>java.lang.NullPointerException: Cannot invoke "java.lang.CharSequence.length()" because "this.text" is null
+	at java.base/java.util.regex.Matcher.getTextLength(Matcher.java:1769)
+	at java.base/java.util.regex.Matcher.reset(Matcher.java:415)
+	at java.base/java.util.regex.Matcher.<init>(Matcher.java:252)
+	at java.base/java.util.regex.Pattern.matcher(Pattern.java:1134)
+	at com.relevantcodes.extentreports.utils.ExceptionUtil.getExceptionHeadline(ExceptionUtil.java:25)
+	at com.relevantcodes.extentreports.utils.ExceptionUtil.createExceptionInfo(ExceptionUtil.java:34)
+	at com.relevantcodes.extentreports.ExtentTest.log(ExtentTest.java:131)
+	at com.relevantcodes.extentreports.ExtentTest.log(ExtentTest.java:164)
+	at com.appium.util.TestNgListeners.onTestSkipped(TestNgListeners.java:71)
+	at org.testng.internal.TestListenerHelper.runTestListeners(TestListenerHelper.java:99)
+	at org.testng.internal.invokers.TestInvoker.runTestResultListener(TestInvoker.java:262)
+	at org.testng.internal.invokers.TestInvoker.invokeListenersForSkippedTestResult(TestInvoker.java:500)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:599)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+</textarea></td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:24</td>
+																	<td class='step-details'>Screen shot failure Cannot invoke "io.appium.java_client.AppiumDriver.getScreenshotAs(org.openqa.selenium.OutputType)" because the return value of "com.appium.util.actiondriver.MobileActionDriver.getAppiumDriver()" is null</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:24</td>
+																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_336345685760.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_336345685760.jpeg' /></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active fail ' extentid='0e801991-6c93-4ff9-8599-1a42d2bd1915'>
+											<div class='test-head'>
+												<span class='test-name'>Android LifeScoreScenariosTests-LS_TC04_LoginWithUnregisteredEmail </span>
+												<span class='test-status label right outline capitalize fail'>fail</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 20:04:24</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:24</td>
+																	<td class='step-details'>Initializing Appium Driver</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:28</td>
+																	<td class='step-details'>Executing Test Case LS_TC04_LoginWithUnregisteredEmail</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:28</td>
+																	<td class='step-details'>LS_TC04_LoginWithUnregisteredEmail skipped!</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:28</td>
+																	<td class='step-details'>LS_TC04_LoginWithUnregisteredEmail Failed!</td>
+																</tr>
+																<tr>
+																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
+																	<td class='timestamp'>20:04:28</td>
+																	<td class='step-details'><textarea>java.lang.NullPointerException: Cannot invoke "java.lang.CharSequence.length()" because "this.text" is null
+	at java.base/java.util.regex.Matcher.getTextLength(Matcher.java:1769)
+	at java.base/java.util.regex.Matcher.reset(Matcher.java:415)
+	at java.base/java.util.regex.Matcher.<init>(Matcher.java:252)
+	at java.base/java.util.regex.Pattern.matcher(Pattern.java:1134)
+	at com.relevantcodes.extentreports.utils.ExceptionUtil.getExceptionHeadline(ExceptionUtil.java:25)
+	at com.relevantcodes.extentreports.utils.ExceptionUtil.createExceptionInfo(ExceptionUtil.java:34)
+	at com.relevantcodes.extentreports.ExtentTest.log(ExtentTest.java:131)
+	at com.relevantcodes.extentreports.ExtentTest.log(ExtentTest.java:164)
+	at com.appium.util.TestNgListeners.onTestSkipped(TestNgListeners.java:71)
+	at org.testng.internal.TestListenerHelper.runTestListeners(TestListenerHelper.java:99)
+	at org.testng.internal.invokers.TestInvoker.runTestResultListener(TestInvoker.java:262)
+	at org.testng.internal.invokers.TestInvoker.invokeListenersForSkippedTestResult(TestInvoker.java:500)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:599)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+</textarea></td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:28</td>
+																	<td class='step-details'>Screen shot failure Cannot invoke "io.appium.java_client.AppiumDriver.getScreenshotAs(org.openqa.selenium.OutputType)" because the return value of "com.appium.util.actiondriver.MobileActionDriver.getAppiumDriver()" is null</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:28</td>
+																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_186693893675.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_186693893675.jpeg' /></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active fail ' extentid='af0cbe39-ed2c-4827-95dd-1d95b5ce4ee6'>
+											<div class='test-head'>
+												<span class='test-name'>Android LifeScoreScenariosTests-LS_TC05_LoginWithWrongPassword </span>
+												<span class='test-status label right outline capitalize fail'>fail</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 20:04:28</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:28</td>
+																	<td class='step-details'>Initializing Appium Driver</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:34</td>
+																	<td class='step-details'>Executing Test Case LS_TC05_LoginWithWrongPassword</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:34</td>
+																	<td class='step-details'>LS_TC05_LoginWithWrongPassword skipped!</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:34</td>
+																	<td class='step-details'>LS_TC05_LoginWithWrongPassword Failed!</td>
+																</tr>
+																<tr>
+																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
+																	<td class='timestamp'>20:04:34</td>
+																	<td class='step-details'><textarea>java.lang.NullPointerException: Cannot invoke "java.lang.CharSequence.length()" because "this.text" is null
+	at java.base/java.util.regex.Matcher.getTextLength(Matcher.java:1769)
+	at java.base/java.util.regex.Matcher.reset(Matcher.java:415)
+	at java.base/java.util.regex.Matcher.<init>(Matcher.java:252)
+	at java.base/java.util.regex.Pattern.matcher(Pattern.java:1134)
+	at com.relevantcodes.extentreports.utils.ExceptionUtil.getExceptionHeadline(ExceptionUtil.java:25)
+	at com.relevantcodes.extentreports.utils.ExceptionUtil.createExceptionInfo(ExceptionUtil.java:34)
+	at com.relevantcodes.extentreports.ExtentTest.log(ExtentTest.java:131)
+	at com.relevantcodes.extentreports.ExtentTest.log(ExtentTest.java:164)
+	at com.appium.util.TestNgListeners.onTestSkipped(TestNgListeners.java:71)
+	at org.testng.internal.TestListenerHelper.runTestListeners(TestListenerHelper.java:99)
+	at org.testng.internal.invokers.TestInvoker.runTestResultListener(TestInvoker.java:262)
+	at org.testng.internal.invokers.TestInvoker.invokeListenersForSkippedTestResult(TestInvoker.java:500)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:599)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:848)
+	at org.testng.TestRunner.run(TestRunner.java:621)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
+	at org.testng.TestNG.runSuites(TestNG.java:1114)
+	at org.testng.TestNG.run(TestNG.java:1082)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
+	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
+</textarea></td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:34</td>
+																	<td class='step-details'>Screen shot failure Cannot invoke "io.appium.java_client.AppiumDriver.getScreenshotAs(org.openqa.selenium.OutputType)" because the return value of "com.appium.util.actiondriver.MobileActionDriver.getAppiumDriver()" is null</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:34</td>
+																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_102526714863.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_102526714863.jpeg' /></a></td>
+																</tr>
+														</tbody>
+													</table>
+													<ul class='collapsible node-list' data-collapsible='accordion'>
+													</ul>
+												</div>
+											</div>
+										</li>
+										<li class='collection-item test displayed active skip ' extentid='390779a0-c724-47b3-adde-d20699601993'>
+											<div class='test-head'>
+												<span class='test-name'>Android LifeScoreScenariosTests-LS_TC05_LoginWithoutPassword </span>
+												<span class='test-status label right outline capitalize skip'>skip</span>
+												<span class='category-assigned hide '></span>
+											</div>
+											<div class='test-body'>
+												<div class='test-info'>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 20:04:34</span>
+													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
+													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
+												</div>
+												<div class='test-desc'></div>
+												<div class='test-attributes'>
+												</div>
+												<div class='test-steps'>
+													<table class='bordered table-results'>
+														<thead>
+															<tr>
+																<th>Status</th>
+																<th>Timestamp</th>
+																<th>Details</th>
+															</tr>
+														</thead>
+														<tbody>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:34</td>
+																	<td class='step-details'>Initializing Appium Driver</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:43</td>
+																	<td class='step-details'>Executing Test Case LS_TC05_LoginWithoutPassword</td>
+																</tr>
+																<tr>
+																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
+																	<td class='timestamp'>20:04:43</td>
+																	<td class='step-details'>LS_TC05_LoginWithoutPassword skipped!</td>
+																</tr>
+																<tr>
 																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
-																	<td class='timestamp'>19:53:37</td>
-																	<td class='step-details'><pre>org.testng.SkipException: Skipping test case due to following error : org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Cannot start the 'com.mycompany.lifescore' application. Visit https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/android/activity-startup.md for troubleshooting. Original error: Cannot start the 'com.mycompany.lifescore' application. Visit https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/android/activity-startup.md for troubleshooting. Original error: Activity name '.com.mycompany.lifescore.MainActivity' used to start the app doesn't exist or cannot be launched! Make sure it exists and is a launchable activity 
-Host info: host: 'pkrvm4h0tjkhlvh', ip: '10.1.0.199'
+																	<td class='timestamp'>20:04:43</td>
+																	<td class='step-details'><pre>org.testng.SkipException: Skipping test case due to following error : org.openqa.selenium.SessionNotCreatedException: Could not start a new session. Response code 500. Message: An unknown server-side error occurred while processing the command. Original error: Cannot start the 'com.mycompany.lifescore' application. Visit https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/android/activity-startup.md for troubleshooting. Original error: Activity name '.MainActivity' used to start the app doesn't exist or cannot be launched! Make sure it exists and is a launchable activity 
+Host info: host: 'pkrvm4h0tjkhlvh', ip: '10.1.0.210'
 Build info: version: '4.34.0', revision: '707dcb4246*'
 System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-1030-azure', java.version: '17.0.15'
 Driver info: io.appium.java_client.android.AndroidDriver
-Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPackage: com.mycompany.lifescore, appium:autoGrantPermissions: true, appium:automationName: UiAutomator2, appium:deviceName: pixel_4_xl, appium:fullReset: false, appium:noReset: true, appium:platformVersion: 14, appium:unicodeKeyboard: false, platformName: ANDROID}]}]
-Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPackage: com.mycompany.lifescore, appium:autoGrantPermissions: true, appium:automationName: UiAutomator2, appium:deviceName: pixel_4_xl, appium:fullReset: false, appium:noReset: true, appium:platformVersion: 14, appium:unicodeKeyboard: false, platformName: ANDROID}
+Command: [null, newSession {capabilities=[Capabilities {appium:appActivity: .MainActivity, appium:appPackage: com.mycompany.lifescore, appium:autoGrantPermissions: true, appium:automationName: UiAutomator2, appium:deviceName: pixel_4_xl, appium:fullReset: false, appium:noReset: true, appium:platformVersion: 14, appium:unicodeKeyboard: false, platformName: ANDROID}]}]
+Capabilities {appium:appActivity: .MainActivity, appium:appPackage: com.mycompany.lifescore, appium:autoGrantPermissions: true, appium:automationName: UiAutomator2, appium:deviceName: pixel_4_xl, appium:fullReset: false, appium:noReset: true, appium:platformVersion: 14, appium:unicodeKeyboard: false, platformName: ANDROID}
 	at com.appium.setup.AppTestCase.setUp(AppTestCase.java:174)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
@@ -328,13 +863,13 @@ Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPack
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:53:37</td>
+																	<td class='timestamp'>20:04:43</td>
 																	<td class='step-details'>Screen shot failure Cannot invoke "io.appium.java_client.AppiumDriver.getScreenshotAs(org.openqa.selenium.OutputType)" because the return value of "com.appium.util.actiondriver.MobileActionDriver.getAppiumDriver()" is null</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:53:37</td>
-																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_312404852144.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_312404852144.jpeg' /></a></td>
+																	<td class='timestamp'>20:04:43</td>
+																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_614344600248.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_614344600248.jpeg' /></a></td>
 																</tr>
 														</tbody>
 													</table>
@@ -343,517 +878,7 @@ Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPack
 												</div>
 											</div>
 										</li>
-										<li class='collection-item test displayed active skip ' extentid='d7e48405-0b7c-4584-b078-99f9fa4338e9'>
-											<div class='test-head'>
-												<span class='test-name'>Android LifeScoreScenariosTests-LS_TC02_LoginWithoutEmail </span>
-												<span class='test-status label right outline capitalize skip'>skip</span>
-												<span class='category-assigned hide '></span>
-											</div>
-											<div class='test-body'>
-												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 19:53:37</span>
-													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
-													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
-												</div>
-												<div class='test-desc'></div>
-												<div class='test-attributes'>
-												</div>
-												<div class='test-steps'>
-													<table class='bordered table-results'>
-														<thead>
-															<tr>
-																<th>Status</th>
-																<th>Timestamp</th>
-																<th>Details</th>
-															</tr>
-														</thead>
-														<tbody>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:53:37</td>
-																	<td class='step-details'>Initializing Appium Driver</td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:53:50</td>
-																	<td class='step-details'>Executing Test Case LS_TC02_LoginWithoutEmail</td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:53:50</td>
-																	<td class='step-details'>LS_TC02_LoginWithoutEmail skipped!</td>
-																</tr>
-																<tr>
-																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
-																	<td class='timestamp'>19:53:50</td>
-																	<td class='step-details'><pre>java.lang.NullPointerException: Cannot invoke "io.appium.java_client.AppiumDriver.quit()" because the return value of "com.appium.util.actiondriver.BaseActionDriver.getAppiumDriver()" is null
-	at com.appium.setup.AppTestCase.closeDriver(AppTestCase.java:201)
-	at com.appium.setup.AppTestCase.tearDown(AppTestCase.java:196)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:390)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:325)
-	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:810)
-	at org.testng.internal.invokers.TestInvoker.runAfterConfigurations(TestInvoker.java:779)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:600)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
-	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
-	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
-	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
-	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.testng.TestRunner.privateRun(TestRunner.java:848)
-	at org.testng.TestRunner.run(TestRunner.java:621)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
-	at org.testng.TestNG.runSuites(TestNG.java:1114)
-	at org.testng.TestNG.run(TestNG.java:1082)
-	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
-	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
-	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
-	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
-	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-</pre></td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:53:50</td>
-																	<td class='step-details'>Screen shot failure Cannot invoke "io.appium.java_client.AppiumDriver.getScreenshotAs(org.openqa.selenium.OutputType)" because the return value of "com.appium.util.actiondriver.MobileActionDriver.getAppiumDriver()" is null</td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:53:50</td>
-																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_212796773623.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_212796773623.jpeg' /></a></td>
-																</tr>
-														</tbody>
-													</table>
-													<ul class='collapsible node-list' data-collapsible='accordion'>
-													</ul>
-												</div>
-											</div>
-										</li>
-										<li class='collection-item test displayed active skip ' extentid='1f92b986-5ea7-4e0b-8292-83494aa67184'>
-											<div class='test-head'>
-												<span class='test-name'>Android LifeScoreScenariosTests-LS_TC03_LoginWithInvalidEmail </span>
-												<span class='test-status label right outline capitalize skip'>skip</span>
-												<span class='category-assigned hide '></span>
-											</div>
-											<div class='test-body'>
-												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 19:53:50</span>
-													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
-													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
-												</div>
-												<div class='test-desc'></div>
-												<div class='test-attributes'>
-												</div>
-												<div class='test-steps'>
-													<table class='bordered table-results'>
-														<thead>
-															<tr>
-																<th>Status</th>
-																<th>Timestamp</th>
-																<th>Details</th>
-															</tr>
-														</thead>
-														<tbody>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:53:50</td>
-																	<td class='step-details'>Initializing Appium Driver</td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:53:57</td>
-																	<td class='step-details'>Executing Test Case LS_TC03_LoginWithInvalidEmail</td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:53:57</td>
-																	<td class='step-details'>LS_TC03_LoginWithInvalidEmail skipped!</td>
-																</tr>
-																<tr>
-																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
-																	<td class='timestamp'>19:53:57</td>
-																	<td class='step-details'><pre>java.lang.NullPointerException: Cannot invoke "io.appium.java_client.AppiumDriver.quit()" because the return value of "com.appium.util.actiondriver.BaseActionDriver.getAppiumDriver()" is null
-	at com.appium.setup.AppTestCase.closeDriver(AppTestCase.java:201)
-	at com.appium.setup.AppTestCase.tearDown(AppTestCase.java:196)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:390)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:325)
-	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:810)
-	at org.testng.internal.invokers.TestInvoker.runAfterConfigurations(TestInvoker.java:779)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:600)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
-	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
-	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
-	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
-	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.testng.TestRunner.privateRun(TestRunner.java:848)
-	at org.testng.TestRunner.run(TestRunner.java:621)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
-	at org.testng.TestNG.runSuites(TestNG.java:1114)
-	at org.testng.TestNG.run(TestNG.java:1082)
-	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
-	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
-	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
-	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
-	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-</pre></td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:53:57</td>
-																	<td class='step-details'>Screen shot failure Cannot invoke "io.appium.java_client.AppiumDriver.getScreenshotAs(org.openqa.selenium.OutputType)" because the return value of "com.appium.util.actiondriver.MobileActionDriver.getAppiumDriver()" is null</td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:53:57</td>
-																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_860169597963.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_860169597963.jpeg' /></a></td>
-																</tr>
-														</tbody>
-													</table>
-													<ul class='collapsible node-list' data-collapsible='accordion'>
-													</ul>
-												</div>
-											</div>
-										</li>
-										<li class='collection-item test displayed active skip ' extentid='a68f326c-e436-4496-9a7c-903702245c93'>
-											<div class='test-head'>
-												<span class='test-name'>Android LifeScoreScenariosTests-LS_TC04_LoginWithUnregisteredEmail </span>
-												<span class='test-status label right outline capitalize skip'>skip</span>
-												<span class='category-assigned hide '></span>
-											</div>
-											<div class='test-body'>
-												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 19:53:57</span>
-													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
-													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
-												</div>
-												<div class='test-desc'></div>
-												<div class='test-attributes'>
-												</div>
-												<div class='test-steps'>
-													<table class='bordered table-results'>
-														<thead>
-															<tr>
-																<th>Status</th>
-																<th>Timestamp</th>
-																<th>Details</th>
-															</tr>
-														</thead>
-														<tbody>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:53:57</td>
-																	<td class='step-details'>Initializing Appium Driver</td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:03</td>
-																	<td class='step-details'>Executing Test Case LS_TC04_LoginWithUnregisteredEmail</td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:03</td>
-																	<td class='step-details'>LS_TC04_LoginWithUnregisteredEmail skipped!</td>
-																</tr>
-																<tr>
-																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
-																	<td class='timestamp'>19:54:03</td>
-																	<td class='step-details'><pre>java.lang.NullPointerException: Cannot invoke "io.appium.java_client.AppiumDriver.quit()" because the return value of "com.appium.util.actiondriver.BaseActionDriver.getAppiumDriver()" is null
-	at com.appium.setup.AppTestCase.closeDriver(AppTestCase.java:201)
-	at com.appium.setup.AppTestCase.tearDown(AppTestCase.java:196)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:390)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:325)
-	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:810)
-	at org.testng.internal.invokers.TestInvoker.runAfterConfigurations(TestInvoker.java:779)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:600)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
-	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
-	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
-	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
-	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.testng.TestRunner.privateRun(TestRunner.java:848)
-	at org.testng.TestRunner.run(TestRunner.java:621)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
-	at org.testng.TestNG.runSuites(TestNG.java:1114)
-	at org.testng.TestNG.run(TestNG.java:1082)
-	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
-	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
-	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
-	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
-	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-</pre></td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:03</td>
-																	<td class='step-details'>Screen shot failure Cannot invoke "io.appium.java_client.AppiumDriver.getScreenshotAs(org.openqa.selenium.OutputType)" because the return value of "com.appium.util.actiondriver.MobileActionDriver.getAppiumDriver()" is null</td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:03</td>
-																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_879857994450.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_879857994450.jpeg' /></a></td>
-																</tr>
-														</tbody>
-													</table>
-													<ul class='collapsible node-list' data-collapsible='accordion'>
-													</ul>
-												</div>
-											</div>
-										</li>
-										<li class='collection-item test displayed active skip ' extentid='e19f81dc-020b-47e3-8cab-ee1fbd8deb16'>
-											<div class='test-head'>
-												<span class='test-name'>Android LifeScoreScenariosTests-LS_TC05_LoginWithWrongPassword </span>
-												<span class='test-status label right outline capitalize skip'>skip</span>
-												<span class='category-assigned hide '></span>
-											</div>
-											<div class='test-body'>
-												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 19:54:03</span>
-													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
-													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
-												</div>
-												<div class='test-desc'></div>
-												<div class='test-attributes'>
-												</div>
-												<div class='test-steps'>
-													<table class='bordered table-results'>
-														<thead>
-															<tr>
-																<th>Status</th>
-																<th>Timestamp</th>
-																<th>Details</th>
-															</tr>
-														</thead>
-														<tbody>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:03</td>
-																	<td class='step-details'>Initializing Appium Driver</td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:11</td>
-																	<td class='step-details'>Executing Test Case LS_TC05_LoginWithWrongPassword</td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:11</td>
-																	<td class='step-details'>LS_TC05_LoginWithWrongPassword skipped!</td>
-																</tr>
-																<tr>
-																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
-																	<td class='timestamp'>19:54:11</td>
-																	<td class='step-details'><pre>java.lang.NullPointerException: Cannot invoke "io.appium.java_client.AppiumDriver.quit()" because the return value of "com.appium.util.actiondriver.BaseActionDriver.getAppiumDriver()" is null
-	at com.appium.setup.AppTestCase.closeDriver(AppTestCase.java:201)
-	at com.appium.setup.AppTestCase.tearDown(AppTestCase.java:196)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:390)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:325)
-	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:810)
-	at org.testng.internal.invokers.TestInvoker.runAfterConfigurations(TestInvoker.java:779)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:600)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
-	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
-	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
-	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
-	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.testng.TestRunner.privateRun(TestRunner.java:848)
-	at org.testng.TestRunner.run(TestRunner.java:621)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
-	at org.testng.TestNG.runSuites(TestNG.java:1114)
-	at org.testng.TestNG.run(TestNG.java:1082)
-	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
-	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
-	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
-	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
-	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-</pre></td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:11</td>
-																	<td class='step-details'>Screen shot failure Cannot invoke "io.appium.java_client.AppiumDriver.getScreenshotAs(org.openqa.selenium.OutputType)" because the return value of "com.appium.util.actiondriver.MobileActionDriver.getAppiumDriver()" is null</td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:11</td>
-																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_333747354207.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_333747354207.jpeg' /></a></td>
-																</tr>
-														</tbody>
-													</table>
-													<ul class='collapsible node-list' data-collapsible='accordion'>
-													</ul>
-												</div>
-											</div>
-										</li>
-										<li class='collection-item test displayed active skip ' extentid='fb372c62-c975-4cf0-845c-68057f66941b'>
-											<div class='test-head'>
-												<span class='test-name'>Android LifeScoreScenariosTests-LS_TC05_LoginWithoutPassword </span>
-												<span class='test-status label right outline capitalize skip'>skip</span>
-												<span class='category-assigned hide '></span>
-											</div>
-											<div class='test-body'>
-												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 19:54:11</span>
-													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
-													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
-												</div>
-												<div class='test-desc'></div>
-												<div class='test-attributes'>
-												</div>
-												<div class='test-steps'>
-													<table class='bordered table-results'>
-														<thead>
-															<tr>
-																<th>Status</th>
-																<th>Timestamp</th>
-																<th>Details</th>
-															</tr>
-														</thead>
-														<tbody>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:11</td>
-																	<td class='step-details'>Initializing Appium Driver</td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:17</td>
-																	<td class='step-details'>Executing Test Case LS_TC05_LoginWithoutPassword</td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:17</td>
-																	<td class='step-details'>LS_TC05_LoginWithoutPassword skipped!</td>
-																</tr>
-																<tr>
-																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
-																	<td class='timestamp'>19:54:17</td>
-																	<td class='step-details'><pre>java.lang.NullPointerException: Cannot invoke "io.appium.java_client.AppiumDriver.quit()" because the return value of "com.appium.util.actiondriver.BaseActionDriver.getAppiumDriver()" is null
-	at com.appium.setup.AppTestCase.closeDriver(AppTestCase.java:201)
-	at com.appium.setup.AppTestCase.tearDown(AppTestCase.java:196)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:390)
-	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:325)
-	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:810)
-	at org.testng.internal.invokers.TestInvoker.runAfterConfigurations(TestInvoker.java:779)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:600)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
-	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
-	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:200)
-	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:148)
-	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.testng.TestRunner.privateRun(TestRunner.java:848)
-	at org.testng.TestRunner.run(TestRunner.java:621)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:443)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:437)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:397)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:336)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1280)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1200)
-	at org.testng.TestNG.runSuites(TestNG.java:1114)
-	at org.testng.TestNG.run(TestNG.java:1082)
-	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:308)
-	at org.apache.maven.surefire.testng.TestNGXmlTestSuite.execute(TestNGXmlTestSuite.java:71)
-	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:113)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385)
-	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
-	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-</pre></td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:17</td>
-																	<td class='step-details'>Screen shot failure Cannot invoke "io.appium.java_client.AppiumDriver.getScreenshotAs(org.openqa.selenium.OutputType)" because the return value of "com.appium.util.actiondriver.MobileActionDriver.getAppiumDriver()" is null</td>
-																</tr>
-																<tr>
-																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:17</td>
-																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_264289884883.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_264289884883.jpeg' /></a></td>
-																</tr>
-														</tbody>
-													</table>
-													<ul class='collapsible node-list' data-collapsible='accordion'>
-													</ul>
-												</div>
-											</div>
-										</li>
-										<li class='collection-item test displayed active skip ' extentid='d14053a9-9e53-4644-a8b4-7ab6d1cfdcc4'>
+										<li class='collection-item test displayed active skip ' extentid='0d33a282-6956-4be9-afa9-d6dd0fe7f837'>
 											<div class='test-head'>
 												<span class='test-name'>Android LifeScoreScenariosTests-LS_TC06_LoginSuccessfully </span>
 												<span class='test-status label right outline capitalize skip'>skip</span>
@@ -861,7 +886,7 @@ Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPack
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 19:54:18</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 20:04:43</span>
 													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
 													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
 												</div>
@@ -880,22 +905,22 @@ Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPack
 														<tbody>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:18</td>
+																	<td class='timestamp'>20:04:43</td>
 																	<td class='step-details'>Initializing Appium Driver</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:25</td>
+																	<td class='timestamp'>20:04:51</td>
 																	<td class='step-details'>Executing Test Case LS_TC06_LoginSuccessfully</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:25</td>
+																	<td class='timestamp'>20:04:51</td>
 																	<td class='step-details'>LS_TC06_LoginSuccessfully skipped!</td>
 																</tr>
 																<tr>
 																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
-																	<td class='timestamp'>19:54:25</td>
+																	<td class='timestamp'>20:04:51</td>
 																	<td class='step-details'><pre>java.lang.NullPointerException: Cannot invoke "io.appium.java_client.AppiumDriver.quit()" because the return value of "com.appium.util.actiondriver.BaseActionDriver.getAppiumDriver()" is null
 	at com.appium.setup.AppTestCase.closeDriver(AppTestCase.java:201)
 	at com.appium.setup.AppTestCase.tearDown(AppTestCase.java:196)
@@ -940,13 +965,13 @@ Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPack
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:25</td>
+																	<td class='timestamp'>20:04:51</td>
 																	<td class='step-details'>Screen shot failure Cannot invoke "io.appium.java_client.AppiumDriver.getScreenshotAs(org.openqa.selenium.OutputType)" because the return value of "com.appium.util.actiondriver.MobileActionDriver.getAppiumDriver()" is null</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:25</td>
-																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_955761214782.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_955761214782.jpeg' /></a></td>
+																	<td class='timestamp'>20:04:51</td>
+																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_843022452041.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_843022452041.jpeg' /></a></td>
 																</tr>
 														</tbody>
 													</table>
@@ -955,7 +980,7 @@ Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPack
 												</div>
 											</div>
 										</li>
-										<li class='collection-item test displayed active skip ' extentid='a65b338e-0fdf-460e-aa39-d1d366b816ba'>
+										<li class='collection-item test displayed active skip ' extentid='1a93c942-7539-4d72-9803-5010d3924b71'>
 											<div class='test-head'>
 												<span class='test-name'>Android LifeScoreScenariosTests-LS_TC07_CheckTodayPage </span>
 												<span class='test-status label right outline capitalize skip'>skip</span>
@@ -963,7 +988,7 @@ Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPack
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 19:54:25</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 20:04:51</span>
 													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
 													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
 												</div>
@@ -982,22 +1007,22 @@ Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPack
 														<tbody>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:25</td>
+																	<td class='timestamp'>20:04:51</td>
 																	<td class='step-details'>Initializing Appium Driver</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:32</td>
+																	<td class='timestamp'>20:04:57</td>
 																	<td class='step-details'>Executing Test Case LS_TC07_CheckTodayPage</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:32</td>
+																	<td class='timestamp'>20:04:57</td>
 																	<td class='step-details'>LS_TC07_CheckTodayPage skipped!</td>
 																</tr>
 																<tr>
 																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
-																	<td class='timestamp'>19:54:32</td>
+																	<td class='timestamp'>20:04:57</td>
 																	<td class='step-details'><pre>java.lang.NullPointerException: Cannot invoke "io.appium.java_client.AppiumDriver.quit()" because the return value of "com.appium.util.actiondriver.BaseActionDriver.getAppiumDriver()" is null
 	at com.appium.setup.AppTestCase.closeDriver(AppTestCase.java:201)
 	at com.appium.setup.AppTestCase.tearDown(AppTestCase.java:196)
@@ -1042,13 +1067,13 @@ Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPack
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:32</td>
+																	<td class='timestamp'>20:04:57</td>
 																	<td class='step-details'>Screen shot failure Cannot invoke "io.appium.java_client.AppiumDriver.getScreenshotAs(org.openqa.selenium.OutputType)" because the return value of "com.appium.util.actiondriver.MobileActionDriver.getAppiumDriver()" is null</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:32</td>
-																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_264773311650.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_264773311650.jpeg' /></a></td>
+																	<td class='timestamp'>20:04:57</td>
+																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_913856235508.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_913856235508.jpeg' /></a></td>
 																</tr>
 														</tbody>
 													</table>
@@ -1057,7 +1082,7 @@ Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPack
 												</div>
 											</div>
 										</li>
-										<li class='collection-item test displayed active skip ' extentid='04f78f6a-da5f-4f09-b008-84b3f1a0d349'>
+										<li class='collection-item test displayed active skip ' extentid='3fc42eee-d0bb-4efa-ac75-3bf6a0dba084'>
 											<div class='test-head'>
 												<span class='test-name'>Android LifeScoreScenariosTests-LS_TC08_CheckFooterOnTodayPage </span>
 												<span class='test-status label right outline capitalize skip'>skip</span>
@@ -1065,7 +1090,7 @@ Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPack
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 19:54:32</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 20:04:57</span>
 													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
 													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
 												</div>
@@ -1084,22 +1109,22 @@ Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPack
 														<tbody>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:32</td>
+																	<td class='timestamp'>20:04:57</td>
 																	<td class='step-details'>Initializing Appium Driver</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:38</td>
+																	<td class='timestamp'>20:05:03</td>
 																	<td class='step-details'>Executing Test Case LS_TC08_CheckFooterOnTodayPage</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:38</td>
+																	<td class='timestamp'>20:05:03</td>
 																	<td class='step-details'>LS_TC08_CheckFooterOnTodayPage skipped!</td>
 																</tr>
 																<tr>
 																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
-																	<td class='timestamp'>19:54:38</td>
+																	<td class='timestamp'>20:05:03</td>
 																	<td class='step-details'><pre>java.lang.NullPointerException: Cannot invoke "io.appium.java_client.AppiumDriver.quit()" because the return value of "com.appium.util.actiondriver.BaseActionDriver.getAppiumDriver()" is null
 	at com.appium.setup.AppTestCase.closeDriver(AppTestCase.java:201)
 	at com.appium.setup.AppTestCase.tearDown(AppTestCase.java:196)
@@ -1144,13 +1169,13 @@ Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPack
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:38</td>
+																	<td class='timestamp'>20:05:03</td>
 																	<td class='step-details'>Screen shot failure Cannot invoke "io.appium.java_client.AppiumDriver.getScreenshotAs(org.openqa.selenium.OutputType)" because the return value of "com.appium.util.actiondriver.MobileActionDriver.getAppiumDriver()" is null</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:38</td>
-																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_179038674727.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_179038674727.jpeg' /></a></td>
+																	<td class='timestamp'>20:05:03</td>
+																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_601874987610.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_601874987610.jpeg' /></a></td>
 																</tr>
 														</tbody>
 													</table>
@@ -1159,7 +1184,7 @@ Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPack
 												</div>
 											</div>
 										</li>
-										<li class='collection-item test displayed active skip ' extentid='719172a7-8775-4dca-bc8d-433d4883abb4'>
+										<li class='collection-item test displayed active skip ' extentid='368ea0cd-bf26-4239-96d1-c3012ace8387'>
 											<div class='test-head'>
 												<span class='test-name'>Android LifeScoreScenariosTests-LS_TC09_ValidateIfLifeScoresMatch </span>
 												<span class='test-status label right outline capitalize skip'>skip</span>
@@ -1167,7 +1192,7 @@ Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPack
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 19:54:38</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 20:05:03</span>
 													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
 													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
 												</div>
@@ -1186,22 +1211,22 @@ Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPack
 														<tbody>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:38</td>
+																	<td class='timestamp'>20:05:03</td>
 																	<td class='step-details'>Initializing Appium Driver</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:44</td>
+																	<td class='timestamp'>20:05:09</td>
 																	<td class='step-details'>Executing Test Case LS_TC09_ValidateIfLifeScoresMatch</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:44</td>
+																	<td class='timestamp'>20:05:09</td>
 																	<td class='step-details'>LS_TC09_ValidateIfLifeScoresMatch skipped!</td>
 																</tr>
 																<tr>
 																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
-																	<td class='timestamp'>19:54:44</td>
+																	<td class='timestamp'>20:05:09</td>
 																	<td class='step-details'><pre>java.lang.NullPointerException: Cannot invoke "io.appium.java_client.AppiumDriver.quit()" because the return value of "com.appium.util.actiondriver.BaseActionDriver.getAppiumDriver()" is null
 	at com.appium.setup.AppTestCase.closeDriver(AppTestCase.java:201)
 	at com.appium.setup.AppTestCase.tearDown(AppTestCase.java:196)
@@ -1246,13 +1271,13 @@ Capabilities {appium:appActivity: com.mycompany.lifescore.Mai..., appium:appPack
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:44</td>
+																	<td class='timestamp'>20:05:09</td>
 																	<td class='step-details'>Screen shot failure Cannot invoke "io.appium.java_client.AppiumDriver.getScreenshotAs(org.openqa.selenium.OutputType)" because the return value of "com.appium.util.actiondriver.MobileActionDriver.getAppiumDriver()" is null</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>19:54:44</td>
-																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_758045407120.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_758045407120.jpeg' /></a></td>
+																	<td class='timestamp'>20:05:09</td>
+																	<td class='step-details'>Screenshot attached below: <a href='LifeScoreScenariosTests_Android_303174018547.jpeg' data-featherlight='image'><img class='report-img' src='LifeScoreScenariosTests_Android_303174018547.jpeg' /></a></td>
 																</tr>
 														</tbody>
 													</table>
