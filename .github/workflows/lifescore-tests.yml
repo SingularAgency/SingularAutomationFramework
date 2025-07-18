@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-22.04
 
     env:
+      REPORT_BRANCH: reports-lifescore
       MOBILE_OS: Android
       ANDROID_HOME: /home/runner/Android/Sdk
       JAVA_HOME: /usr/lib/jvm/java-17-openjdk
@@ -171,31 +172,39 @@ jobs:
           git checkout AutomationReports
           git pull origin AutomationReports
 
-      - name: Copy reports to AutomationReports branch root
+      - name: Copy reports to temporary directory
         if: always()
         shell: bash
         run: |
+          mkdir -p /tmp/reports
           shopt -s nullglob
-          cp -r /tmp/reports/* . || echo "No reports to copy."
-          echo "Contents of AutomationReports branch root after copying reports:"
-          ls -lR
+          cp -r AndroidAutomationReport/* /tmp/reports/ || echo "No reports to copy."
+          echo "Contents of /tmp/reports:"
+          ls -lR /tmp/reports/
 
-      - name: Commit and push reports
+      - name: Publish report to ${{ env.REPORT_BRANCH }} branch
         if: always()
         run: |
+          echo "Cloning $REPORT_BRANCH branch into temp directory..."
+          mkdir publish-temp
+          cd publish-temp
+            
+          git init
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          # ⬇️ CAMBIA la URL aquí:
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/jalc98/SingularAutomationFramework.git
-          
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/jalc98/SingularAutomationFramework.git
+          git fetch origin $REPORT_BRANCH || echo "Branch $REPORT_BRANCH does not exist yet."
+          git checkout -b $REPORT_BRANCH origin/$REPORT_BRANCH || git checkout -b $REPORT_BRANCH
+            
+          echo "Copying report files..."
+          rm -rf ./*
+          cp -r /tmp/reports/* .
+            
+          echo "Committing and pushing changes..."
           git add -A
-          echo "Git status before commit:"
-          git status
           if git diff --cached --quiet; then
-            echo "No changes to commit"
+            echo "No changes to commit."
           else
-            git commit -m "Add test reports from workflow run $GITHUB_RUN_ID"
-            git push origin AutomationReports
+            git commit -m "📊 Add LifeScore test report from run $GITHUB_RUN_ID"
+            git push origin $REPORT_BRANCH
           fi
-
