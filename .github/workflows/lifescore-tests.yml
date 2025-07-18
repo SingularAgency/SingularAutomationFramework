@@ -92,13 +92,6 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
-      - name: Set vars
-        id: vars
-        run: |
-          echo "report_branch=reports-lifescore" >> $GITHUB_OUTPUT
-          echo "suite=src/test/java/suites/lifescore_test_suite.xml" >> $GITHUB_OUTPUT
-
-
       - name: Download APK from GitHub Release
         run: |
           mkdir -p apks
@@ -119,25 +112,15 @@ jobs:
           fi
           echo "APK is valid ✅"
 
-      - name: Prepare test script
+      - name: Create test runner script
         run: |
-          cat > run-tests.sh <<'EOF'
+          cat > run-tests.sh <<EOF
           #!/bin/bash
-          echo "Waiting for emulator to appear online..."
           adb wait-for-device
           adb devices
-
-          echo "Installing APK..."
-          adb install -r apks/LifeScore.apk || {
-            echo "Retrying APK install after failure..."
-            sleep 10
-            adb install -r apks/LifeScore.apk
-          }
-
-          echo "Running Maven tests..."
-          mvn clean test -DsuiteXmlFile=${{ steps.vars.outputs.suite }}
+          echo "Running LifeScore suite..."
+          mvn clean test -DsuiteXmlFile=src/test/java/suites/lifescore_test_suite.xml
           EOF
-
           chmod +x run-tests.sh
 
       - name: Start emulator, install APK and run tests
