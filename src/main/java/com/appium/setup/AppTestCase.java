@@ -293,5 +293,35 @@ public abstract class AppTestCase {
         }
     }
 
+    public void clearCache() throws IOException {
+        try {
+            String androidHome = System.getenv("ANDROID_HOME");
+            String adbPath = androidHome + "/platform-tools/adb";
+
+            String appBundleId = System.getenv("APP_PACKAGE");
+            if (appBundleId == null || appBundleId.isEmpty()) {
+                appBundleId = "com.mycompany.lifescore"; // fallback local
+            }
+
+            String[] clearCmd = {adbPath, "shell", "pm", "clear", appBundleId};
+            Runtime.getRuntime().exec(clearCmd);
+
+            String[] permissionCmd = {
+                    adbPath,
+                    "shell",
+                    "pm",
+                    "grant",
+                    appBundleId,
+                    "android.permission.POST_NOTIFICATIONS"
+            };
+            Runtime.getRuntime().exec(permissionCmd);
+
+            System.out.println("✅ App cleared and notification permission granted");
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("❌ Failed to clear app or grant permissions");
+        }
+    }
+
 
 }
