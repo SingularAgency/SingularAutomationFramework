@@ -122,8 +122,13 @@ public class CommonUtil {
                 options.setCapability(UiAutomator2Options.AUTO_GRANT_PERMISSIONS_OPTION, true);
                 options.setCapability(UiAutomator2Options.NO_RESET_OPTION, true);
                 options.setCapability(UiAutomator2Options.FULL_RESET_OPTION, false);
+                String activity = AppTestCase.CONFIG.getProperty(ConfigKey.MAIN_ACTIVITY).trim();
+                if (activity.startsWith(".")) {
+                    activity = activity.substring(1);
+                    System.out.println("Removed leading dot from activity name, new value: " + activity);
+                }
                 options.setCapability(UiAutomator2Options.APP_PACKAGE_OPTION, AppTestCase.CONFIG.getProperty(ConfigKey.APP_PACKAGE));
-                options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION, AppTestCase.CONFIG.getProperty(ConfigKey.MAIN_ACTIVITY));
+                options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION, activity);
 
                 String appiumServerUrl;
                 if ("true".equals(System.getenv("CI"))) {
