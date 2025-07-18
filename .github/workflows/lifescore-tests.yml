@@ -162,9 +162,10 @@ jobs:
           echo "Contents of /tmp/reports:"
           ls -lR /tmp/reports/
 
-      - name: Clean untracked files before checkout
-        if: always()
-        run: git clean -fdx
+      # ⚠️ Elimina este paso o muévelo al final, si realmente lo necesitas
+      # - name: Clean untracked files before checkout
+      #   if: always()
+      #   run: git clean -fdx
 
       - name: Checkout AutomationReports branch
         if: always()
@@ -172,34 +173,24 @@ jobs:
           git checkout AutomationReports
           git pull origin AutomationReports
 
-      - name: Copy reports to temporary directory
-        if: always()
-        shell: bash
-        run: |
-          mkdir -p /tmp/reports
-          shopt -s nullglob
-          cp -r AndroidAutomationReport/* /tmp/reports/ || echo "No reports to copy."
-          echo "Contents of /tmp/reports:"
-          ls -lR /tmp/reports/
-
       - name: Publish report to ${{ env.REPORT_BRANCH }} branch
         if: always()
         run: |
           echo "Cloning $REPORT_BRANCH branch into temp directory..."
           mkdir publish-temp
           cd publish-temp
-            
+          
           git init
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/jalc98/SingularAutomationFramework.git
           git fetch origin $REPORT_BRANCH || echo "Branch $REPORT_BRANCH does not exist yet."
           git checkout -b $REPORT_BRANCH origin/$REPORT_BRANCH || git checkout -b $REPORT_BRANCH
-            
+          
           echo "Copying report files..."
           rm -rf ./*
           cp -r /tmp/reports/* .
-            
+          
           echo "Committing and pushing changes..."
           git add -A
           if git diff --cached --quiet; then
