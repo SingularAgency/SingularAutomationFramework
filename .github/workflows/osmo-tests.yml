@@ -26,6 +26,14 @@ jobs:
           ref: main
           fetch-depth: 0
 
+      - name: Print current directory and list root files
+        run: |
+          pwd
+          ls -l
+          ls -l src
+          ls -l src/test
+          ls -l src/test/resources
+
       - name: List osmo test suite location
         run: ls -l src/test/resources/
 
