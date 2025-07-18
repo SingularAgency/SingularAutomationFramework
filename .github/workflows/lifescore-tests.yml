@@ -145,7 +145,7 @@ jobs:
           }
 
           echo "Running Maven tests..."
-          run: mvn clean test -DsuiteXmlFile=${{ steps.vars.outputs.suite }}
+          mvn clean test -DsuiteXmlFile=${{ steps.vars.outputs.suite }}
           EOF
 
           chmod +x run-tests.sh
