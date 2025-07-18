@@ -295,15 +295,29 @@ public abstract class AppTestCase {
     public void clearCache() throws IOException {
         try {
             String androidHome = System.getenv("ANDROID_HOME");
+            if (androidHome == null || androidHome.isEmpty()) {
+                androidHome = CONFIG.getProperty(ConfigKey.ANDROID_HOME);
+            }
+
+            if (androidHome == null || androidHome.isEmpty()) {
+                // Fallback manual para entorno local (ajusta esta ruta a tu máquina)
+                androidHome = System.getProperty("user.home") + "/Library/Android/sdk";
+                // En Windows podría ser: androidHome = System.getProperty("user.home") + "\\AppData\\Local\\Android\\Sdk";
+            }
+
             String adbPath = androidHome + "/platform-tools/adb";
+            File adbFile = new File(adbPath);
+            if (!adbFile.exists()) {
+                throw new RuntimeException("❌ adb path does not exist: " + adbPath);
+            }
 
             String appBundleId = System.getenv("APP_PACKAGE");
             if (appBundleId == null || appBundleId.isEmpty()) {
-                appBundleId = "com.mycompany.lifescore"; // fallback local
+                appBundleId = CONFIG.getProperty(ConfigKey.APP_PACKAGE);
             }
-
             String[] clearCmd = {adbPath, "shell", "pm", "clear", appBundleId};
-            Runtime.getRuntime().exec(clearCmd);
+            Process clearProcess = Runtime.getRuntime().exec(clearCmd);
+            clearProcess.waitFor();
 
             String[] permissionCmd = {
                     adbPath,
@@ -313,7 +327,8 @@ public abstract class AppTestCase {
                     appBundleId,
                     "android.permission.POST_NOTIFICATIONS"
             };
-            Runtime.getRuntime().exec(permissionCmd);
+            Process permissionProcess = Runtime.getRuntime().exec(permissionCmd);
+            permissionProcess.waitFor();
 
             System.out.println("✅ App cleared and notification permission granted");
         } catch (Exception e) {
@@ -321,6 +336,5 @@ public abstract class AppTestCase {
             throw new RuntimeException("❌ Failed to clear app or grant permissions");
         }
     }
-
 
 }
