@@ -12,14 +12,14 @@ import io.appium.java_client.ios.IOSDriver;
 
 
 public abstract class BaseActionDriver {
-	
-    protected AppiumDriver appiumDriver;
+
+	protected AppiumDriver appiumDriver;
 	protected IOSDriver iosDriver;
 	private String testCaseName;
 	private String deviceName;
 
 
-    public IOSDriver getIOSDriver() {
+	public IOSDriver getIOSDriver() {
 		return iosDriver;
 	}
 

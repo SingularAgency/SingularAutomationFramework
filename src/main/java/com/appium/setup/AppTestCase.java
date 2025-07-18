@@ -52,14 +52,11 @@ public abstract class AppTestCase {
     public static ExtentTest getTest() {
         return testThread.get();
     }
-
     public static Properties CONFIG;
     public static FileInputStream fn;
-
     public static CommonUtil getCommon() {
         return commonThread.get();
     }
-
     public static String appBundleId;
     private Process emulatorProcess;  // To hold emulator process reference
 
@@ -154,7 +151,6 @@ public abstract class AppTestCase {
     @Parameters({"device"})
     public synchronized void setUp(@Optional String device, Method method) throws Exception {
         try {
-
             testCaseName = method.getName();
             actionDriver.setDeviceName(deviceName);
             actionDriver.setTestCaseName(testCaseName);
@@ -162,12 +158,11 @@ public abstract class AppTestCase {
             test = testThread.get();
             common.initializeLogs(test);
             counter = counter + 1;
-            if (actionDriver.getDeviceName().equalsIgnoreCase("Android")) {
+            if(actionDriver.getDeviceName().equalsIgnoreCase("Android")) {
                 common.initializeAppiumDriver(deviceName);
-            } else if (actionDriver.getDeviceName().equalsIgnoreCase("iOS")) {
+            }else if(actionDriver.getDeviceName().equalsIgnoreCase("iOS")) {
                 common.initializeAppiumDriver(deviceName);
             }
-
         } catch (Throwable t) {
             t.printStackTrace();
             if (actionDriver.getAppiumDriver() != null) {
@@ -186,7 +181,7 @@ public abstract class AppTestCase {
         getCommon().testCaseId = testId;
         this.setTestId(testId);
         CommonUtil.setInitialConfigurations(device);
-        deviceName = device;
+        deviceName =device;
         this.common = getCommon();
         this.actionDriver = getActionDriver();
     }
