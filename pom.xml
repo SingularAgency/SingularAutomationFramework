@@ -16,6 +16,7 @@
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
+		<suiteXmlFile>src/test/java/suites/default_test_suite.xml</suiteXmlFile> <!-- Default -->
 	</properties>
 
 	<dependencies>
@@ -174,12 +175,12 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.5.3</version>
 				<configuration>
+					<suiteXmlFiles>
+						<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+					</suiteXmlFiles>
 					<includes>
 						<include>**/*Tests.java</include>
 					</includes>
-					<suiteXmlFiles>
-						<suiteXmlFile>src/test/java/suites/testng.xml</suiteXmlFile>
-					</suiteXmlFiles>
 				</configuration>
 			</plugin>
 		</plugins>
