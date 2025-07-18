@@ -118,7 +118,7 @@ public class CommonUtil {
                 options.setPlatformName("Android");
                 options.setCapability("platformVersion", AppTestCase.CONFIG.getProperty(ConfigKey.OS_VERSION));
                 options.setAutomationName("UiAutomator2");
-                options.setCapability("unicodeKeyboard", true);
+                options.setCapability("unicodeKeyboard", false);
                 options.setCapability(UiAutomator2Options.AUTO_GRANT_PERMISSIONS_OPTION, true);
                 options.setCapability(UiAutomator2Options.NO_RESET_OPTION, true);
                 options.setCapability(UiAutomator2Options.FULL_RESET_OPTION, false);
