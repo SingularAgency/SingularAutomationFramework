@@ -1,5 +1,4 @@
-name: Execute LifeScore Tests and Publish Report
-
+name: Execute Osmo Tests and Publish Report
 
 on:
   push:
