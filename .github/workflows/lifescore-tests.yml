@@ -95,7 +95,7 @@ jobs:
       - name: Download APK from GitHub Release
         run: |
           mkdir -p apks
-          curl -L -o apks/LifeScore.apk https://github.com/Caserez98/appiumFramework/releases/download/LifeScore/LifeScore.apk
+          curl -L -o apks/LifeScore.apk https://github.com/jalc98/SingularAutomationFramework/releases/download/LifeScore/LifeScore.apk
 
       - name: Validate APK
         run: |
@@ -128,7 +128,7 @@ jobs:
           }
 
           echo "Running Maven tests..."
-          mvn test -DsuiteXmlFile=src/test/resources/testng.xml
+          mvn test -DsuiteXmlFile=src/test/resources/lifescore_test_suite.xml
           EOF
 
           chmod +x run-tests.sh

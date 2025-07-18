@@ -4,7 +4,7 @@ name: Execute LifeScore Tests and Publish Report
 on:
   push:
     branches:
-      - lifescore_main
+      - Osmo
   workflow_dispatch:
 
 jobs:
@@ -17,8 +17,8 @@ jobs:
       JAVA_HOME: /usr/lib/jvm/java-17-openjdk
       DEVICE_NAME: pixel_4_xl
       OS_VERSION: 14
-      MAIN_ACTIVITY: com.mycompany.lifescore.MainActivity
-      APP_PACKAGE: com.mycompany.lifescore
+      MAIN_ACTIVITY: com.osmo.smt.MainActivity
+      APP_PACKAGE: com.osmo.smt
 
     steps:
       - name: Checkout repository
@@ -95,14 +95,14 @@ jobs:
       - name: Download APK from GitHub Release
         run: |
           mkdir -p apks
-          curl -L -o apks/LifeScore.apk https://github.com/Caserez98/appiumFramework/releases/download/LifeScore/LifeScore.apk
+          curl -L -o apks/LifeScore.apk https://github.com/jalc98/SingularAutomationFramework/releases/download/OsmoApk/Osmo.apk
 
       - name: Validate APK
         run: |
           echo "Checking APK file..."
           ls -lh apks/
-          file apks/LifeScore.apk || { echo "Could not inspect APK"; exit 1; }
-          if [ ! -f apks/LifeScore.apk ]; then
+          file apks/Osmo.apk || { echo "Could not inspect APK"; exit 1; }
+          if [ ! -f apks/Osmo.apk ]; then
             echo "APK file not found!"
             exit 1
           fi
@@ -121,10 +121,10 @@ jobs:
           adb devices
 
           echo "Installing APK..."
-          adb install -r apks/LifeScore.apk || {
+          adb install -r apks/Osmo.apk || {
             echo "Retrying APK install after failure..."
             sleep 10
-            adb install -r apks/LifeScore.apk
+            adb install -r apks/Osmo.apk
           }
 
           echo "Running Maven tests..."
