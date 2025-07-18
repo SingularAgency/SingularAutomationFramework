@@ -3,13 +3,12 @@ package com.lifescore.pages;
 import com.appium.setup.BasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.pagefactory.AndroidFindBy;
-import lombok.Getter;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Getter
+
 public class MyDataPage extends BasePage {
 
     @AndroidFindBy(xpath = "//android.view.View[@content-desc=\"Your LifeScore\"]/following-sibling::android.view.View[1]")
@@ -20,6 +19,14 @@ public class MyDataPage extends BasePage {
 
     public MyDataPage(AppiumDriver driver) {
         super(driver);
+    }
+
+    public List<WebElement> getLifeScores() {
+        return lifeScores;
+    }
+
+    public List<WebElement> getScores() {
+        return scores;
     }
 
     public List<String> getVisibleScores() {

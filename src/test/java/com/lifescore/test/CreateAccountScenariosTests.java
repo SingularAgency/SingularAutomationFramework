@@ -10,12 +10,18 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
+
 public class CreateAccountScenariosTests extends AppTestCase {
 
     private LoginPageSteps loginPageSteps;
+
+    public CreateAccountScenariosTests() {
+        this.configSuffix = "lifescore";  // así configuras el sufijo antes de @BeforeClass
+    }
+
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
-        initializeAppTest(this.getClass().getSimpleName(), "Android");
+        initializeAppTest(this.getClass().getSimpleName(), "Android", "lifescore");
     }
 
     @BeforeMethod

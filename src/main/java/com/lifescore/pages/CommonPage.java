@@ -6,7 +6,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 
-@Getter
+
 public class CommonPage extends BasePage {
 
     @AndroidFindBy(xpath = "//android.widget.Button[contains(@content-desc,'Today')]")
@@ -27,5 +27,25 @@ public class CommonPage extends BasePage {
 
     public CommonPage(AppiumDriver driver) {
         super(driver);
+    }
+
+    public WebElement getBtnHub() {
+        return btnHub;
+    }
+
+    public WebElement getBtnLifeLine() {
+        return btnLifeLine;
+    }
+
+    public WebElement getBtnMyData() {
+        return btnMyData;
+    }
+
+    public WebElement getBtnMe() {
+        return btnMe;
+    }
+
+    public WebElement getBtnToday() {
+        return btnToday;
     }
 }

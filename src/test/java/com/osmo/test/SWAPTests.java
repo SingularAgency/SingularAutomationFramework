@@ -13,13 +13,17 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 
 public class SWAPTests extends AppTestCase {
-    private String className = this.getClass().getSimpleName();
     HomePage homePage;
     SWAPSteps swapSteps;
     AndroidDriver driver;
+
+    public SWAPTests(){
+        this.configSuffix = "osmo";  // así configuras el sufijo antes de @BeforeClass
+    }
+
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
-        initializeAppTest(className, "Android");
+        initializeAppTest(this.getClass().getSimpleName(), "Android", "osmo");
     }
     @BeforeMethod
     public void initializePageObjects() throws IOException {

@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-@Getter
 public class LoginPage extends BasePage {
     @AndroidFindBy(xpath = "//android.view.View[@content-desc='Password']/following-sibling::android.widget.EditText")
     private WebElement txtPassword;
@@ -136,5 +135,167 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    public WebElement getAllWaterBtn() {
+        return allWaterBtn;
+    }
 
+    public List<WebElement> getBtnAnswers() {
+        return btnAnswers;
+    }
+
+    public WebElement getBtnChooseDate() {
+        return btnChooseDate;
+    }
+
+    public WebElement getBtnContinue() {
+        return btnContinue;
+    }
+
+    public WebElement getBtnContinueToAssesment() {
+        return btnContinueToAssesment;
+    }
+
+    public WebElement getBtnDOB() {
+        return btnDOB;
+    }
+
+    public WebElement getBtnHetero() {
+        return btnHetero;
+    }
+
+    public WebElement getBtnGetStarted() {
+        return btnGetStarted;
+    }
+
+    public WebElement getBtnHispanic() {
+        return btnHispanic;
+    }
+
+    public WebElement getBtnLogin() {
+        return btnLogin;
+    }
+
+    public WebElement getBtnNever() {
+        return btnNever;
+    }
+
+    public WebElement getBtnNext() {
+        return btnNext;
+    }
+
+    public WebElement getBtnNone() {
+        return btnNone;
+    }
+
+    public WebElement getBtnVeryOk() {
+        return btnVeryOk;
+    }
+
+    public WebElement getBtnRegister() {
+        return btnRegister;
+    }
+
+    public WebElement getBtnStart() {
+        return btnStart;
+    }
+
+    public WebElement getLblDemographics() {
+        return lblDemographics;
+    }
+
+    public WebElement getEditDOB() {
+        return editDOB;
+    }
+
+    public WebElement getLblEmailInvalid() {
+        return lblEmailInvalid;
+    }
+
+    public WebElement getLblEmailNotRegistered() {
+        return lblEmailNotRegistered;
+    }
+
+    public WebElement getLblMandatoryField() {
+        return lblMandatoryField;
+    }
+
+    public WebElement getLblSetUpBackgroundInfo() {
+        return lblSetUpBackgroundInfo;
+    }
+
+    public List<WebElement> getLblMandatoryFields() {
+        return lblMandatoryFields;
+    }
+
+    public WebElement getLblNutrition() {
+        return lblNutrition;
+    }
+
+    public WebElement getLblWrongPassword() {
+        return lblWrongPassword;
+    }
+
+    public WebElement getModalPoints() {
+        return modalPoints;
+    }
+
+    public WebElement getRbtNo() {
+        return rbtNo;
+    }
+
+    public WebElement getRbt() {
+        return rbt;
+    }
+
+    public WebElement getSelect() {
+        return select;
+    }
+
+    public List<WebElement> getSelectOptions() {
+        return selectOptions;
+    }
+
+    public WebElement getSelectRace() {
+        return selectRace;
+    }
+
+    public List<WebElement> getSelects() {
+        return selects;
+    }
+
+    public WebElement getZeroToTwo() {
+        return zeroToTwo;
+    }
+
+    public WebElement getVeryOftenBtn() {
+        return veryOftenBtn;
+    }
+
+    public List<WebElement> getTxtPasswords() {
+        return txtPasswords;
+    }
+
+    public WebElement getTxtPassword() {
+        return txtPassword;
+    }
+
+    public List<WebElement> getTxtInputs() {
+        return txtInputs;
+    }
+
+    public WebElement getTxtInput() {
+        return txtInput;
+    }
+
+    public WebElement getTxtEmail() {
+        return txtEmail;
+    }
+
+    public List<WebElement> getSelectsOptions() {
+        return selectsOptions;
+    }
+
+    public WebElement getSelectSexualOrientation() {
+        return selectSexualOrientation;
+    }
 }

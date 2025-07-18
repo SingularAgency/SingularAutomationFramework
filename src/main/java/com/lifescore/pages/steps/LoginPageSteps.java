@@ -38,9 +38,6 @@ public class LoginPageSteps extends LoginPage {
         getTxtPassword().click();
         getTxtPassword().sendKeys(password);
         getBtnLogin().click();
-        wait.until(
-                ExpectedConditions.elementToBeClickable(By.id("com.android.permissioncontroller:id/permission_allow_button")));
-        driver.findElement(By.id("com.android.permissioncontroller:id/permission_allow_button")).click();
     }
 
 

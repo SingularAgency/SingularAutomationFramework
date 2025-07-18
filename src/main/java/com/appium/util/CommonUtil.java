@@ -41,42 +41,58 @@ public class CommonUtil {
 
     }
 
-    public synchronized static void setInitialConfigurations(String device) throws Exception {
+    public synchronized static void setInitialConfigurations(String device, String configSuffix) throws Exception {
         if (!isInitialConfigurationDone) {
             isInitialConfigurationDone = true;
             System.out.println("Initializing Selenium files path");
 
             try {
-                CONFIG = new Properties();
+                AppTestCase.CONFIG = new Properties();
 
-                // 🔍 Dynamically determine calling test class package
-                String testClassName = Thread.currentThread().getStackTrace()[2].getClassName(); // caller class
-                Class<?> clazz = Class.forName(testClassName);
-                String packageName = clazz.getPackage().getName();
-                String shortName = packageName.substring(packageName.lastIndexOf(".") + 1); // e.g., osmo
+                // 🧪 Detectar si está corriendo en GitHub Actions (CI)
+                boolean isCI = "true".equalsIgnoreCase(System.getenv("CI"));
 
-                String configFileName = "config-" + shortName + ".properties";
-                String fallbackFileName = "config-default.properties";
+                if (isCI) {
+                    System.out.println("🌐 Running in CI - Loading config from ENV variables");
 
-                String baseFilePath = System.getProperty("user.dir") + "/src/main/resources/config/";
-                File configFile = new File(baseFilePath + configFileName);
-                File fallbackFile = new File(baseFilePath + fallbackFileName);
+                    // Cargar valores desde variables de entorno
+                    AppTestCase.CONFIG.setProperty("DEVICE_NAME", System.getenv("DEVICE_NAME"));
+                    AppTestCase.CONFIG.setProperty("OS_VERSION", System.getenv("OS_VERSION"));
+                    AppTestCase.CONFIG.setProperty("APP_PACKAGE", System.getenv("APP_PACKAGE"));
+                    AppTestCase.CONFIG.setProperty("MAIN_ACTIVITY", System.getenv("MAIN_ACTIVITY"));
+                    AppTestCase.CONFIG.setProperty("MOBILE_OS", System.getenv("MOBILE_OS"));
+                    AppTestCase.CONFIG.setProperty("JAVA_HOME", System.getenv("JAVA_HOME"));
+                    AppTestCase.CONFIG.setProperty("ANDROID_HOME", System.getenv("ANDROID_HOME"));
+                    AppTestCase.CONFIG.setProperty("WAIT_TIMEOUT", System.getenv().getOrDefault("WAIT_TIMEOUT", "10"));
 
-                FileInputStream fn = new FileInputStream(configFile.exists() ? configFile : fallbackFile);
-                CONFIG.load(fn);
-                System.out.println("✅ Loaded config file: " + (configFile.exists() ? configFileName : fallbackFileName));
+                    System.out.println("✅ CONFIG loaded from ENV.");
+                } else {
+                    System.out.println("🧪 Running locally - Loading config from file");
 
-                AppTestCase.WAIT_TIMEOUT = Integer.parseInt(CONFIG.getProperty("WAIT_TIMEOUT", "10"));
+                    String baseFilePath = System.getProperty("user.dir") + "/src/main/resources/config/";
+                    String filePath;
 
+                    if (configSuffix == null || configSuffix.trim().isEmpty()) {
+                        throw new RuntimeException("configSuffix no puede ser null o vacío al cargar configuración");
+                    } else {
+                        filePath = baseFilePath + "config-" + configSuffix.toLowerCase() + ".properties";
+                    }
+
+                    FileInputStream fn = new FileInputStream(filePath);
+                    AppTestCase.CONFIG.load(fn); // ✅
+
+                    System.out.println("✅ Loaded config file: " + filePath);
+                }
+
+                // Asignar WAIT_TIMEOUT siempre
+                AppTestCase.WAIT_TIMEOUT = Integer.parseInt(AppTestCase.CONFIG.getProperty("WAIT_TIMEOUT", "10"));
             } catch (Exception e) {
-                throw new Exception("❌ Environment configuration is not set: " + e.getMessage());
+                throw new Exception("❌ Environment configuration is not set: " + e.getMessage(), e);
             }
         }
 
         if (!isReportInitialized) {
             isReportInitialized = true;
-
-            // reports cleaning
             CommonUtil.cleanOldReports(device);
             System.out.println("🧾 Setting up Extent Report object");
             AppTestCase.reports = new ExtentReports("./" + device + "AutomationReport/index.html");
@@ -90,7 +106,7 @@ public class CommonUtil {
 
     public void initializeAppiumDriver(String device) throws Exception {
         log("Initializing Appium Driver");
-
+        System.out.println("DEBUG: Using appActivity = '" + AppTestCase.CONFIG.getProperty(ConfigKey.MAIN_ACTIVITY) + "'");
         try {
             deviceName = device;
             actionDriver.setDeviceName(deviceName);
@@ -98,17 +114,16 @@ public class CommonUtil {
             if (device.equals("Android")) {
 
                 UiAutomator2Options options = new UiAutomator2Options();
-                options.setDeviceName(CommonUtil.CONFIG.getProperty(ConfigKey.DEVICE_NAME));
+                options.setDeviceName(AppTestCase.CONFIG.getProperty(ConfigKey.DEVICE_NAME));
                 options.setPlatformName("Android");
-                options.setCapability("platformVersion", CommonUtil.CONFIG.getProperty(ConfigKey.OS_VERSION));
+                options.setCapability("platformVersion", AppTestCase.CONFIG.getProperty(ConfigKey.OS_VERSION));
                 options.setAutomationName("UiAutomator2");
-                options.setCapability("unicodeKeyboard", true);
+                options.setCapability("unicodeKeyboard", false);
                 options.setCapability(UiAutomator2Options.AUTO_GRANT_PERMISSIONS_OPTION, true);
                 options.setCapability(UiAutomator2Options.NO_RESET_OPTION, true);
                 options.setCapability(UiAutomator2Options.FULL_RESET_OPTION, false);
-                options.setCapability(UiAutomator2Options.APP_PACKAGE_OPTION, CommonUtil.CONFIG.getProperty(ConfigKey.APP_PACKAGE));
-                options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION, CommonUtil.CONFIG.getProperty(ConfigKey.MAIN_ACTIVITY));
-
+                options.setCapability(UiAutomator2Options.APP_PACKAGE_OPTION, AppTestCase.CONFIG.getProperty(ConfigKey.APP_PACKAGE));
+                options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION, AppTestCase.CONFIG.getProperty(ConfigKey.MAIN_ACTIVITY).trim());
                 String appiumServerUrl;
                 if ("true".equals(System.getenv("CI"))) {
                     // Running in GitHub Actions
