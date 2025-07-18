@@ -181,12 +181,13 @@ jobs:
 
       - name: Commit and push reports
         if: always()
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GH_PAT}}@github.com/jalc98/SingularAutomationFramework.git
+          
+          # ⬇️ CAMBIA la URL aquí:
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/jalc98/SingularAutomationFramework.git
+          
           git add -A
           echo "Git status before commit:"
           git status
@@ -196,3 +197,4 @@ jobs:
             git commit -m "Add test reports from workflow run $GITHUB_RUN_ID"
             git push origin AutomationReports
           fi
+
