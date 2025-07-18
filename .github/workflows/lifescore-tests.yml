@@ -1,6 +1,5 @@
 name: Execute LifeScore Tests and Publish Report
 
-
 on:
   push:
     branches:
@@ -123,10 +122,22 @@ jobs:
 
       - name: Create test runner script
         run: |
-          cat > run-tests.sh <<EOF
+          cat > run-tests.sh <<'EOF'
           #!/bin/bash
           adb wait-for-device
+
+          boot_completed=""
+          until [ "$boot_completed" = "1" ]; do
+            boot_completed=$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')
+            echo "Waiting for emulator to fully boot... ($boot_completed)"
+            sleep 5
+          done
+
           adb devices
+
+          # Confirm app is installed
+          adb shell pm list packages | grep com.mycompany.lifescore
+
           echo "Running LifeScore suite..."
           mvn clean test -DsuiteXmlFile=src/test/java/suites/lifescore_test_suite.xml
           EOF
@@ -143,7 +154,9 @@ jobs:
           emulator-boot-timeout: 300
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
-          script: ./run-tests.sh
+          script: |
+            adb install -r apks/LifeScore.apk
+            ./run-tests.sh
 
       - name: Terminate Emulator (Optional)
         if: always()
@@ -180,7 +193,6 @@ jobs:
           
           cd reports-temp
           
-          # ✅ Set Git identity for CI commits
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
@@ -199,5 +211,3 @@ jobs:
             git commit -m "📊 Update $REPORT_SUBFOLDER report from run $GITHUB_RUN_ID"
             git push origin $REPORT_BRANCH
           fi
-
-
