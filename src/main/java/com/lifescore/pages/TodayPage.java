@@ -9,11 +9,49 @@ import java.util.List;
 
 public class TodayPage extends BasePage {
 
-    @AndroidFindBy(xpath = "(//android.view.View)")
-    private List<WebElement> dailyCheckinList;
+    @AndroidFindBy(xpath ="//*[@content-desc='Start daily Check In']" )
+    private WebElement btnCheckin;
+
+    @AndroidFindBy(accessibility = "Complete My Account Setup")
+    private WebElement btnSetup;
+
+    @AndroidFindBy(accessibility = "Start Quiz")
+    private WebElement btnQuiz;
+
+    @AndroidFindBy(accessibility = "Learn more")
+    private WebElement btnLearnMore;
+
+    @AndroidFindBy(xpath = "//android.view.View[contains(@content-desc,'Your handy guide to portion sizes')]")
+    private WebElement resourceCard;
+
+    @AndroidFindBy(xpath = "(//android.view.View[contains(@content-desc,'Hi!')]//android.view.View)[position() <= 4]\n")
+    private List<WebElement> tasksLists;
+
     public TodayPage(AppiumDriver driver) {
         super(driver);
     }
 
-    //public void complete
+    public WebElement getBtnCheckin() {
+        return btnCheckin;
+    }
+
+    public WebElement getBtnLearnMore() {
+        return btnLearnMore;
+    }
+
+    public WebElement getBtnQuiz() {
+        return btnQuiz;
+    }
+
+    public WebElement getBtnSetup() {
+        return btnSetup;
+    }
+
+    public WebElement getResourceCard() {
+        return resourceCard;
+    }
+
+    public List<WebElement> getTasksLists() {
+        return tasksLists;
+    }
 }

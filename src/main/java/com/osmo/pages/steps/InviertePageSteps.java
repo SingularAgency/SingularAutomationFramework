@@ -2,7 +2,6 @@ package com.osmo.pages.steps;
 
 import com.osmo.pages.InviertePage;
 import io.appium.java_client.AppiumDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class InviertePageSteps extends InviertePage {

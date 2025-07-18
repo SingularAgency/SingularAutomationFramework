@@ -1,8 +1,7 @@
-package com.osmo;
+package com.osmo.test;
 
 import com.appium.setup.AppTestCase;
 import com.osmo.pages.steps.InviertePageSteps;
-
 import io.appium.java_client.android.AndroidDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -30,8 +29,6 @@ public class AndroidTests extends AppTestCase {
         InviertePageSteps inviertePageSteps = new InviertePageSteps(driver);
         Assert.assertTrue(inviertePageSteps.attemptToBuyWithoutKYC());
         common.log(inviertePageSteps.getModalVerificacion().getAttribute("content-desc"));
-
-
     }
 
     @Test
@@ -42,9 +39,6 @@ public class AndroidTests extends AppTestCase {
         common.log(inviertePageSteps.getModalVerificacion().getAttribute("content-desc"));
 
     }
-
-
-
 
     @Override
     protected void cleanPageObjects() {
