@@ -8,11 +8,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class AndroidTests extends AppTestCase {
-    private String className = this.getClass().getSimpleName();
+
+    public AndroidTests(){
+        this.configSuffix = "osmo";  // así configuras el sufijo antes de @BeforeClass
+    }
 
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
-        initializeAppTest(className, "Android");
+        initializeAppTest(this.getClass().getSimpleName(), "Android", "osmo");
     }
 
     @Test

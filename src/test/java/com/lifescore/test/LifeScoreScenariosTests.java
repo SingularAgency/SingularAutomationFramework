@@ -22,9 +22,14 @@ public class LifeScoreScenariosTests extends AppTestCase {
     private MyDataPageSteps myDataPageSteps;
     AndroidDriver driver;
 
+    public LifeScoreScenariosTests() {
+        this.configSuffix = "lifescore";  // así configuras el sufijo antes de @BeforeClass
+    }
+
+
     @BeforeClass(alwaysRun = true)
     public void setUp() throws Exception {
-        initializeAppTest(this.getClass().getSimpleName(), "Android");
+        initializeAppTest(this.getClass().getSimpleName(), "Android", "lifescore");
     }
 
     @BeforeMethod
@@ -115,4 +120,5 @@ public class LifeScoreScenariosTests extends AppTestCase {
     protected void cleanPageObjects() {
 
     }
+
 }

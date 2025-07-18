@@ -3,19 +3,14 @@ package com.appium.setup;
 import java.io.*;
 import java.lang.reflect.Method;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
 import com.appium.util.ConfigKey;
 import org.testng.SkipException;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 import com.appium.util.CommonUtil;
 import com.appium.util.TestNgListeners;
@@ -41,24 +36,41 @@ public abstract class AppTestCase {
     public Throwable Error = null;
     public int counter;
     private String testId;
-
     public static ExtentReports reports;
+    public static Properties CONFIG;
+    public static FileInputStream fn;
+    public static String appBundleId;
+    private Process emulatorProcess;  // To hold emulator process reference
+    protected String configSuffix;  // <--- campo para guardar sufijo
 
 
     protected static ThreadLocal<BaseActionDriver> actionDriverThread = new ThreadLocal<BaseActionDriver>();
     protected static ThreadLocal<CommonUtil> commonThread = new ThreadLocal<CommonUtil>();
     protected static ThreadLocal<ExtentTest> testThread = new ThreadLocal<ExtentTest>();
 
+    public AppTestCase() {
+        System.out.println("AppTestCase constructor: CONFIG = " + CONFIG);
+        System.out.println("AppTestCase constructor: class = " + this.getClass().getName());
+    }
+
+    public static String getConfigSuffixFromClass(Class<?> clazz) {
+        String packageName = clazz.getPackage().getName();
+        String[] parts = packageName.split("\\.");
+        if (parts.length >= 2) {
+            return parts[parts.length - 2];
+        } else {
+            return parts[0];
+        }
+    }
+
     public static ExtentTest getTest() {
         return testThread.get();
     }
-    public static Properties CONFIG;
-    public static FileInputStream fn;
+
+
     public static CommonUtil getCommon() {
         return commonThread.get();
     }
-    public static String appBundleId;
-    private Process emulatorProcess;  // To hold emulator process reference
 
     public static BaseActionDriver getActionDriver() {
         return actionDriverThread.get();
@@ -68,30 +80,23 @@ public abstract class AppTestCase {
         this.testId = testId;
     }
 
+
     @BeforeClass
     public void configureAppium() throws Exception {
-        CONFIG = new Properties();
-        // Get test package name (e.g., com.osmo)
-        String packageName = this.getClass().getPackage().getName();
-        String shortName = packageName.substring(packageName.lastIndexOf(".") + 1); // osmo
+        System.out.println("⏳ Entered configureAppium");
+        System.out.println("Current configSuffix: " + configSuffix);
 
-        // Compose config file name
-        String configFileName = "config-" + shortName + ".properties";
-        String fallbackFileName = "config-default.properties";
+        if (CONFIG == null) {
+            if (configSuffix == null || configSuffix.trim().isEmpty()) {
+                throw new RuntimeException("Config suffix is not set");
+            }
 
-        String baseFilePath = System.getProperty("user.dir") + "/src/main/resources/config/";
-        File configFile = new File(baseFilePath + configFileName);
-        File fallbackFile = new File(baseFilePath + fallbackFileName);
-
-        try (FileInputStream fn = new FileInputStream(
-                configFile.exists() ? configFile : fallbackFile)) {
-            CONFIG.load(fn);
-            System.out.println("✅ Loaded config file: " + (configFile.exists() ? configFileName : fallbackFileName));
-        } catch (IOException e) {
-            throw new RuntimeException("❌ Failed to load config properties", e);
+            System.out.println("📦 Loading config with suffix: " + configSuffix);
+            CommonUtil.setInitialConfigurations("Android", configSuffix);
         }
 
-        // For each config key, check env var first, else fallback to config file
+        System.out.println("✅ CONFIG loaded: " + (CONFIG != null));
+        // Ya no cargas archivo, solo usas las propiedades
         String avdName = System.getenv("DEVICE_NAME");
         if (avdName == null) avdName = CONFIG.getProperty("DEVICE_NAME");
 
@@ -118,14 +123,12 @@ public abstract class AppTestCase {
             System.out.println("Skipping emulator start in CI environment.");
         }
 
-        // Build environment for Appium
         Map<String, String> env = new HashMap<>(System.getenv());
         env.put("ANDROID_HOME", androidHome);
         env.put("JAVA_HOME", javaHome);
         env.put("SDKROOT", sdkroot);
         env.put("PATH", path);
 
-        // Store app package for later use
         appBundleId = CONFIG.getProperty(ConfigKey.APP_PACKAGE);
 
         if (githubActions == null || !githubActions.equalsIgnoreCase("true")) {
@@ -140,10 +143,9 @@ public abstract class AppTestCase {
 
             service.start();
             waitForAppiumServer();
-        } else {// En GitHub Actions, ya está iniciado por el workflow
+        } else {
             System.out.println("Running in CI - assuming Appium is already started.");
         }
-
     }
 
 
@@ -158,9 +160,9 @@ public abstract class AppTestCase {
             test = testThread.get();
             common.initializeLogs(test);
             counter = counter + 1;
-            if(actionDriver.getDeviceName().equalsIgnoreCase("Android")) {
+            if (actionDriver.getDeviceName().equalsIgnoreCase("Android")) {
                 common.initializeAppiumDriver(deviceName);
-            }else if(actionDriver.getDeviceName().equalsIgnoreCase("iOS")) {
+            } else if (actionDriver.getDeviceName().equalsIgnoreCase("iOS")) {
                 common.initializeAppiumDriver(deviceName);
             }
         } catch (Throwable t) {
@@ -174,14 +176,16 @@ public abstract class AppTestCase {
 
     }
 
-    public void initializeAppTest(String testId, String device) throws Exception {
+    public void initializeAppTest(String testId, String device, String configSuffix) throws Exception {
         actionDriverThread.set(new MobileActionDriver());
         commonThread.set(new CommonUtil(getActionDriver()));
         getActionDriver().initializeLogging();
         getCommon().testCaseId = testId;
         this.setTestId(testId);
-        CommonUtil.setInitialConfigurations(device);
-        deviceName =device;
+
+        CommonUtil.setInitialConfigurations(device, configSuffix);
+
+        deviceName = device;
         this.common = getCommon();
         this.actionDriver = getActionDriver();
     }

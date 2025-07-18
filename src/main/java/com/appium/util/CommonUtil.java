@@ -41,33 +41,26 @@ public class CommonUtil {
 
     }
 
-    public synchronized static void setInitialConfigurations(String device) throws Exception {
+    public synchronized static void setInitialConfigurations(String device, String configSuffix) throws Exception {
         if (!isInitialConfigurationDone) {
             isInitialConfigurationDone = true;
             System.out.println("Initializing Selenium files path");
-
             try {
-                CONFIG = new Properties();
-
-                // 🔍 Dynamically determine calling test class package
-                String testClassName = Thread.currentThread().getStackTrace()[2].getClassName(); // caller class
-                Class<?> clazz = Class.forName(testClassName);
-                String packageName = clazz.getPackage().getName();
-                String shortName = packageName.substring(packageName.lastIndexOf(".") + 1); // e.g., osmo
-
-                String configFileName = "config-" + shortName + ".properties";
-                String fallbackFileName = "config-default.properties";
-
+                AppTestCase.CONFIG = new Properties();
                 String baseFilePath = System.getProperty("user.dir") + "/src/main/resources/config/";
-                File configFile = new File(baseFilePath + configFileName);
-                File fallbackFile = new File(baseFilePath + fallbackFileName);
+                String filePath;
 
-                FileInputStream fn = new FileInputStream(configFile.exists() ? configFile : fallbackFile);
-                CONFIG.load(fn);
-                System.out.println("✅ Loaded config file: " + (configFile.exists() ? configFileName : fallbackFileName));
+                if (configSuffix == null || configSuffix.trim().isEmpty()) {
+                    throw new RuntimeException("configSuffix no puede ser null o vacío al cargar configuración");
+                } else {
+                    filePath = baseFilePath + "config-" + configSuffix.toLowerCase() + ".properties";
+                }
 
-                AppTestCase.WAIT_TIMEOUT = Integer.parseInt(CONFIG.getProperty("WAIT_TIMEOUT", "10"));
+                FileInputStream fn = new FileInputStream(filePath);
+                AppTestCase.CONFIG.load(fn); // ✅
 
+                AppTestCase.WAIT_TIMEOUT = Integer.parseInt(AppTestCase.CONFIG.getProperty("WAIT_TIMEOUT", "10"));
+                System.out.println("✅ Loaded config file: " + filePath);
             } catch (Exception e) {
                 throw new Exception("❌ Environment configuration is not set: " + e.getMessage());
             }
@@ -75,8 +68,6 @@ public class CommonUtil {
 
         if (!isReportInitialized) {
             isReportInitialized = true;
-
-            // reports cleaning
             CommonUtil.cleanOldReports(device);
             System.out.println("🧾 Setting up Extent Report object");
             AppTestCase.reports = new ExtentReports("./" + device + "AutomationReport/index.html");
