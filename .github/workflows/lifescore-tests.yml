@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-22.04
 
     env:
-      REPORT_BRANCH: reports-lifescore
       MOBILE_OS: Android
       ANDROID_HOME: /home/runner/Android/Sdk
       JAVA_HOME: /usr/lib/jvm/java-17-openjdk
@@ -161,39 +160,37 @@ jobs:
       #   run: git clean -fdx
 
 
-      - name: Publish report to ${{ env.REPORT_BRANCH }} branch
+      - name: Publish report to reports branch (with subfolder)
         if: always()
+        env:
+          REPORT_BRANCH: reports
+          REPORT_SUBFOLDER: lifescore   # Change this per app: lifescore, osmo, etc.
         run: |
           echo "Cloning $REPORT_BRANCH branch into temp directory..."
-          mkdir publish-temp
-          cd publish-temp
+          git clone --branch $REPORT_BRANCH https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/jalc98/SingularAutomationFramework.git reports-temp || {
+            echo "Branch $REPORT_BRANCH does not exist, creating it..."
+            git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/jalc98/SingularAutomationFramework.git reports-temp
+            cd reports-temp
+            git checkout --orphan $REPORT_BRANCH
+            git rm -rf .
+            git commit --allow-empty -m "Initial commit on $REPORT_BRANCH branch"
+            git push origin $REPORT_BRANCH
+            cd ..
+          }
+          cd reports-temp
           
-          git init
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/jalc98/SingularAutomationFramework.git
+          echo "Removing old reports in $REPORT_SUBFOLDER..."
+          rm -rf "$REPORT_SUBFOLDER"
+          mkdir -p "$REPORT_SUBFOLDER"
           
-          echo "Fetching remote branches..."
-          git fetch origin
+          echo "Copying new reports into $REPORT_SUBFOLDER..."
+          cp -r /tmp/reports/* "$REPORT_SUBFOLDER"/
           
-          echo "Checking if branch $REPORT_BRANCH exists..."
-          if git ls-remote --heads origin "$REPORT_BRANCH" | grep "$REPORT_BRANCH" > /dev/null; then
-            echo "✅ Branch $REPORT_BRANCH exists. Checking it out..."
-            git checkout -b $REPORT_BRANCH origin/$REPORT_BRANCH
-          else
-            echo "⚠️ Branch $REPORT_BRANCH does not exist. Creating it..."
-            git checkout -b $REPORT_BRANCH
-          fi
+          git add "$REPORT_SUBFOLDER"
           
-          echo "Copying report files..."
-          rm -rf ./*
-          cp -r /tmp/reports/* .
-          
-          echo "Committing and pushing changes..."
-          git add -A
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "📊 Add LifeScore test report from run $GITHUB_RUN_ID"
+            git commit -m "📊 Update $REPORT_SUBFOLDER report from run $GITHUB_RUN_ID"
             git push origin $REPORT_BRANCH
           fi

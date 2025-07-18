@@ -45,24 +45,49 @@ public class CommonUtil {
         if (!isInitialConfigurationDone) {
             isInitialConfigurationDone = true;
             System.out.println("Initializing Selenium files path");
+
             try {
                 AppTestCase.CONFIG = new Properties();
-                String baseFilePath = System.getProperty("user.dir") + "/src/main/resources/config/";
-                String filePath;
 
-                if (configSuffix == null || configSuffix.trim().isEmpty()) {
-                    throw new RuntimeException("configSuffix no puede ser null o vacío al cargar configuración");
+                // 🧪 Detectar si está corriendo en GitHub Actions (CI)
+                boolean isCI = "true".equalsIgnoreCase(System.getenv("CI"));
+
+                if (isCI) {
+                    System.out.println("🌐 Running in CI - Loading config from ENV variables");
+
+                    // Cargar valores desde variables de entorno
+                    AppTestCase.CONFIG.setProperty("DEVICE_NAME", System.getenv("DEVICE_NAME"));
+                    AppTestCase.CONFIG.setProperty("OS_VERSION", System.getenv("OS_VERSION"));
+                    AppTestCase.CONFIG.setProperty("APP_PACKAGE", System.getenv("APP_PACKAGE"));
+                    AppTestCase.CONFIG.setProperty("MAIN_ACTIVITY", System.getenv("MAIN_ACTIVITY"));
+                    AppTestCase.CONFIG.setProperty("MOBILE_OS", System.getenv("MOBILE_OS"));
+                    AppTestCase.CONFIG.setProperty("JAVA_HOME", System.getenv("JAVA_HOME"));
+                    AppTestCase.CONFIG.setProperty("ANDROID_HOME", System.getenv("ANDROID_HOME"));
+                    AppTestCase.CONFIG.setProperty("WAIT_TIMEOUT", System.getenv().getOrDefault("WAIT_TIMEOUT", "10"));
+
+                    System.out.println("✅ CONFIG loaded from ENV.");
                 } else {
-                    filePath = baseFilePath + "config-" + configSuffix.toLowerCase() + ".properties";
+                    System.out.println("🧪 Running locally - Loading config from file");
+
+                    String baseFilePath = System.getProperty("user.dir") + "/src/main/resources/config/";
+                    String filePath;
+
+                    if (configSuffix == null || configSuffix.trim().isEmpty()) {
+                        throw new RuntimeException("configSuffix no puede ser null o vacío al cargar configuración");
+                    } else {
+                        filePath = baseFilePath + "config-" + configSuffix.toLowerCase() + ".properties";
+                    }
+
+                    FileInputStream fn = new FileInputStream(filePath);
+                    AppTestCase.CONFIG.load(fn); // ✅
+
+                    System.out.println("✅ Loaded config file: " + filePath);
                 }
 
-                FileInputStream fn = new FileInputStream(filePath);
-                AppTestCase.CONFIG.load(fn); // ✅
-
+                // Asignar WAIT_TIMEOUT siempre
                 AppTestCase.WAIT_TIMEOUT = Integer.parseInt(AppTestCase.CONFIG.getProperty("WAIT_TIMEOUT", "10"));
-                System.out.println("✅ Loaded config file: " + filePath);
             } catch (Exception e) {
-                throw new Exception("❌ Environment configuration is not set: " + e.getMessage());
+                throw new Exception("❌ Environment configuration is not set: " + e.getMessage(), e);
             }
         }
 
