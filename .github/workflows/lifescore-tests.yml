@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-22.04
 
     env:
-      REPORT_BRANCH: reports-lifescore
       MOBILE_OS: Android
       ANDROID_HOME: /home/runner/Android/Sdk
       JAVA_HOME: /usr/lib/jvm/java-17-openjdk
@@ -96,23 +95,9 @@ jobs:
       - name: Set vars
         id: vars
         run: |
-          BRANCH_NAME=$(echo "${GITHUB_REF##*/}")
-          echo "Current branch: '$BRANCH_NAME'"
-          
-          case "$BRANCH_NAME" in
-            lifescore_main)
-              echo "report_branch=reports-lifescore" >> $GITHUB_OUTPUT
-              echo "suite=src/test/java/suites/lifescore_test_suite.xml" >> $GITHUB_OUTPUT
-              ;;
-            Osmo)
-              echo "report_branch=reports-osmo" >> $GITHUB_OUTPUT
-              echo "suite=src/test/java/suites/osmo_test_suite.xml" >> $GITHUB_OUTPUT
-              ;;
-            *)
-              echo "report_branch=reports-default" >> $GITHUB_OUTPUT
-              echo "suite=src/test/java/suites/default_test_suite.xml" >> $GITHUB_OUTPUT
-              ;;
-          esac
+          echo "report_branch=reports-lifescore" >> $GITHUB_OUTPUT
+          echo "suite=src/test/java/suites/lifescore_test_suite.xml" >> $GITHUB_OUTPUT
+
 
       - name: Download APK from GitHub Release
         run: |
