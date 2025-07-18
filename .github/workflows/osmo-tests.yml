@@ -117,10 +117,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y android-sdk-build-tools
           aapt dump badging apks/Osmo.apk | grep launchable-activity
-          
-
-      - name: Check osmo_test_suite.xml exists
-        run: ls -l src/test/resources/osmo_test_suite.xml
 
       - name: Create test runner script
         run: |
