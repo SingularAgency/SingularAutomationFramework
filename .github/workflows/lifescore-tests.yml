@@ -115,6 +115,12 @@ jobs:
           fi
           echo "APK is valid ✅"
 
+      - name: Inspect APK to get launchable activity
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y android-sdk-build-tools
+          aapt dump badging apks/LifeScore.apk | grep launchable-activity
+
       - name: Create test runner script
         run: |
           cat > run-tests.sh <<EOF
