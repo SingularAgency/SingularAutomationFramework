@@ -1,9 +1,6 @@
 name: Execute Osmo Tests and Publish Report
 
 on:
-  push:
-    branches:
-      - Osmo
   workflow_dispatch:
 
 jobs:
