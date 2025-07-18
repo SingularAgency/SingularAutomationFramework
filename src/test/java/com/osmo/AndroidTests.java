@@ -2,8 +2,7 @@ package com.osmo;
 
 import com.appium.setup.AppTestCase;
 import com.osmo.pages.steps.InviertePageSteps;
-import com.vuzo.construyamos.pages.SharedPage;
-import com.vuzo.construyamos.pages.steps.LoginPageSteps;
+
 import io.appium.java_client.android.AndroidDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -19,12 +18,9 @@ public class AndroidTests extends AppTestCase {
 
     @Test
     public void VCTC001_CheckBitcoinPrice() throws InterruptedException {
-
         AndroidDriver driver = (AndroidDriver) AppTestCase.getActionDriver().getAppiumDriver();
         InviertePageSteps inviertePageSteps = new InviertePageSteps(driver);
         common.log("Precio actual del Bitcoin:" + inviertePageSteps.getBictoinPrice());
-
-
     }
 
     @Test
@@ -40,12 +36,10 @@ public class AndroidTests extends AppTestCase {
 
     @Test
     public void VCTC003_AttemptBuyWithKYC() throws InterruptedException {
-
         AndroidDriver driver = (AndroidDriver) AppTestCase.getActionDriver().getAppiumDriver();
         InviertePageSteps inviertePageSteps = new InviertePageSteps(driver);
         Assert.assertFalse(inviertePageSteps.attemptToBuyWithoutKYC());
         common.log(inviertePageSteps.getModalVerificacion().getAttribute("content-desc"));
-
 
     }
 

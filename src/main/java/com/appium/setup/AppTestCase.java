@@ -1,8 +1,6 @@
 package com.appium.setup;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Method;
 import java.time.Duration;
 import java.util.HashMap;
@@ -41,7 +39,7 @@ public abstract class AppTestCase {
 	public String testCaseName;
 	public Throwable Error = null;
 	public int counter;
-	private String testId;
+    private String testId;
 
 	public static ExtentReports reports;
 
@@ -58,34 +56,86 @@ public abstract class AppTestCase {
 	public static CommonUtil getCommon() {
 		return commonThread.get();
 	}
+	public static String appBundleId;
+	private Process emulatorProcess;  // To hold emulator process reference
 
 	public static BaseActionDriver getActionDriver() {
 		return actionDriverThread.get();
 	}
-	
+
+	public void setTestId(String testId) {
+		this.testId = testId;
+	}
+
 	@BeforeClass
-	public void configureAppium() throws IOException {
+	public void configureAppium() throws Exception {
 		CONFIG = new Properties();
 		String baseFilePath = System.getProperty("user.dir") + "/src/main/resources/config/";
-		String filePath = null;
-		filePath = baseFilePath + "config.properties";
-		fn = new FileInputStream(filePath);
-		CONFIG.load(fn);
-		Map<String , String> env = new HashMap<String , String>(System.getenv());
-		env.put("ANDROID_HOME", CONFIG.getProperty(ConfigKey.ANDROID_HOME));
-		env.put("PATH", CONFIG.getProperty(ConfigKey.PATH));
-		env.put("JAVA_HOME", CONFIG.getProperty(ConfigKey.JAVA_HOME));
-		env.put("SDKROOT", CONFIG.getProperty(ConfigKey.SDKROOT));
-		env.put("PATH", "/Applications/Xcode.app");
-		this.service = new AppiumServiceBuilder().withAppiumJS(new File(CONFIG.getProperty(ConfigKey.APPIUM_FILE_PATH)))
-				.withIPAddress("127.0.0.1").usingPort(4723).withEnvironment(env).withTimeout(Duration.ofSeconds(300)).build();
-		service.start();
+		String filePath = baseFilePath + "config.properties";
 
+		// Load config file
+		try (FileInputStream fn = new FileInputStream(filePath)) {
+			CONFIG.load(fn);
+		} catch (FileNotFoundException e) {
+			System.out.println("Config file not found, will rely on environment variables");
+		}
+		// For each config key, check env var first, else fallback to config file
+		String avdName = System.getenv("DEVICE_NAME");
+		if (avdName == null) avdName = CONFIG.getProperty("DEVICE_NAME");
 
+		String androidHome = System.getenv("ANDROID_HOME");
+		if (androidHome == null) androidHome = CONFIG.getProperty(ConfigKey.ANDROID_HOME);
 
+		String javaHome = System.getenv("JAVA_HOME");
+		if (javaHome == null) javaHome = CONFIG.getProperty(ConfigKey.JAVA_HOME);
+
+		String sdkroot = System.getenv("SDKROOT");
+		if (sdkroot == null) sdkroot = CONFIG.getProperty(ConfigKey.SDKROOT);
+
+		String appiumFilePath = System.getenv("APPIUM_FILE_PATH");
+		if (appiumFilePath == null) appiumFilePath = CONFIG.getProperty(ConfigKey.APPIUM_FILE_PATH);
+
+		String path = System.getenv("PATH");
+		if (path == null) path = CONFIG.getProperty(ConfigKey.PATH);
+
+		// Decide if running in GitHub Actions
+		String githubActions = System.getenv("GITHUB_ACTIONS");
+		if ((githubActions == null || !githubActions.equalsIgnoreCase("true")) && avdName != null && !avdName.isEmpty()) {
+			startEmulator(avdName);
+		} else {
+			System.out.println("Skipping emulator start in CI environment.");
+		}
+
+		// Build environment for Appium
+		Map<String, String> env = new HashMap<>(System.getenv());
+		env.put("ANDROID_HOME", androidHome);
+		env.put("JAVA_HOME", javaHome);
+		env.put("SDKROOT", sdkroot);
+		env.put("PATH", path);
+
+		// Store app package for later use
+		appBundleId = CONFIG.getProperty(ConfigKey.APP_PACKAGE);
+
+		if (githubActions == null || !githubActions.equalsIgnoreCase("true")) {
+			System.out.println("Starting Appium locally...");
+			this.service = new AppiumServiceBuilder()
+					.withAppiumJS(new File(appiumFilePath))
+					.withIPAddress("127.0.0.1")
+					.usingPort(4723)
+					.withEnvironment(env)
+					.withTimeout(Duration.ofSeconds(300))
+					.build();
+
+			service.start();
+			waitForAppiumServer();
+		} else {// En GitHub Actions, ya está iniciado por el workflow
+			System.out.println("Running in CI - assuming Appium is already started.");
+		}
 
 	}
-	
+
+
+
 	@BeforeMethod(groups = { "smoke", "prod" }, alwaysRun = true)
 	@Parameters({ "device" })
 	public synchronized void setUp(@Optional String device, Method method) throws Exception {
@@ -126,9 +176,6 @@ public abstract class AppTestCase {
 		this.common = getCommon();
 		this.actionDriver = getActionDriver();
 	}
-	
-
-	
 
 	@AfterMethod(alwaysRun = true)
 	public synchronized void tearDown() {
@@ -141,21 +188,96 @@ public abstract class AppTestCase {
 		this.actionDriver.getAppiumDriver().quit();
 
 	}
-	
+
 	@AfterClass(alwaysRun=true)
 	public synchronized void stopService() {
-		service.stop();
+		if (service != null && service.isRunning()) {
+			service.stop();
+		}
+		stopEmulator();  // Stop emulator after Appium service
 	}
 
-	public String getTestId() {
-		return testId;
+    public void startEmulator(String avdName) throws Exception {
+		String emulatorPath = CONFIG.getProperty(ConfigKey.ANDROID_HOME) + "/emulator/emulator";
+		ProcessBuilder pb = new ProcessBuilder(
+				emulatorPath,
+				"-avd", avdName,
+				"-no-snapshot-load",
+				"-no-window" // optional: remove if you want emulator UI
+		);
+
+		pb.redirectErrorStream(true);
+		emulatorProcess = pb.start();
+		// Log emulator output asynchronously (optional)
+		BufferedReader reader = new BufferedReader(new InputStreamReader(emulatorProcess.getInputStream()));
+		new Thread(() -> reader.lines().forEach(System.out::println)).start();
+		System.out.println("Starting emulator: " + avdName);
+		waitForEmulatorBoot();
 	}
 
-	public void setTestId(String testId) {
-		this.testId = testId;
+	private void waitForEmulatorBoot() throws Exception {
+		String adbPath = CONFIG.getProperty(ConfigKey.PATH) + "/adb";
+		// Wait for device to be online
+		ProcessBuilder waitForDevice = new ProcessBuilder(adbPath, "wait-for-device");
+		Process waitProcess = waitForDevice.start();
+		waitProcess.waitFor();
+		// Wait until boot completed
+		boolean bootCompleted = false;
+		while (!bootCompleted) {
+			ProcessBuilder checkBoot = new ProcessBuilder(adbPath, "shell", "getprop", "sys.boot_completed");
+			Process checkProcess = checkBoot.start();
+			BufferedReader br = new BufferedReader(new InputStreamReader(checkProcess.getInputStream()));
+			String line = br.readLine();
+			if ("1".equals(line)) {
+				bootCompleted = true;
+			} else {
+				Thread.sleep(1000);
+			}
+		}
+		System.out.println("Emulator boot completed.");
 	}
-	
-	
+
+	public void stopEmulator() {
+		try {
+			if (emulatorProcess != null && emulatorProcess.isAlive()) {
+				emulatorProcess.destroy();
+				System.out.println("Emulator process terminated.");
+			} else {
+				System.out.println("Emulator process not running.");
+			}
+		} catch (Exception e) {
+			System.err.println("Error stopping emulator: " + e.getMessage());
+		}
+	}
+
+	private void waitForAppiumServer() throws InterruptedException {
+		int retries = 0;
+		boolean serverReady = false;
+		while (retries < 15 && !serverReady) {
+			try {
+				java.net.URL url = new java.net.URL("http://127.0.0.1:4723/status");
+				java.net.HttpURLConnection connection = (java.net.HttpURLConnection) url.openConnection();
+				connection.setRequestMethod("GET");
+				connection.setConnectTimeout(3000);
+				connection.connect();
+
+				int responseCode = connection.getResponseCode();
+				if (responseCode == 200) {
+					serverReady = true;
+					System.out.println("Appium server is up and running!");
+				}
+			} catch (java.io.IOException e) {
+				System.out.println("Waiting for Appium server to be ready...");
+			}
+			if (!serverReady) {
+				Thread.sleep(2000); // wait 2 seconds before retry
+				retries++;
+			}
+		}
+		if (!serverReady) {
+			throw new RuntimeException("Appium server not responding at http://127.0.0.1:4723/status after waiting.");
+		}
+	}
 
 
 }

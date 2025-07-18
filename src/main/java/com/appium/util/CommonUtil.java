@@ -13,6 +13,7 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 
+
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import io.appium.java_client.ios.IOSDriver;
@@ -93,14 +94,21 @@ public class CommonUtil {
 				options.setAutomationName("UiAutomator2");
 				options.setCapability("unicodeKeyboard", true);
 				options.setCapability(UiAutomator2Options.AUTO_GRANT_PERMISSIONS_OPTION, true);
-				options.setCapability(UiAutomator2Options.NO_RESET_OPTION, false);
+				options.setCapability(UiAutomator2Options.NO_RESET_OPTION, true);
 				options.setCapability(UiAutomator2Options.FULL_RESET_OPTION, false);
-
-
+				options.setCapability(UiAutomator2Options.APP_PACKAGE_OPTION,CommonUtil.CONFIG.getProperty(ConfigKey.APP_PACKAGE));
 				options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION,CommonUtil.CONFIG.getProperty(ConfigKey.MAIN_ACTIVITY));
-				
+
+				String appiumServerUrl;
+				if ("true".equals(System.getenv("CI"))) {
+					// Running in GitHub Actions
+					appiumServerUrl = "http://127.0.0.1:4723/wd/hub";
+				} else {
+					// Local run
+					appiumServerUrl = "http://127.0.0.1:4723"; // can be another like localhost or IP
+				}
 				//create object for AndroidDriver/ IOSDriver 
-				actionDriver.setAppiumDriver(new AndroidDriver(new URI("http://127.0.0.1:4723").toURL(), options));
+				actionDriver.setAppiumDriver(new AndroidDriver(new URI(appiumServerUrl).toURL(), options));
 				
 			}else if(device.equals("iOS")) {
 				XCUITestOptions options = new XCUITestOptions();
@@ -238,7 +246,7 @@ public class CommonUtil {
 	}
 
 	public void failSeleniumTest(Throwable t, BaseActionDriver actionDriver, int counter, String deviceName) {
-		t.printStackTrace();
+		//t.printStackTrace();
 
 		addScreenShot(deviceName);
 	}

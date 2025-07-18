@@ -30,14 +30,14 @@ public class MobileActionDriver extends BaseActionDriver {
 
 
 	public void quit() {
-		appiumDriver.quit();
+		if (appiumDriver != null) {
+			appiumDriver.quit(); // Ensures app closes after each test
+		}
 	}
 
 	public void takeScreenShot(String filePath) {
 		try {
-			Augmenter augmenter = new Augmenter();
-			TakesScreenshot ts = (TakesScreenshot) augmenter.augment(getAppiumDriver());
-			File scrFile = ts.getScreenshotAs(OutputType.FILE);
+			File scrFile = getAppiumDriver().getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(scrFile, new File(filePath));
 		} catch (Throwable e) {
 			common.log("Screen shot failure " + e.getMessage());
