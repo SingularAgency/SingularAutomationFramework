@@ -114,16 +114,16 @@ public class CommonUtil {
             if (device.equals("Android")) {
 
                 UiAutomator2Options options = new UiAutomator2Options();
-                options.setDeviceName(CommonUtil.CONFIG.getProperty(ConfigKey.DEVICE_NAME));
+                options.setDeviceName(AppTestCase.CONFIG.getProperty(ConfigKey.DEVICE_NAME));
                 options.setPlatformName("Android");
-                options.setCapability("platformVersion", CommonUtil.CONFIG.getProperty(ConfigKey.OS_VERSION));
+                options.setCapability("platformVersion", AppTestCase.CONFIG.getProperty(ConfigKey.OS_VERSION));
                 options.setAutomationName("UiAutomator2");
                 options.setCapability("unicodeKeyboard", true);
                 options.setCapability(UiAutomator2Options.AUTO_GRANT_PERMISSIONS_OPTION, true);
                 options.setCapability(UiAutomator2Options.NO_RESET_OPTION, true);
                 options.setCapability(UiAutomator2Options.FULL_RESET_OPTION, false);
-                options.setCapability(UiAutomator2Options.APP_PACKAGE_OPTION, CommonUtil.CONFIG.getProperty(ConfigKey.APP_PACKAGE));
-                options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION, CommonUtil.CONFIG.getProperty(ConfigKey.MAIN_ACTIVITY));
+                options.setCapability(UiAutomator2Options.APP_PACKAGE_OPTION, AppTestCase.CONFIG.getProperty(ConfigKey.APP_PACKAGE));
+                options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION, AppTestCase.CONFIG.getProperty(ConfigKey.MAIN_ACTIVITY));
 
                 String appiumServerUrl;
                 if ("true".equals(System.getenv("CI"))) {

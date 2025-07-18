@@ -154,12 +154,6 @@ jobs:
           echo "Contents of /tmp/reports:"
           ls -lR /tmp/reports/
 
-      # ⚠️ Elimina este paso o muévelo al final, si realmente lo necesitas
-      # - name: Clean untracked files before checkout
-      #   if: always()
-      #   run: git clean -fdx
-
-
       - name: Publish report to reports branch (with subfolder)
         if: always()
         env:
@@ -177,7 +171,12 @@ jobs:
             git push origin $REPORT_BRANCH
             cd ..
           }
+          
           cd reports-temp
+          
+          # ✅ Set Git identity for CI commits
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           
           echo "Removing old reports in $REPORT_SUBFOLDER..."
           rm -rf "$REPORT_SUBFOLDER"
@@ -194,3 +193,5 @@ jobs:
             git commit -m "📊 Update $REPORT_SUBFOLDER report from run $GITHUB_RUN_ID"
             git push origin $REPORT_BRANCH
           fi
+
+
