@@ -26,17 +26,6 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Print current directory and list root files
-        run: |
-          pwd
-          ls -l
-          ls -l src
-          ls -l src/test
-          ls -l src/test/resources
-
-      - name: List osmo test suite location
-        run: ls -l src/test/resources/
-
       - name: Install unzip
         run: |
           sudo apt-get update
@@ -152,7 +141,7 @@ jobs:
           adb shell pm list packages | grep com.osmo.smt
 
           echo "Running Osmo suite..."
-          mvn clean test -DsuiteXmlFile=src/test/resources/osmo_test_suite.xml
+          mvn clean test -DsuiteXmlFile=src/test/java/suites/osmo_test_suite.xml
           EOF
           chmod +x run-tests.sh          
 
