@@ -33,6 +33,7 @@ public class SWAPTests extends AppTestCase {
         driver = (AndroidDriver) AppTestCase.getActionDriver().getAppiumDriver();
         homePage= new HomePage(driver);
         swapSteps = new SWAPSteps(driver);
+        loginPageSteps = new LoginSteps(driver);
         clearCache();
         driver.activateApp(appBundleId);
         loginPageSteps.performLoginWithEmail("alara@singularagency.co");
