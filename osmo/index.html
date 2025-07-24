@@ -53,7 +53,7 @@
 					<i class='mdi-hardware-desktop-windows'></i>
 				</li>
 				<li>
-					<span class='suite-started-time'>2025-07-18 21:58:33</span>
+					<span class='suite-started-time'>2025-07-24 21:01:19</span>
 				</li>
 				<li>
 					<span>v2.41.1</span>
@@ -83,25 +83,25 @@
 					<div class='col l2 m4 s12'>
 						<div class='card suite-total-time-current'> 
 							<span class='panel-name'>Total Time Taken (Current Run)</span> 
-							<span class='suite-total-time-current-value panel-lead'>0h 2m 13s+681ms</span> 
+							<span class='suite-total-time-current-value panel-lead'>0h 1m 45s+390ms</span> 
 						</div> 
 					</div>
 					<div class='col l2 m4 s12'>
 						<div class='card suite-total-time-overall'> 
 							<span class='panel-name'>Total Time Taken (Overall)</span> 
-							<span class='suite-total-time-overall-value panel-lead'>0h 2m 13s+681ms</span> 
+							<span class='suite-total-time-overall-value panel-lead'>0h 1m 45s+390ms</span> 
 						</div> 
 					</div>
 					<div class='col l2 m4 s6 suite-start-time'>
 						<div class='card accent green-accent'> 
 							<span class='panel-name'>Start</span> 
-							<span class='panel-lead suite-started-time'>2025-07-18 21:56:19</span> 
+							<span class='panel-lead suite-started-time'>2025-07-24 20:59:34</span> 
 						</div> 
 					</div>
 					<div class='col l2 m4 s6 suite-end-time'>
 						<div class='card accent pink-accent'> 
 							<span class='panel-name'>End</span> 
-							<span class='panel-lead suite-ended-time'>2025-07-18 21:58:33</span> 
+							<span class='panel-lead suite-ended-time'>2025-07-24 21:01:19</span> 
 						</div> 
 					</div>
 				</div>
@@ -176,11 +176,11 @@
 										</tr>
 										<tr>
 											<td>Java Version</td>
-											<td>17.0.15</td>
+											<td>17.0.16</td>
 										</tr>
 										<tr>
 											<td>Host Name</td>
-											<td>pkrvm4h0tjkhlvh</td>
+											<td>pkrvmwwozixf3lp</td>
 										</tr>
 								</tbody>
 							</table>
@@ -237,15 +237,15 @@
 						<div class='card-panel no-padding-h no-padding-v no-margin-v'>
 							<div class='wrapper'>
 								<ul id='test-collection' class='test-collection'>
-										<li class='collection-item test displayed active fail ' extentid='b19a0a28-b771-4cae-b41c-8591b2aad74b'>
+										<li class='collection-item test displayed active skip ' extentid='1d0e57d2-0b99-4c5b-bb2b-6f8edbc08c10'>
 											<div class='test-head'>
 												<span class='test-name'>Android SWAPTests-performBTCtoCRC </span>
-												<span class='test-status label right outline capitalize fail'>fail</span>
+												<span class='test-status label right outline capitalize skip'>skip</span>
 												<span class='category-assigned hide '></span>
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 21:56:20</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-24 20:59:34</span>
 													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
 													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
 												</div>
@@ -264,32 +264,38 @@
 														<tbody>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:56:20</td>
+																	<td class='timestamp'>20:59:34</td>
 																	<td class='step-details'>Initializing Appium Driver</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:56:43</td>
+																	<td class='timestamp'>21:00:14</td>
 																	<td class='step-details'>Executing Test Case performBTCtoCRC</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:57:01</td>
-																	<td class='step-details'>performBTCtoCRC Failed!</td>
+																	<td class='timestamp'>21:00:14</td>
+																	<td class='step-details'>performBTCtoCRC skipped!</td>
 																</tr>
 																<tr>
-																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
-																	<td class='timestamp'>21:57:01</td>
-																	<td class='step-details'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of Located by By.chained({By.xpath: //android.widget.ImageView[@content-desc="Convertir"]}) (tried for 15 second(s) with 500 milliseconds interval)
+																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
+																	<td class='timestamp'>21:00:14</td>
+																	<td class='step-details'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of Located by By.chained({By.xpath: //android.widget.Button[@content-desc="Ingresar"]}) (tried for 15 second(s) with 500 milliseconds interval)
 	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
-	at com.osmo.test.SWAPTests.performBTCtoCRC(SWAPTests.java:45)
+	at com.appium.setup.BasePage.waitForVisibilityOfElement(BasePage.java:79)
+	at com.osmo.pages.steps.LoginSteps.performLoginWithEmail(LoginSteps.java:24)
+	at com.osmo.test.SWAPTests.initializePageObjects(SWAPTests.java:39)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:390)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:325)
+	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:810)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:577)
 	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
 	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
 	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
@@ -316,26 +322,26 @@
 	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-Caused by: org.openqa.selenium.NoSuchElementException: Can't locate an element by this strategy: By.chained({By.xpath: //android.widget.ImageView[@content-desc="Convertir"]})
+Caused by: org.openqa.selenium.NoSuchElementException: Can't locate an element by this strategy: By.chained({By.xpath: //android.widget.Button[@content-desc="Ingresar"]})
 	at io.appium.java_client.pagefactory.AppiumElementLocator.findElement(AppiumElementLocator.java:166)
 	at io.appium.java_client.pagefactory.interceptors.InterceptorOfASingleElement.call(InterceptorOfASingleElement.java:74)
 	at io.appium.java_client.proxy.Interceptor.intercept(Interceptor.java:78)
-	at org.openqa.selenium.remote.RemoteWebElement$ByteBuddy$Bxr80NPY.isDisplayed(Unknown Source)
+	at org.openqa.selenium.remote.RemoteWebElement$ByteBuddy$otuw8QIh.isDisplayed(Unknown Source)
 	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:304)
 	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:290)
 	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:287)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
-	... 33 more
-Caused by: org.openqa.selenium.TimeoutException: Expected condition failed: waiting for io.appium.java_client.pagefactory.AppiumElementLocator$WaitingFunction@70f31322 (tried for 1 second(s) with 500 milliseconds interval)
+	... 39 more
+Caused by: org.openqa.selenium.TimeoutException: Expected condition failed: waiting for io.appium.java_client.pagefactory.AppiumElementLocator$WaitingFunction@a137d7a (tried for 1 second(s) with 500 milliseconds interval)
 	at org.openqa.selenium.support.ui.FluentWait.timeoutException(FluentWait.java:265)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
 	at io.appium.java_client.pagefactory.AppiumElementLocator.waitFor(AppiumElementLocator.java:135)
 	at io.appium.java_client.pagefactory.AppiumElementLocator.findElement(AppiumElementLocator.java:160)
-	... 40 more
-Caused by: org.openqa.selenium.NoSuchElementException: Cannot locate an element using By.chained({By.xpath: //android.widget.ImageView[@content-desc="Convertir"]})
+	... 46 more
+Caused by: org.openqa.selenium.NoSuchElementException: Cannot locate an element using By.chained({By.xpath: //android.widget.Button[@content-desc="Ingresar"]})
 For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
 Build info: version: '4.34.0', revision: '707dcb4246*'
-System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-1030-azure', java.version: '17.0.15'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-1031-azure', java.version: '17.0.16'
 Driver info: driver.version: RemoteWebDriver
 	at io.appium.java_client.pagefactory.bys.builder.ByChained.findElement(ByChained.java:74)
 	at org.openqa.selenium.remote.ElementLocation$ElementFinder$1.findElement(ElementLocation.java:139)
@@ -351,13 +357,13 @@ Driver info: driver.version: RemoteWebDriver
 	at io.appium.java_client.pagefactory.AppiumElementLocator$WaitingFunction.apply(AppiumElementLocator.java:217)
 	at io.appium.java_client.pagefactory.AppiumElementLocator$WaitingFunction.apply(AppiumElementLocator.java:210)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
-	... 42 more
+	... 48 more
 </pre></td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:57:04</td>
-																	<td class='step-details'>Screenshot attached below: <a href='SWAPTests_Android_366376685730.jpeg' data-featherlight='image'><img class='report-img' src='SWAPTests_Android_366376685730.jpeg' /></a></td>
+																	<td class='timestamp'>21:00:16</td>
+																	<td class='step-details'>Screenshot attached below: <a href='SWAPTests_Android_183090587683.jpeg' data-featherlight='image'><img class='report-img' src='SWAPTests_Android_183090587683.jpeg' /></a></td>
 																</tr>
 														</tbody>
 													</table>
@@ -366,15 +372,15 @@ Driver info: driver.version: RemoteWebDriver
 												</div>
 											</div>
 										</li>
-										<li class='collection-item test displayed active fail ' extentid='8c0baafd-4362-4102-8f7b-91731d061051'>
+										<li class='collection-item test displayed active skip ' extentid='7c23ca1f-a503-4255-a5a6-18b3439baa88'>
 											<div class='test-head'>
 												<span class='test-name'>Android SWAPTests-performBTCtoDollars </span>
-												<span class='test-status label right outline capitalize fail'>fail</span>
+												<span class='test-status label right outline capitalize skip'>skip</span>
 												<span class='category-assigned hide '></span>
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 21:57:05</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-24 21:00:18</span>
 													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
 													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
 												</div>
@@ -393,32 +399,38 @@ Driver info: driver.version: RemoteWebDriver
 														<tbody>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:57:05</td>
+																	<td class='timestamp'>21:00:18</td>
 																	<td class='step-details'>Initializing Appium Driver</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:57:15</td>
+																	<td class='timestamp'>21:00:28</td>
 																	<td class='step-details'>Executing Test Case performBTCtoDollars</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:57:31</td>
-																	<td class='step-details'>performBTCtoDollars Failed!</td>
+																	<td class='timestamp'>21:00:28</td>
+																	<td class='step-details'>performBTCtoDollars skipped!</td>
 																</tr>
 																<tr>
-																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
-																	<td class='timestamp'>21:57:31</td>
-																	<td class='step-details'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of Located by By.chained({By.xpath: //android.widget.ImageView[@content-desc="Convertir"]}) (tried for 15 second(s) with 500 milliseconds interval)
+																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
+																	<td class='timestamp'>21:00:28</td>
+																	<td class='step-details'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of Located by By.chained({By.xpath: //android.widget.Button[@content-desc="Ingresar"]}) (tried for 15 second(s) with 500 milliseconds interval)
 	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
-	at com.osmo.test.SWAPTests.performBTCtoDollars(SWAPTests.java:52)
+	at com.appium.setup.BasePage.waitForVisibilityOfElement(BasePage.java:79)
+	at com.osmo.pages.steps.LoginSteps.performLoginWithEmail(LoginSteps.java:24)
+	at com.osmo.test.SWAPTests.initializePageObjects(SWAPTests.java:39)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:390)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:325)
+	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:810)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:577)
 	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
 	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
 	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
@@ -445,26 +457,26 @@ Driver info: driver.version: RemoteWebDriver
 	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-Caused by: org.openqa.selenium.NoSuchElementException: Can't locate an element by this strategy: By.chained({By.xpath: //android.widget.ImageView[@content-desc="Convertir"]})
+Caused by: org.openqa.selenium.NoSuchElementException: Can't locate an element by this strategy: By.chained({By.xpath: //android.widget.Button[@content-desc="Ingresar"]})
 	at io.appium.java_client.pagefactory.AppiumElementLocator.findElement(AppiumElementLocator.java:166)
 	at io.appium.java_client.pagefactory.interceptors.InterceptorOfASingleElement.call(InterceptorOfASingleElement.java:74)
 	at io.appium.java_client.proxy.Interceptor.intercept(Interceptor.java:78)
-	at org.openqa.selenium.remote.RemoteWebElement$ByteBuddy$3BPWKvSH.isDisplayed(Unknown Source)
+	at org.openqa.selenium.remote.RemoteWebElement$ByteBuddy$otuw8QIh.isDisplayed(Unknown Source)
 	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:304)
 	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:290)
 	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:287)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
-	... 33 more
-Caused by: org.openqa.selenium.TimeoutException: Expected condition failed: waiting for io.appium.java_client.pagefactory.AppiumElementLocator$WaitingFunction@7bab5898 (tried for 1 second(s) with 500 milliseconds interval)
+	... 39 more
+Caused by: org.openqa.selenium.TimeoutException: Expected condition failed: waiting for io.appium.java_client.pagefactory.AppiumElementLocator$WaitingFunction@a137d7a (tried for 1 second(s) with 500 milliseconds interval)
 	at org.openqa.selenium.support.ui.FluentWait.timeoutException(FluentWait.java:265)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
 	at io.appium.java_client.pagefactory.AppiumElementLocator.waitFor(AppiumElementLocator.java:135)
 	at io.appium.java_client.pagefactory.AppiumElementLocator.findElement(AppiumElementLocator.java:160)
-	... 40 more
-Caused by: org.openqa.selenium.NoSuchElementException: Cannot locate an element using By.chained({By.xpath: //android.widget.ImageView[@content-desc="Convertir"]})
+	... 46 more
+Caused by: org.openqa.selenium.NoSuchElementException: Cannot locate an element using By.chained({By.xpath: //android.widget.Button[@content-desc="Ingresar"]})
 For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
 Build info: version: '4.34.0', revision: '707dcb4246*'
-System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-1030-azure', java.version: '17.0.15'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-1031-azure', java.version: '17.0.16'
 Driver info: driver.version: RemoteWebDriver
 	at io.appium.java_client.pagefactory.bys.builder.ByChained.findElement(ByChained.java:74)
 	at org.openqa.selenium.remote.ElementLocation$ElementFinder$1.findElement(ElementLocation.java:139)
@@ -480,13 +492,13 @@ Driver info: driver.version: RemoteWebDriver
 	at io.appium.java_client.pagefactory.AppiumElementLocator$WaitingFunction.apply(AppiumElementLocator.java:217)
 	at io.appium.java_client.pagefactory.AppiumElementLocator$WaitingFunction.apply(AppiumElementLocator.java:210)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
-	... 42 more
+	... 48 more
 </pre></td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:57:33</td>
-																	<td class='step-details'>Screenshot attached below: <a href='SWAPTests_Android_349098814413.jpeg' data-featherlight='image'><img class='report-img' src='SWAPTests_Android_349098814413.jpeg' /></a></td>
+																	<td class='timestamp'>21:00:29</td>
+																	<td class='step-details'>Screenshot attached below: <a href='SWAPTests_Android_445129932549.jpeg' data-featherlight='image'><img class='report-img' src='SWAPTests_Android_445129932549.jpeg' /></a></td>
 																</tr>
 														</tbody>
 													</table>
@@ -495,15 +507,15 @@ Driver info: driver.version: RemoteWebDriver
 												</div>
 											</div>
 										</li>
-										<li class='collection-item test displayed active fail ' extentid='1fbf1698-1a33-4d17-b558-ca9715b38840'>
+										<li class='collection-item test displayed active skip ' extentid='c83598be-cafa-4cc6-a24f-497cf1ccc794'>
 											<div class='test-head'>
 												<span class='test-name'>Android SWAPTests-performBTCtoQTZ </span>
-												<span class='test-status label right outline capitalize fail'>fail</span>
+												<span class='test-status label right outline capitalize skip'>skip</span>
 												<span class='category-assigned hide '></span>
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 21:57:35</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-24 21:00:29</span>
 													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
 													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
 												</div>
@@ -522,32 +534,38 @@ Driver info: driver.version: RemoteWebDriver
 														<tbody>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:57:35</td>
+																	<td class='timestamp'>21:00:29</td>
 																	<td class='step-details'>Initializing Appium Driver</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:57:44</td>
+																	<td class='timestamp'>21:00:38</td>
 																	<td class='step-details'>Executing Test Case performBTCtoQTZ</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:58:01</td>
-																	<td class='step-details'>performBTCtoQTZ Failed!</td>
+																	<td class='timestamp'>21:00:38</td>
+																	<td class='step-details'>performBTCtoQTZ skipped!</td>
 																</tr>
 																<tr>
-																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
-																	<td class='timestamp'>21:58:01</td>
-																	<td class='step-details'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of Located by By.chained({By.xpath: //android.widget.ImageView[@content-desc="Convertir"]}) (tried for 15 second(s) with 500 milliseconds interval)
+																	<td class='status skip' title='skip' alt='skip'><i class='mdi-content-redo'></i></td>
+																	<td class='timestamp'>21:00:38</td>
+																	<td class='step-details'><pre>org.openqa.selenium.TimeoutException: Expected condition failed: waiting for visibility of Located by By.chained({By.xpath: //android.widget.Button[@content-desc="Ingresar"]}) (tried for 15 second(s) with 500 milliseconds interval)
 	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
-	at com.osmo.test.SWAPTests.performBTCtoQTZ(SWAPTests.java:38)
+	at com.appium.setup.BasePage.waitForVisibilityOfElement(BasePage.java:79)
+	at com.osmo.pages.steps.LoginSteps.performLoginWithEmail(LoginSteps.java:24)
+	at com.osmo.test.SWAPTests.initializePageObjects(SWAPTests.java:39)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:139)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:664)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethodConsideringTimeout(MethodInvocationHelper.java:69)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurationMethod(ConfigInvoker.java:390)
+	at org.testng.internal.invokers.ConfigInvoker.invokeConfigurations(ConfigInvoker.java:325)
+	at org.testng.internal.invokers.TestInvoker.runConfigMethods(TestInvoker.java:810)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:577)
 	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:227)
 	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
 	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:957)
@@ -574,26 +592,26 @@ Driver info: driver.version: RemoteWebDriver
 	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162)
 	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507)
 	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495)
-Caused by: org.openqa.selenium.NoSuchElementException: Can't locate an element by this strategy: By.chained({By.xpath: //android.widget.ImageView[@content-desc="Convertir"]})
+Caused by: org.openqa.selenium.NoSuchElementException: Can't locate an element by this strategy: By.chained({By.xpath: //android.widget.Button[@content-desc="Ingresar"]})
 	at io.appium.java_client.pagefactory.AppiumElementLocator.findElement(AppiumElementLocator.java:166)
 	at io.appium.java_client.pagefactory.interceptors.InterceptorOfASingleElement.call(InterceptorOfASingleElement.java:74)
 	at io.appium.java_client.proxy.Interceptor.intercept(Interceptor.java:78)
-	at org.openqa.selenium.remote.RemoteWebElement$ByteBuddy$JMKVtFpS.isDisplayed(Unknown Source)
+	at org.openqa.selenium.remote.RemoteWebElement$ByteBuddy$otuw8QIh.isDisplayed(Unknown Source)
 	at org.openqa.selenium.support.ui.ExpectedConditions.elementIfVisible(ExpectedConditions.java:304)
 	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:290)
 	at org.openqa.selenium.support.ui.ExpectedConditions$10.apply(ExpectedConditions.java:287)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
-	... 33 more
-Caused by: org.openqa.selenium.TimeoutException: Expected condition failed: waiting for io.appium.java_client.pagefactory.AppiumElementLocator$WaitingFunction@3451f01d (tried for 1 second(s) with 500 milliseconds interval)
+	... 39 more
+Caused by: org.openqa.selenium.TimeoutException: Expected condition failed: waiting for io.appium.java_client.pagefactory.AppiumElementLocator$WaitingFunction@a137d7a (tried for 1 second(s) with 500 milliseconds interval)
 	at org.openqa.selenium.support.ui.FluentWait.timeoutException(FluentWait.java:265)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
 	at io.appium.java_client.pagefactory.AppiumElementLocator.waitFor(AppiumElementLocator.java:135)
 	at io.appium.java_client.pagefactory.AppiumElementLocator.findElement(AppiumElementLocator.java:160)
-	... 40 more
-Caused by: org.openqa.selenium.NoSuchElementException: Cannot locate an element using By.chained({By.xpath: //android.widget.ImageView[@content-desc="Convertir"]})
+	... 46 more
+Caused by: org.openqa.selenium.NoSuchElementException: Cannot locate an element using By.chained({By.xpath: //android.widget.Button[@content-desc="Ingresar"]})
 For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
 Build info: version: '4.34.0', revision: '707dcb4246*'
-System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-1030-azure', java.version: '17.0.15'
+System info: os.name: 'Linux', os.arch: 'amd64', os.version: '6.8.0-1031-azure', java.version: '17.0.16'
 Driver info: driver.version: RemoteWebDriver
 	at io.appium.java_client.pagefactory.bys.builder.ByChained.findElement(ByChained.java:74)
 	at org.openqa.selenium.remote.ElementLocation$ElementFinder$1.findElement(ElementLocation.java:139)
@@ -609,13 +627,13 @@ Driver info: driver.version: RemoteWebDriver
 	at io.appium.java_client.pagefactory.AppiumElementLocator$WaitingFunction.apply(AppiumElementLocator.java:217)
 	at io.appium.java_client.pagefactory.AppiumElementLocator$WaitingFunction.apply(AppiumElementLocator.java:210)
 	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:203)
-	... 42 more
+	... 48 more
 </pre></td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:58:03</td>
-																	<td class='step-details'>Screenshot attached below: <a href='SWAPTests_Android_437511048419.jpeg' data-featherlight='image'><img class='report-img' src='SWAPTests_Android_437511048419.jpeg' /></a></td>
+																	<td class='timestamp'>21:00:40</td>
+																	<td class='step-details'>Screenshot attached below: <a href='SWAPTests_Android_217859247844.jpeg' data-featherlight='image'><img class='report-img' src='SWAPTests_Android_217859247844.jpeg' /></a></td>
 																</tr>
 														</tbody>
 													</table>
@@ -624,7 +642,7 @@ Driver info: driver.version: RemoteWebDriver
 												</div>
 											</div>
 										</li>
-										<li class='collection-item test displayed active fail ' extentid='176fc487-b794-4e68-b0e7-c8d4adffe371'>
+										<li class='collection-item test displayed active fail ' extentid='d0dbe0e1-b9c8-4e3d-ade5-ae3299d98044'>
 											<div class='test-head'>
 												<span class='test-name'>Android AndroidTests-VCTC001_CheckBitcoinPrice </span>
 												<span class='test-status label right outline capitalize fail'>fail</span>
@@ -632,7 +650,7 @@ Driver info: driver.version: RemoteWebDriver
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 21:58:05</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-24 21:00:41</span>
 													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
 													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
 												</div>
@@ -651,28 +669,28 @@ Driver info: driver.version: RemoteWebDriver
 														<tbody>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:58:05</td>
+																	<td class='timestamp'>21:00:41</td>
 																	<td class='step-details'>Initializing Appium Driver</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:58:12</td>
+																	<td class='timestamp'>21:00:50</td>
 																	<td class='step-details'>Executing Test Case VCTC001_CheckBitcoinPrice</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:58:14</td>
+																	<td class='timestamp'>21:00:52</td>
 																	<td class='step-details'>VCTC001_CheckBitcoinPrice Failed!</td>
 																</tr>
 																<tr>
 																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
-																	<td class='timestamp'>21:58:14</td>
+																	<td class='timestamp'>21:00:52</td>
 																	<td class='step-details'>Element not found: Please verify the locator or app state.</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:58:14</td>
-																	<td class='step-details'>Screenshot attached below: <a href='AndroidTests_Android_100770674780.jpeg' data-featherlight='image'><img class='report-img' src='AndroidTests_Android_100770674780.jpeg' /></a></td>
+																	<td class='timestamp'>21:00:53</td>
+																	<td class='step-details'>Screenshot attached below: <a href='AndroidTests_Android_242842415606.jpeg' data-featherlight='image'><img class='report-img' src='AndroidTests_Android_242842415606.jpeg' /></a></td>
 																</tr>
 														</tbody>
 													</table>
@@ -681,7 +699,7 @@ Driver info: driver.version: RemoteWebDriver
 												</div>
 											</div>
 										</li>
-										<li class='collection-item test displayed active fail ' extentid='afb2a836-85bf-47d5-83cf-f841c437ae9d'>
+										<li class='collection-item test displayed active fail ' extentid='4face7c5-c054-4034-ae32-3bae90dcb07f'>
 											<div class='test-head'>
 												<span class='test-name'>Android AndroidTests-VCTC002_AttemptBuyWithoutKYC </span>
 												<span class='test-status label right outline capitalize fail'>fail</span>
@@ -689,7 +707,7 @@ Driver info: driver.version: RemoteWebDriver
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 21:58:15</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-24 21:00:54</span>
 													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
 													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
 												</div>
@@ -708,28 +726,28 @@ Driver info: driver.version: RemoteWebDriver
 														<tbody>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:58:15</td>
+																	<td class='timestamp'>21:00:54</td>
 																	<td class='step-details'>Initializing Appium Driver</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:58:21</td>
+																	<td class='timestamp'>21:01:01</td>
 																	<td class='step-details'>Executing Test Case VCTC002_AttemptBuyWithoutKYC</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:58:23</td>
+																	<td class='timestamp'>21:01:03</td>
 																	<td class='step-details'>VCTC002_AttemptBuyWithoutKYC Failed!</td>
 																</tr>
 																<tr>
 																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
-																	<td class='timestamp'>21:58:23</td>
+																	<td class='timestamp'>21:01:03</td>
 																	<td class='step-details'>Element not found: Please verify the locator or app state.</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:58:23</td>
-																	<td class='step-details'>Screenshot attached below: <a href='AndroidTests_Android_216659535765.jpeg' data-featherlight='image'><img class='report-img' src='AndroidTests_Android_216659535765.jpeg' /></a></td>
+																	<td class='timestamp'>21:01:05</td>
+																	<td class='step-details'>Screenshot attached below: <a href='AndroidTests_Android_916915757611.jpeg' data-featherlight='image'><img class='report-img' src='AndroidTests_Android_916915757611.jpeg' /></a></td>
 																</tr>
 														</tbody>
 													</table>
@@ -738,7 +756,7 @@ Driver info: driver.version: RemoteWebDriver
 												</div>
 											</div>
 										</li>
-										<li class='collection-item test displayed active fail ' extentid='d7faf0fd-2a01-47e1-877b-4ebc5826b482'>
+										<li class='collection-item test displayed active fail ' extentid='f8554ccc-70f9-4b4a-b243-2753115b197a'>
 											<div class='test-head'>
 												<span class='test-name'>Android AndroidTests-VCTC003_AttemptBuyWithKYC </span>
 												<span class='test-status label right outline capitalize fail'>fail</span>
@@ -746,7 +764,7 @@ Driver info: driver.version: RemoteWebDriver
 											</div>
 											<div class='test-body'>
 												<div class='test-info'>
-													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-18 21:58:24</span>
+													<span title='Test started time' alt='Test started time' class='test-started-time label green lighten-1 text-white'>2025-07-24 21:01:06</span>
 													<span title='Test ended time' alt='Test ended time' class='test-ended-time label red lighten-1 text-white'></span>
 													<span title='Time taken to finish' alt='Time taken to finish' class='test-time-taken label blue-grey lighten-3 text-white'></span>
 												</div>
@@ -765,28 +783,28 @@ Driver info: driver.version: RemoteWebDriver
 														<tbody>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:58:24</td>
+																	<td class='timestamp'>21:01:06</td>
 																	<td class='step-details'>Initializing Appium Driver</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:58:30</td>
+																	<td class='timestamp'>21:01:15</td>
 																	<td class='step-details'>Executing Test Case VCTC003_AttemptBuyWithKYC</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:58:32</td>
+																	<td class='timestamp'>21:01:17</td>
 																	<td class='step-details'>VCTC003_AttemptBuyWithKYC Failed!</td>
 																</tr>
 																<tr>
 																	<td class='status fail' title='fail' alt='fail'><i class='mdi-navigation-cancel'></i></td>
-																	<td class='timestamp'>21:58:32</td>
+																	<td class='timestamp'>21:01:17</td>
 																	<td class='step-details'>Element not found: Please verify the locator or app state.</td>
 																</tr>
 																<tr>
 																	<td class='status info' title='info' alt='info'><i class='mdi-action-info-outline'></i></td>
-																	<td class='timestamp'>21:58:32</td>
-																	<td class='step-details'>Screenshot attached below: <a href='AndroidTests_Android_413213380817.jpeg' data-featherlight='image'><img class='report-img' src='AndroidTests_Android_413213380817.jpeg' /></a></td>
+																	<td class='timestamp'>21:01:18</td>
+																	<td class='step-details'>Screenshot attached below: <a href='AndroidTests_Android_413260061338.jpeg' data-featherlight='image'><img class='report-img' src='AndroidTests_Android_413260061338.jpeg' /></a></td>
 																</tr>
 														</tbody>
 													</table>
