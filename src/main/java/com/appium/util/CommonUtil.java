@@ -120,6 +120,7 @@ public class CommonUtil {
                 options.setAutomationName("UiAutomator2");
                 options.setCapability("unicodeKeyboard", false);
                 options.setCapability(UiAutomator2Options.AUTO_GRANT_PERMISSIONS_OPTION, true);
+                options.setCapability(UiAutomator2Options.DISABLE_WINDOWS_ANIMATION_OPTION,true);
                 options.setCapability(UiAutomator2Options.NO_RESET_OPTION, true);
                 options.setCapability(UiAutomator2Options.FULL_RESET_OPTION, false);
                 options.setCapability(UiAutomator2Options.APP_PACKAGE_OPTION, AppTestCase.CONFIG.getProperty(ConfigKey.APP_PACKAGE));
