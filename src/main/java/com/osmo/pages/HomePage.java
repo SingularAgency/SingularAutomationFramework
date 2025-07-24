@@ -29,6 +29,13 @@ public class HomePage extends BasePage {
     @AndroidFindBy(xpath = "(//android.widget.Button[@content-desc=\"Saldo total (USD)\"]/following-sibling::android.view.View)[1]")
     private WebElement lblBalance;
 
+    @AndroidFindBy(xpath = "//android.widget.Button[contains(@content-desc,\"Saldo total\")]")
+    private WebElement lblForReference;
+
+    public WebElement getLblForReference() {
+        return lblForReference;
+    }
+
     public WebElement getBtn0() {
         return btn0;
     }

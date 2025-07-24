@@ -2,6 +2,7 @@ package com.osmo.test;
 
 import com.appium.setup.AppTestCase;
 import com.osmo.pages.HomePage;
+import com.osmo.pages.steps.LoginSteps;
 import com.osmo.pages.steps.SWAPSteps;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,11 +12,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 public class SWAPTests extends AppTestCase {
     HomePage homePage;
     SWAPSteps swapSteps;
     AndroidDriver driver;
+    private LoginSteps loginPageSteps;
 
     public SWAPTests(){
         this.configSuffix = "osmo";  // así configuras el sufijo antes de @BeforeClass
@@ -26,11 +29,14 @@ public class SWAPTests extends AppTestCase {
         initializeAppTest(this.getClass().getSimpleName(), "Android", "osmo");
     }
     @BeforeMethod
-    public void initializePageObjects() throws IOException {
+    public void initializePageObjects() throws IOException, GeneralSecurityException, InterruptedException {
         driver = (AndroidDriver) AppTestCase.getActionDriver().getAppiumDriver();
         homePage= new HomePage(driver);
         swapSteps = new SWAPSteps(driver);
+        clearCache();
         driver.activateApp(appBundleId);
+        loginPageSteps.performLoginWithEmail("alara@singularagency.co");
+
     }
 
     @Test

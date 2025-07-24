@@ -121,6 +121,17 @@ public class BasePage {
     }
 
 
+    public void acceptLocationService(){
+        try {
+            WebElement allowBtn = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.id("com.android.permissioncontroller:id/permission_allow_foreground_only_button"))); // ID may vary
+            allowBtn.click();
+        } catch (TimeoutException e) {
+            // Popup did not appear
+        }
+    }
+
+
 
 
 }

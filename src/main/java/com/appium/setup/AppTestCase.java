@@ -325,12 +325,35 @@ public abstract class AppTestCase {
                     "pm",
                     "grant",
                     appBundleId,
-                    "android.permission.POST_NOTIFICATIONS"
+                    "android.permission.POST_NOTIFICATIONS",
+                    "android.permission.ACCESS_FINE_LOCATION",
+                    "android.permission.ACCESS_COARSE_LOCATION"
             };
+            System.out.println("✅ App cleared and permission granted");
+
             Process permissionProcess = Runtime.getRuntime().exec(permissionCmd);
             permissionProcess.waitFor();
+            String[] enableLocationServicesCmd = {
+                    adbPath,
+                    "shell",
+                    "settings",
+                    "put",
+                    "secure",
+                    "location_mode",
+                    "3"
+            };
+            Process locationProcess = Runtime.getRuntime().exec(enableLocationServicesCmd);
+            locationProcess.waitFor();
+            System.out.println("✅ Enabled GPS Services");
 
-            System.out.println("✅ App cleared and notification permission granted");
+            String[] disableAutofillCmd1 = { adbPath, "shell", "settings", "put", "secure", "autofill_service", "null" };
+            Process p1 = Runtime.getRuntime().exec(disableAutofillCmd1);
+            p1.waitFor();
+
+            String[] disableAutofillCmd2 = { adbPath, "shell", "settings", "put", "secure", "autofill_enabled", "0" };
+            Process p2 = Runtime.getRuntime().exec(disableAutofillCmd2);
+            p2.waitFor();
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("❌ Failed to clear app or grant permissions");
