@@ -97,7 +97,7 @@ jobs:
       - name: Download APK from GitHub Release
         run: |
           mkdir -p apks
-          curl -L -o apks/LifeScore.apk https://github.com/jalc98/SingularAutomationFramework/releases/download/LifeScore/LifeScore.apk
+          curl -L -o apks/LifeScore.apk https://github.com/SingularAgency/SingularAutomationFramework/releases/download/LifeScore/LifeScore.apk
 
       - name: Validate APK
         run: |
@@ -180,9 +180,9 @@ jobs:
           REPORT_SUBFOLDER: lifescore   # Change this per app: lifescore, osmo, etc.
         run: |
           echo "Cloning $REPORT_BRANCH branch into temp directory..."
-          git clone --branch $REPORT_BRANCH https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/jalc98/SingularAutomationFramework.git reports-temp || {
+          git clone --branch $REPORT_BRANCH https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/SingularAgency/SingularAutomationFramework.git reports-temp || {
             echo "Branch $REPORT_BRANCH does not exist, creating it..."
-            git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/jalc98/SingularAutomationFramework.git reports-temp
+            git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/SingularAgency/SingularAutomationFramework.git reports-temp
             cd reports-temp
             git checkout --orphan $REPORT_BRANCH
             git rm -rf .
