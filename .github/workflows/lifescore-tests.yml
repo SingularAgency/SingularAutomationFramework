@@ -180,9 +180,9 @@ jobs:
           REPORT_SUBFOLDER: lifescore   # Change this per app: lifescore, osmo, etc.
         run: |
           echo "Cloning $REPORT_BRANCH branch into temp directory..."
-          git clone --branch $REPORT_BRANCH https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/SingularAgency/SingularAutomationFramework.git reports-temp || {
+          git clone --branch $REPORT_BRANCH https://x-access-token:${secrets.GH_PAT}@github.com/SingularAgency/SingularAutomationFramework.git reports-temp || {
             echo "Branch $REPORT_BRANCH does not exist, creating it..."
-            git clone https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/SingularAgency/SingularAutomationFramework.git reports-temp
+            git clone https://x-access-token:${secrets.GH_PAT}@github.com/SingularAgency/SingularAutomationFramework.git reports-temp
             cd reports-temp
             git checkout --orphan $REPORT_BRANCH
             git rm -rf .
