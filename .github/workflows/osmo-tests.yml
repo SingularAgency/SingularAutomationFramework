@@ -47,12 +47,13 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Setup Gmail credentials
+      # Create the config file from base64 secret
+      - name: Setup Gmail Config
         run: |
           mkdir -p src/main/resources
-          echo "$GMAIL_CREDENTIALS_B64" | base64 --decode > src/main/resources/credentials.json
+          echo "$GMAIL_CONFIG_B64" | base64 --decode > src/main/resources/config.properties
         env:
-          GMAIL_CREDENTIALS_B64: ${{ secrets.GMAIL_CREDENTIALS_B64 }}
+          GMAIL_CONFIG_B64: ${{ secrets.GMAIL_CONFIG_B64 }}
 
       - name: Install Android SDK Platform-Tools
         run: |

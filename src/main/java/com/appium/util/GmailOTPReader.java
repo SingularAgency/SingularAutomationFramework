@@ -1,10 +1,7 @@
 package com.appium.util;
 
 import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
-import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
-import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -19,6 +16,7 @@ import java.security.GeneralSecurityException;
 import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,9 +24,6 @@ public class GmailOTPReader {
 
     private static final String APPLICATION_NAME = "Gmail OTP Reader";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
-    private static final List<String> SCOPES = Collections.singletonList(GmailScopes.GMAIL_READONLY);
-    private static final String CREDENTIALS_FILE_PATH = "src/main/resources/credentials.json"; // or env-based path
-
     private Gmail service;
 
     public GmailOTPReader() throws Exception {
@@ -39,36 +34,41 @@ public class GmailOTPReader {
         ).setApplicationName(APPLICATION_NAME).build();
     }
 
-    private static Credential getCredentials() throws IOException, GeneralSecurityException {
-        InputStream in;
+    private static Properties loadConfig() throws IOException {
+        Properties props = new Properties();
+        String encoded = System.getenv("GMAIL_CONFIG_B64");
 
-        // For CI/CD: read base64 secret from env
-        String encoded = System.getenv("GMAIL_CREDENTIALS_B64");
         if (encoded != null && !encoded.isEmpty()) {
+            // CI/CD: decode base64 secret
             byte[] decoded = Base64.getDecoder().decode(encoded);
-            in = new ByteArrayInputStream(decoded);
+            props.load(new ByteArrayInputStream(decoded));
         } else {
-            // Local development: read credentials.json
-            File file = new File(CREDENTIALS_FILE_PATH);
-            if (!file.exists()) throw new FileNotFoundException("File not found: " + CREDENTIALS_FILE_PATH);
-            in = new FileInputStream(file);
+            // Local: read config.properties
+            try (InputStream in = new FileInputStream("src/main/resources/config.properties")) {
+                props.load(in);
+            }
+        }
+        return props;
+    }
+
+    private static Credential getCredentials() throws Exception {
+        Properties props = loadConfig();
+
+        String clientId = props.getProperty("gmail.client_id");
+        String clientSecret = props.getProperty("gmail.client_secret");
+        String refreshToken = props.getProperty("gmail.refresh_token");
+
+        if (clientId == null || clientSecret == null || refreshToken == null) {
+            throw new IllegalStateException("Missing CLIENT_ID, CLIENT_SECRET, or REFRESH_TOKEN in config");
         }
 
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
-
-        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-                GoogleNetHttpTransport.newTrustedTransport(),
-                JSON_FACTORY,
-                clientSecrets,
-                SCOPES
-        ).setAccessType("offline").build();
-
-        // LocalServerReceiver handles OAuth flow in a browser for local; headless in CI/CD
-        LocalServerReceiver receiver = new LocalServerReceiver.Builder()
-                .setPort(8888)  // or any free port
-                .build();
-
-        return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
+        return new GoogleCredential.Builder()
+                .setClientSecrets(clientId, clientSecret)
+                .setTransport(GoogleNetHttpTransport.newTrustedTransport())
+                .setJsonFactory(JSON_FACTORY)
+                .build()
+                .setRefreshToken(refreshToken)
+                .createScoped(Collections.singleton(GmailScopes.GMAIL_READONLY));
     }
 
     public String getLatestOTP() throws IOException {
