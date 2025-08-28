@@ -3,7 +3,6 @@ package com.osmo.test;
 import api.steps.OsmoAPISteps;
 import com.appium.setup.AppTestCase;
 import com.appium.util.Constants;
-import com.appium.util.LogcatHelper;
 import com.osmo.pages.HomePage;
 import com.osmo.pages.steps.LoginSteps;
 import com.osmo.pages.steps.SWAPSteps;
@@ -27,7 +26,6 @@ public class SWAPTests extends AppTestCase {
     AndroidDriver driver;
     TransferirPageSteps transferirPageSteps;
     BigDecimal initialBalance;
-    LogcatHelper logcatHelper = new LogcatHelper();
 
     public SWAPTests(){
         this.configSuffix = "osmo";  // así configuras el sufijo antes de @BeforeClass
