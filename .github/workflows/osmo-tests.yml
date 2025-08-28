@@ -165,7 +165,11 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           script: |
+            # 👇 Disable Pixel Launcher to avoid popup
+            adb shell pm disable-user --user 0 com.google.android.apps.nexuslauncher || true
+            # Install your APK
             adb install -r apks/Osmo.apk
+            # Run your tests
             ./run-tests.sh
 
       - name: Terminate Emulator (Optional)
