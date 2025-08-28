@@ -44,12 +44,23 @@ public class LoginSteps extends LoginPage {
         Assert.assertNotNull("OTP was not found in the email inbox.", otp);
         if (otp != null) {
             ((HasClipboard) driver).setClipboardText(otp);
-            getBtnPaste().click();
         } else {
             throw new RuntimeException("OTP is null. Clipboard not set.");
         }
+        Thread.sleep(10000);
+        getBtnPaste().click();
+        try{
+            waitForVisibilityOfElement(getPasskey());
+            clickCenterView();
+        } catch (Exception ignored){
+
+        }
+        acceptLocationService();
         waitForVisibilityOfElement(homepage.getLblForReference());
         Assert.assertTrue(homepage.getLblForReference().isDisplayed());
-        acceptLocationService();
+    }
+
+    public boolean isLoginScreenDisplayed(){
+        return getBtnLogin().isDisplayed();
     }
 }

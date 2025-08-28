@@ -73,6 +73,21 @@ public class BasePage {
         // Perform the action
         driver.perform(Collections.singletonList(tapSequence));
     }
+    public void clickCenterView(){
+        Dimension size = driver.manage().window().getSize();
+        int centerX = size.width / 2;
+        int centerY = size.height / 2;
+
+        // Create a touch pointer
+        PointerInput finger = new PointerInput(PointerInput.Kind.TOUCH, "finger");
+        Sequence tap = new Sequence(finger, 1);
+        tap.addAction(finger.createPointerMove(Duration.ZERO, PointerInput.Origin.viewport(), centerX, centerY));
+        tap.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
+        tap.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
+
+        // Perform the action
+        driver.perform(Collections.singletonList(tap));
+    }
 
 
     public void waitForVisibilityOfElement(WebElement element){
@@ -81,6 +96,10 @@ public class BasePage {
 
     public void waitForElementToBeClickable(WebElement element) {
         wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    public void waitForElementToBeEnabled(WebElement element){
+        fluentWait.until(x->element.isEnabled());
     }
 
     public void waitForVisibilityOfAllElements(List<WebElement> elements)

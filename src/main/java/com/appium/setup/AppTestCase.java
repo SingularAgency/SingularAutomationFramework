@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import com.appium.util.ConfigKey;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import org.testng.SkipException;
 import org.testng.annotations.*;
 
@@ -192,22 +194,52 @@ public abstract class AppTestCase {
 
     @AfterMethod(alwaysRun = true)
     public synchronized void tearDown() {
-        reports.flush();
-        closeDriver();
-
+        try {
+            reports.flush();
+            // Terminate app only, driver stays alive for next test
+            if (actionDriver != null && actionDriver.getAppiumDriver() != null) {
+                try {
+                    if (actionDriver.getAppiumDriver() instanceof AndroidDriver) {
+                        ((AndroidDriver) actionDriver.getAppiumDriver()).terminateApp(appBundleId);
+                    } else if (actionDriver.getAppiumDriver() instanceof IOSDriver) {
+                        ((IOSDriver) actionDriver.getAppiumDriver()).terminateApp(appBundleId);
+                    }
+                } catch (Exception e) {
+                    System.err.println("Error terminating app: " + e.getMessage());
+                }
+            }
+        } finally {
+            cleanPageObjects(); // optional: clear references
+        }
     }
 
     public void closeDriver() {
-        this.actionDriver.getAppiumDriver().quit();
-
+        if (actionDriver != null && actionDriver.getAppiumDriver() != null) {
+            try {
+                actionDriver.getAppiumDriver().quit();
+                System.out.println("Driver quit successfully.");
+            } catch (Exception e) {
+                System.err.println("Failed to quit driver: " + e.getMessage());
+            } finally {
+                actionDriverThread.remove();
+                commonThread.remove();
+                testThread.remove();
+            }
+        }
     }
 
     @AfterClass(alwaysRun = true)
     public synchronized void stopService() {
+        closeDriver(); // ensure driver quits before stopping service
         if (service != null && service.isRunning()) {
-            service.stop();
+            try {
+                service.stop();
+                System.out.println("Appium service stopped.");
+            } catch (Exception e) {
+                System.err.println("Error stopping Appium service: " + e.getMessage());
+            }
         }
-        stopEmulator();  // Stop emulator after Appium service
+        stopEmulator();
     }
 
     public void startEmulator(String avdName) throws Exception {

@@ -32,6 +32,11 @@ public class HomePage extends BasePage {
     @AndroidFindBy(xpath = "//android.widget.Button[contains(@content-desc,\"Saldo total\")]")
     private WebElement lblForReference;
 
+
+
+    @AndroidFindBy(xpath = "//android.widget.ImageView[contains(@content-desc,\"Transferir\")]")
+    private WebElement btnTransfer;
+
     public WebElement getLblForReference() {
         return lblForReference;
     }
@@ -58,5 +63,9 @@ public class HomePage extends BasePage {
 
     public WebElement getLblBalance() {
         return lblBalance;
+    }
+
+    public WebElement getBtnTransfer() {
+        return btnTransfer;
     }
 }

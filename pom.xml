@@ -125,17 +125,18 @@
 			<version>2.14.0</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>5.5.5</version>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>io.appium</groupId>
 			<artifactId>mitmproxy-java</artifactId>
 			<version>1.6.1</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.38</version>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
