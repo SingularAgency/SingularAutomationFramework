@@ -21,7 +21,7 @@ public class OsmoAPISteps {
     ApiClient apiClient = new ApiClient("https://stg.api.osmowallet.com");
 
 
-    public Map<String, BigDecimal> getWallets() throws GeneralSecurityException, IOException, InterruptedException {
+    public Map<String, BigDecimal> getWallets() throws Exception {
         String loginPayload = "{\n" +
                 "  \"input\": \"alara@singularagency.co\",\n" +
                 "  \"grantType\": \"password\",\n" +

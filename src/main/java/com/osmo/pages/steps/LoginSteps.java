@@ -20,7 +20,7 @@ public class LoginSteps extends LoginPage {
         homepage = new HomePage(driver);
     }
 
-    public void performLoginWithEmail(String email) throws InterruptedException, GeneralSecurityException, IOException {
+    public void performLoginWithEmail(String email) throws Exception {
         waitForVisibilityOfElement(getBtnLogin());
         getBtnLogin().click();
         waitForVisibilityOfElement(getBtnAccessWithEmail());

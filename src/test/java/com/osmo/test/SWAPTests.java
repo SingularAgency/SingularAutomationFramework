@@ -36,7 +36,7 @@ public class SWAPTests extends AppTestCase {
         initializeAppTest(this.getClass().getSimpleName(), "Android", "osmo");
     }
     @BeforeMethod
-    public void initializePageObjects() throws IOException, GeneralSecurityException, InterruptedException {
+    public void initializePageObjects() throws Exception {
         driver = (AndroidDriver) AppTestCase.getActionDriver().getAppiumDriver();
         homePage= new HomePage(driver);
         swapSteps = new SWAPSteps(driver);
@@ -50,7 +50,7 @@ public class SWAPTests extends AppTestCase {
     }
 
     @Test
-    public void TC001_performBTCtoQTZ() throws GeneralSecurityException, IOException, InterruptedException {
+    public void TC001_performBTCtoQTZ() throws Exception {
         initialBalance = osmoAPISteps.getWallets().get("Bitcoin");
         common.log("Initial Balance for Bitcoin:" + initialBalance);
         homePage.wait.until(ExpectedConditions.visibilityOf(homePage.getBtnSWAP()));
@@ -64,7 +64,7 @@ public class SWAPTests extends AppTestCase {
     }
 
     @Test
-    public void TC002_performBTCtoCRC() throws GeneralSecurityException, IOException, InterruptedException {
+    public void TC002_performBTCtoCRC() throws Exception {
         initialBalance = osmoAPISteps.getWallets().get("Bitcoin");
         common.log("Initial Balance for Bitcoin:" + initialBalance);
         homePage.wait.until(ExpectedConditions.visibilityOf(homePage.getBtnSWAP()));
@@ -78,7 +78,7 @@ public class SWAPTests extends AppTestCase {
     }
 
     @Test
-    public void TC003_performBTCtoDollars() throws GeneralSecurityException, IOException, InterruptedException {
+    public void TC003_performBTCtoDollars() throws Exception {
         initialBalance = osmoAPISteps.getWallets().get("Bitcoin");
         common.log("Initial Balance for Bitcoin:" + initialBalance);
         homePage.wait.until(ExpectedConditions.visibilityOf(homePage.getBtnSWAP()));
@@ -92,7 +92,7 @@ public class SWAPTests extends AppTestCase {
     }
 
     @Test
-    public void TC004_performDollarsToBTC() throws GeneralSecurityException, IOException, InterruptedException {
+    public void TC004_performDollarsToBTC() throws Exception {
         initialBalance = osmoAPISteps.getWallets().get("Dólares");
         common.log("Initial Balance for Dólares:" + initialBalance);
         homePage.wait.until(ExpectedConditions.visibilityOf(homePage.getBtnSWAP()));
@@ -106,7 +106,7 @@ public class SWAPTests extends AppTestCase {
     }
 
     @Test
-    public void TC005_performDollarsToQTZ() throws GeneralSecurityException, IOException, InterruptedException {
+    public void TC005_performDollarsToQTZ() throws Exception {
         initialBalance = osmoAPISteps.getWallets().get("Dólares");
         common.log("Initial Balance for Dólares:" + initialBalance);
         homePage.wait.until(ExpectedConditions.visibilityOf(homePage.getBtnSWAP()));
@@ -120,7 +120,7 @@ public class SWAPTests extends AppTestCase {
     }
 
     @Test
-    public void TC006_performDollarsToCRC() throws GeneralSecurityException, IOException, InterruptedException {
+    public void TC006_performDollarsToCRC() throws Exception {
         initialBalance = osmoAPISteps.getWallets().get("Dólares");
         common.log("Initial Balance for Dólares:" + initialBalance);
         homePage.wait.until(ExpectedConditions.visibilityOf(homePage.getBtnSWAP()));
@@ -134,7 +134,7 @@ public class SWAPTests extends AppTestCase {
     }
 
     @Test
-    public void TC007_performCRCtoBTC() throws GeneralSecurityException, IOException, InterruptedException {
+    public void TC007_performCRCtoBTC() throws Exception {
         initialBalance = osmoAPISteps.getWallets().get("Colones");
         common.log("Initial Balance for Colones:" + initialBalance);
         homePage.wait.until(ExpectedConditions.visibilityOf(homePage.getBtnSWAP()));
@@ -148,7 +148,7 @@ public class SWAPTests extends AppTestCase {
     }
 
     @Test
-    public void TC008_performCRCtoDollars() throws GeneralSecurityException, IOException, InterruptedException {
+    public void TC008_performCRCtoDollars() throws Exception {
         initialBalance = osmoAPISteps.getWallets().get("Colones");
         common.log("Initial Balance for Colones:" + initialBalance);
         homePage.wait.until(ExpectedConditions.visibilityOf(homePage.getBtnSWAP()));
@@ -162,7 +162,7 @@ public class SWAPTests extends AppTestCase {
     }
 
     @Test
-    public void TC009_performCRCtoQTZ() throws GeneralSecurityException, IOException, InterruptedException {
+    public void TC009_performCRCtoQTZ() throws Exception {
         initialBalance = osmoAPISteps.getWallets().get("Colones");
         common.log("Initial Balance for Colones:" + initialBalance);
         homePage.wait.until(ExpectedConditions.visibilityOf(homePage.getBtnSWAP()));

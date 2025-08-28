@@ -9,7 +9,7 @@ import java.security.GeneralSecurityException;
 public class ApiTest {
 
     @Test
-    public void verifyWallets() throws GeneralSecurityException, IOException, InterruptedException {
+    public void verifyWallets() throws Exception {
         OsmoAPISteps osmoAPISteps = new OsmoAPISteps();
         osmoAPISteps.getWallets();
     }

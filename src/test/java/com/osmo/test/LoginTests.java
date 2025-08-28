@@ -33,7 +33,7 @@ public class LoginTests extends AppTestCase {
     }
 
     @Test
-    public void loginWithMXAccount() throws InterruptedException, GeneralSecurityException, IOException {
+    public void loginWithMXAccount() throws Exception {
         loginPageSteps.performLoginWithEmail("alara@singularagency.co");
     }
 

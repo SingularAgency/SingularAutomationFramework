@@ -5,19 +5,14 @@ import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInsta
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
-import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
-import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
-import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.GmailScopes;
 import com.google.api.services.gmail.model.ListMessagesResponse;
 import com.google.api.services.gmail.model.Message;
 import com.google.api.services.gmail.model.MessagePart;
-import com.google.api.services.gmail.model.ModifyMessageRequest;
 
 import java.io.*;
 import java.security.GeneralSecurityException;
@@ -30,19 +25,50 @@ import java.util.regex.Pattern;
 public class GmailOTPReader {
 
     private static final String APPLICATION_NAME = "Gmail OTP Reader";
-    private static final JacksonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
-    private static final String TOKENS_DIRECTORY_PATH = "tokens";
-    private static final List<String> SCOPES = Collections.singletonList("https://www.googleapis.com/auth/gmail.readonly");
-    private static final String CREDENTIALS_FILE_PATH = "credentials.json";
+    private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
+    private static final List<String> SCOPES = Collections.singletonList(GmailScopes.GMAIL_READONLY);
+    private static final String CREDENTIALS_FILE_PATH = "src/main/resources/credentials.json"; // or env-based path
 
     private Gmail service;
 
-    public GmailOTPReader() throws IOException, GeneralSecurityException {
+    public GmailOTPReader() throws Exception {
         this.service = new Gmail.Builder(
                 GoogleNetHttpTransport.newTrustedTransport(),
                 JSON_FACTORY,
                 getCredentials()
         ).setApplicationName(APPLICATION_NAME).build();
+    }
+
+    private static Credential getCredentials() throws IOException, GeneralSecurityException {
+        InputStream in;
+
+        // For CI/CD: read base64 secret from env
+        String encoded = System.getenv("GMAIL_STORED_CREDENTIAL_B64");
+        if (encoded != null && !encoded.isEmpty()) {
+            byte[] decoded = Base64.getDecoder().decode(encoded);
+            in = new ByteArrayInputStream(decoded);
+        } else {
+            // Local development: read credentials.json
+            File file = new File(CREDENTIALS_FILE_PATH);
+            if (!file.exists()) throw new FileNotFoundException("File not found: " + CREDENTIALS_FILE_PATH);
+            in = new FileInputStream(file);
+        }
+
+        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+
+        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+                GoogleNetHttpTransport.newTrustedTransport(),
+                JSON_FACTORY,
+                clientSecrets,
+                SCOPES
+        ).setAccessType("offline").build();
+
+        // LocalServerReceiver handles OAuth flow in a browser for local; headless in CI/CD
+        LocalServerReceiver receiver = new LocalServerReceiver.Builder()
+                .setPort(8888)  // or any free port
+                .build();
+
+        return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
     }
 
     public String getLatestOTP() throws IOException {
@@ -52,47 +78,20 @@ public class GmailOTPReader {
                 .execute();
 
         List<Message> messages = messagesResponse.getMessages();
-
-        if (messages == null || messages.isEmpty()) {
-            System.out.println("No OTP emails found.");
-            return null;
-        }
+        if (messages == null || messages.isEmpty()) return null;
 
         Message message = service.users().messages().get("me", messages.get(0).getId()).execute();
         String body = getMessageBody(message);
 
-        Pattern pattern = Pattern.compile("\\b\\d{6}\\b");
-        Matcher matcher = pattern.matcher(body);
-
-        if (matcher.find()) {
-            return matcher.group();
-        } else {
-            System.out.println("No OTP found in message body.");
-            return null;
-        }
-    }
-
-    private static Credential getCredentials() throws IOException, GeneralSecurityException {
-        InputStream in = GmailOTPReader.class.getClassLoader().getResourceAsStream(CREDENTIALS_FILE_PATH);
-        if (in == null) {
-            throw new FileNotFoundException("Resource not found: " + CREDENTIALS_FILE_PATH);
-        }
-
-        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-                GoogleNetHttpTransport.newTrustedTransport(), JSON_FACTORY,
-                GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in)),
-                SCOPES
-        ).setDataStoreFactory(new com.google.api.client.util.store.FileDataStoreFactory(new java.io.File(TOKENS_DIRECTORY_PATH)))
-                .setAccessType("offline").build();
-
-        return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
+        Matcher matcher = Pattern.compile("\\b\\d{6}\\b").matcher(body);
+        return matcher.find() ? matcher.group() : null;
     }
 
     private String getMessageBody(Message message) {
         MessagePart part = message.getPayload();
         if (part.getParts() != null && !part.getParts().isEmpty()) {
             for (MessagePart p : part.getParts()) {
-                if (p.getMimeType().equals("text/plain")) {
+                if ("text/plain".equals(p.getMimeType())) {
                     return decodeBody(p.getBody().getData());
                 }
             }
@@ -103,5 +102,4 @@ public class GmailOTPReader {
     private String decodeBody(String body) {
         return new String(Base64.getUrlDecoder().decode(body));
     }
-
 }
