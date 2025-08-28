@@ -10,6 +10,9 @@ jobs:
   test-and-publish:
     runs-on: ubuntu-22.04
 
+    permissions:
+      contents: write
+
     env:
       MOBILE_OS: Android
       ANDROID_HOME: /home/runner/Android/Sdk
@@ -177,35 +180,38 @@ jobs:
           REPORT_BRANCH: reports
           REPORT_SUBFOLDER: osmo   # Change this per app: lifescore, osmo, etc.
         run: |
-          echo "Cloning $REPORT_BRANCH branch into temp directory..."
-          git clone --branch $REPORT_BRANCH https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/SingularAgency/SingularAutomationFramework.git reports-temp || {
-            echo "Branch $REPORT_BRANCH does not exist, creating it..."
-            git clone https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/SingularAgency/SingularAutomationFramework.git reports-temp
+            echo "Cloning $REPORT_BRANCH branch into temp directory..."
+            git clone --branch $REPORT_BRANCH https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/SingularAgency/SingularAutomationFramework.git reports-temp || {
+              echo "Branch $REPORT_BRANCH does not exist, creating it..."
+              git clone https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/SingularAgency/SingularAutomationFramework.git reports-temp
+              cd reports-temp
+              git checkout --orphan $REPORT_BRANCH
+              git rm -rf .
+              git commit --allow-empty -m "Initial commit on $REPORT_BRANCH branch"
+              git push origin $REPORT_BRANCH
+              cd ..
+            }
+            
             cd reports-temp
-            git checkout --orphan $REPORT_BRANCH
-            git rm -rf .
-            git commit --allow-empty -m "Initial commit on $REPORT_BRANCH branch"
-            git push origin $REPORT_BRANCH
-            cd ..
-          }
-          
-          cd reports-temp
-          
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          echo "Removing old reports in $REPORT_SUBFOLDER..."
-          rm -rf "$REPORT_SUBFOLDER"
-          mkdir -p "$REPORT_SUBFOLDER"
-          
-          echo "Copying new reports into $REPORT_SUBFOLDER..."
-          cp -r /tmp/reports/* "$REPORT_SUBFOLDER"/
-          
-          git add "$REPORT_SUBFOLDER"
-          
-          if git diff --cached --quiet; then
-            echo "No changes to commit."
-          else
-            git commit -m "📊 Update $REPORT_SUBFOLDER report from run $GITHUB_RUN_ID"
-            git push origin $REPORT_BRANCH
-          fi
+            
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            
+            # 👇 Ensure the remote uses token auth
+            git remote set-url origin https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/SingularAgency/SingularAutomationFramework.git
+            
+            echo "Removing old reports in $REPORT_SUBFOLDER..."
+            rm -rf "$REPORT_SUBFOLDER"
+            mkdir -p "$REPORT_SUBFOLDER"
+            
+            echo "Copying new reports into $REPORT_SUBFOLDER..."
+            cp -r /tmp/reports/* "$REPORT_SUBFOLDER"/
+            
+            git add "$REPORT_SUBFOLDER"
+            
+            if git diff --cached --quiet; then
+              echo "No changes to commit."
+            else
+              git commit -m "📊 Update $REPORT_SUBFOLDER report from run $GITHUB_RUN_ID"
+              git push origin $REPORT_BRANCH
+            fi      

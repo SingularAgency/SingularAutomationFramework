@@ -20,6 +20,8 @@ public class LoginPage extends BasePage {
     @AndroidFindBy(xpath = "//android.view.View[contains(@content-desc,\"correo electrónico\")]/following-sibling::android.widget.EditText")
     private WebElement txtEmail;
 
+    @AndroidFindBy(xpath = "//android.widget.TextView[@text=\"Create passkey for Osmo Wallet?\"]")
+    private WebElement passkey;
     @AndroidFindBy(xpath = "//android.widget.Button[@content-desc=\"Continuar\"]")
     private WebElement btnContinue;
 
@@ -67,5 +69,7 @@ public class LoginPage extends BasePage {
     public WebElement getBtnPaste() {
         return btnPaste;
     }
+
+    public WebElement getPasskey(){return passkey;}
 
 }

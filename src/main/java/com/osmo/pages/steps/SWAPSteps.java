@@ -12,7 +12,8 @@ public class SWAPSteps extends SwapPage {
         super(driver);
     }
 
-    public void performSWAP(String firstOption, String secondOption){
+    public void selectCoinsToSwap(String firstOption, String secondOption){
+
         fluentWait.until(ExpectedConditions.visibilityOf(getLblHeader()));
         getLblHeader().click();
         Assert.assertFalse(getSwapButtons().isEmpty());
@@ -24,13 +25,17 @@ public class SWAPSteps extends SwapPage {
         WebElement secondElement = driver.findElement(By.xpath(getButtonByCurrency(secondOption)));
         fluentWait.until(ExpectedConditions.elementToBeClickable(secondElement));
         secondElement.click();
-        String minimumAmmount = getMinimumAmmount();
+    }
+
+    public void performSWAP(String minimumAmount){
         clickOnBounds(getTextFields().get(0));
-        getTextFields().get(0).sendKeys(minimumAmmount);
+        getTextFields().get(0).sendKeys(minimumAmount);
         fluentWait.until(ExpectedConditions.elementToBeClickable(getBtnConvert()));
         getBtnConvert().click();
         fluentWait.until(ExpectedConditions.elementToBeClickable(getBtnConvert()));
         getBtnConvert().click();
+        fluentWait.until(ExpectedConditions.visibilityOf(getModalConfirmation()));
+        Assert.assertTrue(getModalConfirmation().isDisplayed());
     }
 
 }

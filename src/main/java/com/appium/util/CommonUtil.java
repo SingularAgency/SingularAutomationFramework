@@ -125,6 +125,9 @@ public class CommonUtil {
                 options.setCapability(UiAutomator2Options.FULL_RESET_OPTION, false);
                 options.setCapability(UiAutomator2Options.APP_PACKAGE_OPTION, AppTestCase.CONFIG.getProperty(ConfigKey.APP_PACKAGE));
                 options.setCapability(UiAutomator2Options.APP_ACTIVITY_OPTION, AppTestCase.CONFIG.getProperty(ConfigKey.MAIN_ACTIVITY).trim());
+                options.setCapability("adbExecTimeout", 600000);                  // 10 min
+                options.setCapability("uiautomator2ServerInstallTimeout", 120000); // 2 min
+                options.setCapability("uiautomator2ServerLaunchTimeout", 120000);  // 2 min
                 String appiumServerUrl;
                 if ("true".equals(System.getenv("CI"))) {
                     // Running in GitHub Actions

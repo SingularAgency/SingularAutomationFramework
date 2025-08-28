@@ -25,14 +25,24 @@ public class MobileActionDriver extends BaseActionDriver {
 	}
 
 	public Set<String> getWindowHandles() {
-		return appiumDriver.getWindowHandles();
+		return driver.getWindowHandles();
 	}
 
 
 
 	public void quit() {
-		if (appiumDriver != null) {
-			appiumDriver.quit(); // Ensures app closes after each test
+		if (driver != null) {
+			try {
+				System.out.println("Quitting driver...");
+				driver.quit();
+				System.out.println("Driver quit successfully.");
+			} catch (Exception e) {
+				System.err.println("Error quitting driver: " + e.getMessage());
+			} finally {
+				driver = null;
+			}
+		} else {
+			System.out.println("No driver instance to quit.");
 		}
 	}
 
