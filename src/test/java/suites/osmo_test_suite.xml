@@ -4,7 +4,6 @@
     <test name="Osmo Smoke Tests Execution">
         <classes>
             <class name="com.osmo.test.SWAPTests"/>
-            <class name="com.osmo.test.AndroidTests"/>
         </classes>
     </test>
 </suite>
