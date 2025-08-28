@@ -47,10 +47,12 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Prepare Gmail StoredCredential
+      - name: Setup Gmail credentials
         run: |
-          mkdir -p tokens
-          echo "${{ secrets.GMAIL_STORED_CREDENTIAL_B64 }}" | base64 --decode > tokens/StoredCredential
+          mkdir -p src/main/resources
+          echo "$GMAIL_CREDENTIALS_B64" | base64 --decode > src/main/resources/credentials.json
+        env:
+          GMAIL_CREDENTIALS_B64: ${{ secrets.GMAIL_CREDENTIALS_B64 }}
 
       - name: Install Android SDK Platform-Tools
         run: |

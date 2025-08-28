@@ -43,7 +43,7 @@ public class GmailOTPReader {
         InputStream in;
 
         // For CI/CD: read base64 secret from env
-        String encoded = System.getenv("GMAIL_STORED_CREDENTIAL_B64");
+        String encoded = System.getenv("GMAIL_CREDENTIALS_B64");
         if (encoded != null && !encoded.isEmpty()) {
             byte[] decoded = Base64.getDecoder().decode(encoded);
             in = new ByteArrayInputStream(decoded);
