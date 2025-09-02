@@ -184,6 +184,7 @@ jobs:
             -wipe-data
             -no-snapshot-load
             -no-snapshot-save
+            -prop hw.keyboard=yes   # ✅ add this line
           script: |
             adb wait-for-device
             adb install -r apks/Osmo.apk
