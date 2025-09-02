@@ -165,7 +165,7 @@ jobs:
           force-avd-creation: true
           emulator-options: >
             -no-window
-            -gpu swift               # ✅ most stable in CI
+            -gpu swiftshader_indirect               # ✅ most stable in CI
             -noaudio
             -no-boot-anim
             -camera-back none
