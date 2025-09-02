@@ -158,14 +158,14 @@ jobs:
         with:
           api-level: 34
           arch: x86_64
-          target: google_apis
+          target: google_apis        # avoid playstore images in CI
           profile: pixel_4
           disable-animations: true
-          emulator-boot-timeout: 600     # give extra time (10 min max)
-          force-avd-creation: true       # fresh AVD each run
+          emulator-boot-timeout: 600
+          force-avd-creation: true
           emulator-options: >
             -no-window
-            -gpu swift                   # more stable in CI
+            -gpu swift               # ✅ most stable in CI
             -noaudio
             -no-boot-anim
             -camera-back none
@@ -174,12 +174,10 @@ jobs:
             -no-snapshot-save
           script: |
             adb wait-for-device
-            adb shell settings put global window_animation_scale 0
-            adb shell settings put global transition_animation_scale 0
-            adb shell settings put global animator_duration_scale 0
-            adb shell pm disable-user --user 0 com.google.android.apps.nexuslauncher || true
+            adb shell getprop sys.boot_completed
             adb install -r apks/Osmo.apk
             ./run-tests.sh
+
 
 
       - name: Terminate Emulator (Optional)
