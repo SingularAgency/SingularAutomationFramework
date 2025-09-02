@@ -156,6 +156,11 @@ jobs:
 
           # Disable Pixel Launcher (optional, avoids popups)
           adb shell pm disable-user --user 0 com.google.android.apps.nexuslauncher || true
+          
+          # Disable soft keyboard
+          adb shell settings put secure show_ime_with_hard_keyboard 0
+          adb shell ime set com.android.inputmethod.latin/.LatinIME || true
+
 
           # Confirm app is installed
           adb shell pm list packages | grep com.osmo.smt || echo "App not yet installed"
@@ -184,7 +189,6 @@ jobs:
             -wipe-data
             -no-snapshot-load
             -no-snapshot-save
-            -prop hw.keyboard=yes   # ✅ add this line
           script: |
             adb wait-for-device
             adb install -r apks/Osmo.apk
