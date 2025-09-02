@@ -4,3 +4,4 @@ AndroidAutomationReport/
 /AppiumFramework/iOSAutomationReport
 .DS_Store
 src/test/java/resources/
+/src/main/resources/config.properties
