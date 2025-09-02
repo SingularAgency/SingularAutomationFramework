@@ -163,7 +163,14 @@ jobs:
           disable-animations: true
           emulator-boot-timeout: 300
           force-avd-creation: false
-          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          emulator-options: >
+            -no-window
+            -gpu swiftshader_indirect
+            -noaudio
+            -no-boot-anim
+            -camera-back none
+            -wipe-data                     # ✅ Remove any previous passkeys / credentials
+            -no-snapshot-load
           script: |
             # 👇 Disable Pixel Launcher to avoid popup
             adb shell pm disable-user --user 0 com.google.android.apps.nexuslauncher || true
