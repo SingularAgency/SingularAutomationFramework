@@ -161,23 +161,26 @@ jobs:
           target: google_apis
           profile: pixel_4
           disable-animations: true
-          emulator-boot-timeout: 300
-          force-avd-creation: false
+          emulator-boot-timeout: 600     # give extra time (10 min max)
+          force-avd-creation: true       # fresh AVD each run
           emulator-options: >
             -no-window
-            -gpu swiftshader_indirect
+            -gpu swift                   # more stable in CI
             -noaudio
             -no-boot-anim
             -camera-back none
-            -wipe-data                     # ✅ Remove any previous passkeys / credentials
+            -wipe-data
             -no-snapshot-load
+            -no-snapshot-save
           script: |
-            # 👇 Disable Pixel Launcher to avoid popup
+            adb wait-for-device
+            adb shell settings put global window_animation_scale 0
+            adb shell settings put global transition_animation_scale 0
+            adb shell settings put global animator_duration_scale 0
             adb shell pm disable-user --user 0 com.google.android.apps.nexuslauncher || true
-            # Install your APK
             adb install -r apks/Osmo.apk
-            # Run your tests
             ./run-tests.sh
+
 
       - name: Terminate Emulator (Optional)
         if: always()
