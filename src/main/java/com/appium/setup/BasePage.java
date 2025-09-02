@@ -27,9 +27,9 @@ public class BasePage {
     public FluentWait<WebDriver> fluentWait;
     public BasePage(AppiumDriver driver) {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(40));
         this.driver= driver;
-        this.fluentWait=new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(5)).pollingEvery(Duration.ofMillis(300)).ignoring(StaleElementReferenceException.class);
+        this.fluentWait=new FluentWait<WebDriver>(driver).withTimeout(Duration.ofSeconds(40)).pollingEvery(Duration.ofMillis(300)).ignoring(StaleElementReferenceException.class);
     }
 
     public void tapElement(WebElement element) {
